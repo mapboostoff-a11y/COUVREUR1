@@ -130,7 +130,7 @@ const Hero: React.FC<HeroProps> = ({ content, isEditing, onUpdate }) => {
       )}
 
       {content.image && !content.videoUrl && (
-        <div className="mt-8 rounded-xl overflow-hidden shadow-2xl">
+        <div className="mt-8 rounded-xl overflow-hidden shadow-2xl mx-auto">
           <EditableImage 
             src={content.image.src} 
             alt={content.image.alt} 
