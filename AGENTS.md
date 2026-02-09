@@ -543,6 +543,18 @@ Use these snippets to populate the `sections` array.
 }
 ```
 
+## 🖱️ Frontend Visual Editing & State Management
+
+When a user modifies the website via the Visual Editor (Frontend), the following process occurs:
+
+1.  **Interaction**: The user clicks on text, images, or adds/removes a section via the Admin Panel UI.
+2.  **State Update**: These actions trigger updates in the **Zustand Store** (`src/store/website.ts`).
+3.  **Real-time JSON**: The global `LandingPageConfig` JSON object is updated immediately in memory.
+4.  **No Code Changes**: **Crucially, no React code is modified.** The site is a pure rendering engine of the JSON configuration.
+    *   *Example*: Changing a headline updates `config.sections[1].content.headline`, causing the `Hero` component to re-render with new data.
+    *   *Example*: Adding a "Testimonials" section simply pushes a new object to the `sections` array in the JSON.
+5.  **Persistence**: The final JSON can be saved or exported to persist the changes.
+
 ## Adding New Sections (Developer Only)
 
 To extend the capability of the builder:
