@@ -14,7 +14,7 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = ({ content, isEditing, onUpdate }) => {
   return (
-    <div className="max-w-4xl mx-auto text-center">
+    <div className="container mx-auto px-4 text-center">
       <div className="mb-12">
         <InlineText
           tagName="h2"
@@ -34,13 +34,13 @@ const Contact: React.FC<ContactProps> = ({ content, isEditing, onUpdate }) => {
         )}
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="flex flex-wrap justify-center gap-8">
         {content.email && (
-          <div className="flex flex-col items-center gap-4 p-6 rounded-lg bg-card border shadow-sm">
+          <div className="flex flex-col items-center gap-4 p-6 rounded-lg bg-card border shadow-sm flex-1 min-w-[250px] max-w-[400px]">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
               <Mail size={24} />
             </div>
-            <div className="text-center">
+            <div className="text-center w-full">
               <p className="text-sm font-medium text-muted-foreground mb-1">Email</p>
               <InlineText
                 tagName="p"
@@ -54,11 +54,11 @@ const Contact: React.FC<ContactProps> = ({ content, isEditing, onUpdate }) => {
         )}
 
         {content.phone && (
-          <div className="flex flex-col items-center gap-4 p-6 rounded-lg bg-card border shadow-sm">
+          <div className="flex flex-col items-center gap-4 p-6 rounded-lg bg-card border shadow-sm flex-1 min-w-[250px] max-w-[400px]">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
               <Phone size={24} />
             </div>
-            <div className="text-center">
+            <div className="text-center w-full">
               <p className="text-sm font-medium text-muted-foreground mb-1">Téléphone</p>
               <InlineText
                 tagName="p"
@@ -72,11 +72,11 @@ const Contact: React.FC<ContactProps> = ({ content, isEditing, onUpdate }) => {
         )}
 
         {content.address && (
-          <div className="flex flex-col items-center gap-4 p-6 rounded-lg bg-card border shadow-sm">
+          <div className="flex flex-col items-center gap-4 p-6 rounded-lg bg-card border shadow-sm flex-1 min-w-[250px] max-w-[400px]">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
               <MapPin size={24} />
             </div>
-            <div className="text-center">
+            <div className="text-center w-full">
               <p className="text-sm font-medium text-muted-foreground mb-1">Adresse</p>
               <InlineText
                 tagName="p"
@@ -90,11 +90,11 @@ const Contact: React.FC<ContactProps> = ({ content, isEditing, onUpdate }) => {
         )}
 
         {content.hours && (
-          <div className="flex flex-col items-center gap-4 p-6 rounded-lg bg-card border shadow-sm">
+          <div className="flex flex-col items-center gap-4 p-6 rounded-lg bg-card border shadow-sm flex-1 min-w-[250px] max-w-[400px]">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
               <Clock size={24} />
             </div>
-            <div className="text-center">
+            <div className="text-center w-full">
               <p className="text-sm font-medium text-muted-foreground mb-1">Horaires</p>
               <InlineText
                 tagName="p"
