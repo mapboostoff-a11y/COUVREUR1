@@ -123,7 +123,7 @@ export const ContactContentSchema = z.object({
   email: z.string().email().optional(),
   phone: z.string().optional(),
   address: z.string().optional(),
-  submitButtonText: z.string().default('Send Message'),
+  hours: z.string().optional(),
 });
 
 export const VideoContentSchema = z.object({

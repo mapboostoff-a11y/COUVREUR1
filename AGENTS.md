@@ -73,7 +73,7 @@ Build the `sections` array using a standard high-converting structure.
 5.  **Testimonials**: Social proof.
 6.  **Pricing** (if applicable): Clear packages.
 7.  **Map** (for local businesses): Physical location.
-8.  **Contact**: Form and contact details.
+8.  **Contact**: Essential contact details (No form).
 9.  **Footer**: Copyright and links.
 
 ### 4. JSON Reference (Section Catalog)
@@ -82,14 +82,23 @@ Use these snippets to populate the `sections` array.
 
 #### **Header (`type: 'header'`)**
 *Crucial for navigation. Usually the first section.*
+
+**Attributes:**
+- `title` (string): Brand name text.
+- `logo` (string, optional): URL to logo image.
+- `logoMode` ('text' | 'image' | 'both'): How to display the brand.
+- `links` (Array): Navigation links `{ text, url, variant }`.
+- `cta` (Object): Call to action button `{ text, url, variant }`.
+- `sticky` (boolean): Keeps header fixed at top.
+
 ```json
 {
   "id": "header-1",
   "type": "header",
   "content": {
     "title": "BrandName",
-    "logo": "https://...",      // Optional: URL to logo image
-    "logoMode": "text",         // "text" | "image" | "both"
+    "logo": "https://...",
+    "logoMode": "text",
     "links": [
       { "text": "Services", "url": "#services" },
       { "text": "Contact", "url": "#contact" }
@@ -101,6 +110,16 @@ Use these snippets to populate the `sections` array.
 ```
 
 #### **Hero (`type: 'hero'`)**
+*First impression. High quality image + Strong CTA.*
+
+**Attributes:**
+- `headline` (string): Main value proposition.
+- `subheadline` (string): Supporting text.
+- `alignment` ('left' | 'center' | 'right'): Text alignment.
+- `cta` (Array): Action buttons `{ text, url, variant }`.
+- `image` (Object): Hero image `{ src, alt }`.
+- `videoUrl` (string, optional): Background video URL.
+
 ```json
 {
   "id": "hero-1",
@@ -108,7 +127,7 @@ Use these snippets to populate the `sections` array.
   "content": {
     "headline": "Expert Services in Your City",
     "subheadline": "Professional, reliable, and affordable solutions.",
-    "alignment": "center", // "left" | "center" | "right"
+    "alignment": "center",
     "cta": [
       { "text": "Get a Free Quote", "url": "#contact", "variant": "primary" }
     ],
@@ -122,7 +141,17 @@ Use these snippets to populate the `sections` array.
 ```
 
 #### **Features (`type: 'features'`)**
-*Use Lucide icon names for `icon` (e.g., 'Shield', 'Hammer', 'Clock', 'Award', 'Star').*
+*Key selling points with icons.*
+
+**Attributes:**
+- `title` (string): Section heading.
+- `subtitle` (string, optional): Section sub-heading.
+- `columns` (number): Number of columns (default: 3).
+- `features` (Array): List of features.
+  - `title`: Feature name.
+  - `description`: Feature detail.
+  - `icon`: **Lucide** icon name (e.g., 'Shield', 'Clock').
+
 ```json
 {
   "id": "features-1",
@@ -147,7 +176,114 @@ Use these snippets to populate the `sections` array.
 }
 ```
 
+#### **Testimonials (`type: 'testimonials'`)**
+*Social proof from clients.*
+
+**Attributes:**
+- `title` (string): Section heading.
+- `testimonials` (Array): List of reviews.
+  - `name`: Client name.
+  - `role`: Client job/title.
+  - `avatar`: URL to client photo.
+  - `content`: The review text.
+  - `rating`: 1-5 stars.
+
+```json
+{
+  "id": "testimonials-1",
+  "type": "testimonials",
+  "content": {
+    "title": "What Our Clients Say",
+    "testimonials": [
+      {
+        "name": "John Doe",
+        "role": "CEO, Tech Corp",
+        "avatar": "https://randomuser.me/api/portraits/men/1.jpg",
+        "content": "Amazing service! Highly recommended.",
+        "rating": 5
+      }
+    ]
+  },
+  "settings": { "backgroundColor": "white" }
+}
+```
+
+#### **Pricing (`type: 'pricing'`)**
+*Clear packages/plans.*
+
+**Attributes:**
+- `title` (string): Section heading.
+- `description` (string, optional): Helper text.
+- `plans` (Array): Pricing tiers.
+  - `name`: Plan name (e.g., "Basic").
+  - `price`: Cost string (e.g., "$29").
+  - `period`: Billing period (e.g., "/month").
+  - `features`: Array of strings.
+  - `cta`: Button object.
+  - `highlight`: Boolean to emphasize plan.
+
+```json
+{
+  "id": "pricing-1",
+  "type": "pricing",
+  "content": {
+    "title": "Simple Pricing",
+    "description": "Choose the plan that fits you.",
+    "plans": [
+      {
+        "name": "Basic",
+        "price": "$29",
+        "period": "/month",
+        "features": ["Feature 1", "Feature 2"],
+        "cta": { "text": "Get Started", "url": "#signup" },
+        "highlight": false
+      },
+      {
+        "name": "Pro",
+        "price": "$99",
+        "period": "/month",
+        "features": ["Everything in Basic", "Priority Support"],
+        "cta": { "text": "Go Pro", "url": "#signup" },
+        "highlight": true
+      }
+    ]
+  },
+  "settings": { "backgroundColor": "white" }
+}
+```
+
+#### **CTA (`type: 'cta'`)**
+*Call to Action section.*
+
+**Attributes:**
+- `title` (string): Compelling header.
+- `description` (string): Persuasive text.
+- `buttons` (Array): Action buttons.
+
+```json
+{
+  "id": "cta-1",
+  "type": "cta",
+  "content": {
+    "title": "Ready to get started?",
+    "description": "Join thousands of satisfied customers today.",
+    "buttons": [
+      { "text": "Sign Up Now", "url": "#signup", "variant": "primary" }
+    ]
+  },
+  "settings": { "backgroundColor": "primary" }
+}
+```
+
 #### **Gallery (`type: 'gallery'`)**
+*Visual proof of work (Images).*
+
+**Attributes:**
+- `title` (string, optional): Section header.
+- `columns` (number): Grid columns.
+- `aspectRatio` ('square' | 'video' | 'portrait'): Image shape.
+- `images` (Array): List of images `{ src, alt }`.
+
 ```json
 {
   "id": "gallery-1",
@@ -155,7 +291,7 @@ Use these snippets to populate the `sections` array.
   "content": {
     "title": "Our Recent Projects",
     "columns": 3,
-    "aspectRatio": "square", // "square" | "video" | "portrait"
+    "aspectRatio": "square",
     "images": [
       { "src": "https://...", "alt": "Project 1" },
       { "src": "https://...", "alt": "Project 2" }
@@ -165,7 +301,66 @@ Use these snippets to populate the `sections` array.
 }
 ```
 
+#### **Video (`type: 'video'`)**
+*Single featured video.*
+
+**Attributes:**
+- `videoUrl` (string): URL (YouTube, Vimeo, etc.).
+- `title` (string, optional): Video title.
+- `autoplay` (boolean): Auto start.
+- `controls` (boolean): Show controls.
+- `width`: CSS width.
+
+```json
+{
+  "id": "video-1",
+  "type": "video",
+  "content": {
+    "videoUrl": "https://www.youtube.com/watch?v=...",
+    "title": "Product Demo",
+    "autoplay": false,
+    "controls": true,
+    "width": "100%",
+    "maxWidth": "800px"
+  },
+  "settings": {}
+}
+```
+
+#### **Video Gallery (`type: 'video-gallery'`)**
+*Collection of videos.*
+
+**Attributes:**
+- `title` (string, optional): Section header.
+- `columns` (number): Grid columns.
+- `aspectRatio` ('video' | 'square' | 'portrait').
+- `videos` (Array): List of video objects `{ videoUrl, thumbnail, title }`.
+
+```json
+{
+  "id": "video-gallery-1",
+  "type": "video-gallery",
+  "content": {
+    "title": "Video Tutorials",
+    "columns": 3,
+    "aspectRatio": "video",
+    "videos": [
+      { "videoUrl": "https://...", "thumbnail": "https://...", "title": "Tutorial 1" }
+    ]
+  },
+  "settings": {}
+}
+```
+
 #### **Map (`type: 'map'`)**
+*Physical location map.*
+
+**Attributes:**
+- `title` (string, optional): Map header.
+- `address` (string): The location to show.
+- `zoom` (number): Zoom level (1-20).
+- `height` (string): CSS height.
+
 ```json
 {
   "id": "map-1",
@@ -181,23 +376,41 @@ Use these snippets to populate the `sections` array.
 ```
 
 #### **Contact (`type: 'contact'`)**
+*Essential contact details (Address, Phone, Email, Hours). No form.*
+
+**Attributes:**
+- `title` (string): Header text.
+- `subtitle` (string, optional): Sub-header.
+- `email` (string, optional): Contact email.
+- `phone` (string, optional): Contact phone.
+- `address` (string, optional): Physical address.
+- `hours` (string, optional): Opening hours (can be multi-line).
+
 ```json
 {
   "id": "contact-1",
   "type": "contact",
   "content": {
     "title": "Contact Us",
-    "subtitle": "Get a response within 24 hours.",
+    "subtitle": "Get in touch with us.",
     "email": "contact@example.com",
     "phone": "+1 234 567 890",
-    "address": "123 Main St, City",
-    "submitButtonText": "Send Message"
+    "address": "123 Main St, City, Country",
+    "hours": "Mon-Fri: 9am - 6pm\nSat: 10am - 4pm"
   },
   "settings": { "backgroundColor": "gray" }
 }
 ```
 
 #### **Footer (`type: 'footer'`)**
+*Copyright and links.*
+
+**Attributes:**
+- `copyright` (string): Copyright text.
+- `socials` (Array): Social links `{ platform, url, enabled }`.
+- `ctaButton` (Object): Optional button.
+- `columns` (Array): Link groups `{ title, links }`.
+
 ```json
 {
   "id": "footer-1",
@@ -311,7 +524,7 @@ Use these snippets to populate the `sections` array.
         "email": "contact@toptoit.fr",
         "phone": "06 12 34 56 78",
         "address": "Bordeaux Centre",
-        "submitButtonText": "Envoyer"
+        "hours": "Lun-Ven: 8h-18h"
       },
       "settings": { "backgroundColor": "gray" }
     },
