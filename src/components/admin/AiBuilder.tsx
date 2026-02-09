@@ -575,17 +575,55 @@ export const AiBuilder: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium ml-1">Logo URL (Optional)</label>
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-muted-foreground">
-                    <ImageIcon size={16} />
-                  </span>
-                  <input 
-                    className="w-full pl-10 p-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                    placeholder="https://example.com/logo.png"
-                    value={formData.logo}
-                    onChange={(e) => updateFormData({ logo: e.target.value })}
-                  />
+                <label className="text-sm font-medium ml-1">Logo</label>
+                <div className="space-y-3">
+                  <div className="relative">
+                    <span className="absolute left-3 top-3 text-muted-foreground">
+                      <ImageIcon size={16} />
+                    </span>
+                    <input 
+                      className="w-full pl-10 p-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                      placeholder="https://example.com/logo.png"
+                      value={formData.logo}
+                      onChange={(e) => updateFormData({ logo: e.target.value })}
+                    />
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="relative">
+                      <input
+                        type="file"
+                        id="logo-upload"
+                        className="hidden"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                              updateFormData({ logo: reader.result as string });
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => document.getElementById('logo-upload')?.click()}
+                        className="text-xs"
+                      >
+                        Upload Image
+                      </Button>
+                    </div>
+                    <span className="text-xs text-muted-foreground">or paste URL above</span>
+                  </div>
+
+                  {formData.logo && (
+                    <div className="mt-2 p-2 border rounded-lg bg-muted/30 w-fit">
+                      <img src={formData.logo} alt="Logo preview" className="h-12 object-contain" />
+                    </div>
+                  )}
                 </div>
               </div>
 
