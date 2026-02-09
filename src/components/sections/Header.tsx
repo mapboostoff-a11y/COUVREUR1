@@ -78,7 +78,8 @@ const Header: React.FC<HeaderProps> = ({ content, isEditing, onUpdate }) => {
         {/* Logo */}
         <div className="flex-shrink-0 font-bold text-xl text-foreground relative group flex items-center gap-3">
           {isEditing && (
-             <div className="absolute top-full left-0 mt-2 hidden group-hover:flex bg-background border border-border rounded shadow-lg p-1 gap-1 z-20">
+             <div className="absolute top-full left-0 pt-2 hidden group-hover:block z-20">
+                <div className="flex bg-background border border-border rounded shadow-lg p-1 gap-1">
                 <button 
                   onClick={() => onUpdate?.({ logoMode: 'text' })}
                   className={cn("p-1 rounded hover:bg-muted", content.logoMode === 'text' ? "text-primary bg-primary/10" : "text-muted-foreground")}
@@ -103,6 +104,7 @@ const Header: React.FC<HeaderProps> = ({ content, isEditing, onUpdate }) => {
                       <Type size={10} />
                   </div>
                 </button>
+                </div>
              </div>
           )}
 
@@ -318,7 +320,7 @@ const Header: React.FC<HeaderProps> = ({ content, isEditing, onUpdate }) => {
                   />
                 </Button>
                 {isEditing && (
-                    <div className="absolute top-full right-0 mt-2 hidden group-hover:flex z-50">
+                    <div className="absolute top-full right-0 pt-2 hidden group-hover:block z-50">
                         <LinkEditor 
                             link={content.cta} 
                             onUpdate={handleCtaUpdate} 

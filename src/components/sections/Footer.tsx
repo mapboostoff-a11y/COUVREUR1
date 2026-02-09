@@ -51,10 +51,10 @@ const Footer: React.FC<FooterProps> = ({ content, isEditing, onUpdate }) => {
   };
 
   return (
-    <div className="space-y-12">
+    <div className="container mx-auto px-4 md:px-6">
         {/* CTA Button Section - Added based on user request */}
         {content.ctaButton && (
-            <div className="flex flex-col items-center justify-center pb-8 border-b border-border gap-4">
+            <div className="flex flex-col items-center justify-center pb-12 mb-12 border-b border-border/50 gap-6">
                 {isEditing && (
                      <div className="text-xs text-muted-foreground mb-2">Button Settings (Edit URL in popup or sidebar)</div>
                 )}
@@ -65,7 +65,7 @@ const Footer: React.FC<FooterProps> = ({ content, isEditing, onUpdate }) => {
                         rel={content.ctaButton.external ? "noopener noreferrer" : undefined}
                         onClick={(e) => isEditing && e.preventDefault()}
                         className={cn(
-                            "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2",
+                            "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 py-2 shadow-sm",
                             buttonVariants[content.ctaButton.variant as keyof typeof buttonVariants] || buttonVariants.primary
                         )}
                     >
@@ -89,20 +89,20 @@ const Footer: React.FC<FooterProps> = ({ content, isEditing, onUpdate }) => {
         )}
 
       {content.columns && (
-        <div className="grid md:grid-cols-4 gap-8 pb-8 border-b border-border">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mb-12">
           {content.columns.map((col, idx) => (
-            <div key={idx}>
+            <div key={idx} className="flex flex-col gap-4">
               <InlineText
                   tagName="h4"
-                  className="font-semibold mb-4 text-foreground"
+                  className="font-bold text-lg tracking-tight text-foreground"
                   value={col.title}
                   isEditing={isEditing}
                   onUpdate={(val) => handleColumnTitleUpdate(idx, val)}
               />
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {col.links.map((link, i) => (
                   <li key={i}>
-                    <a href={link.url} onClick={(e) => isEditing && e.preventDefault()} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <a href={link.url} onClick={(e) => isEditing && e.preventDefault()} className="text-sm text-muted-foreground hover:text-primary transition-colors block">
                       <InlineText
                           tagName="span"
                           value={link.text}
@@ -118,17 +118,17 @@ const Footer: React.FC<FooterProps> = ({ content, isEditing, onUpdate }) => {
         </div>
       )}
 
-      <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-border/50">
         <InlineText
             tagName="div"
-            className="text-sm text-muted-foreground"
+            className="text-sm text-muted-foreground/80 font-medium"
             value={content.copyright}
             isEditing={isEditing}
             onUpdate={(val) => onUpdate?.({ copyright: val })}
         />
         
         {content.socials && (
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-3 items-center">
             {content.socials.filter(s => s.enabled !== false).map((social, idx) => {
               const Icon = getIcon(social.platform);
               return (
@@ -137,10 +137,10 @@ const Footer: React.FC<FooterProps> = ({ content, isEditing, onUpdate }) => {
                         href={social.url} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-foreground transition-colors block"
+                        className="p-2 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all block"
                         onClick={(e) => isEditing && e.preventDefault()}
                     >
-                        <Icon size={20} />
+                        <Icon size={18} />
                     </a>
                     {isEditing && (
                         <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:flex bg-popover p-2 rounded border shadow-lg z-50 flex-col gap-2 min-w-[150px]">
@@ -175,7 +175,7 @@ const Footer: React.FC<FooterProps> = ({ content, isEditing, onUpdate }) => {
             {/* Add Social Button (Only Visible in Edit Mode) */}
             {isEditing && (
                 <div className="relative group ml-2">
-                    <button className="text-muted-foreground/50 hover:text-primary transition-colors">
+                    <button className="p-2 rounded-full text-muted-foreground/50 hover:text-primary transition-colors">
                         <Icons.PlusCircle size={20} />
                     </button>
                     <div className="absolute bottom-full right-0 mb-2 hidden group-hover:flex bg-popover p-2 rounded border shadow-lg z-50 flex-col gap-1 min-w-[120px]">
