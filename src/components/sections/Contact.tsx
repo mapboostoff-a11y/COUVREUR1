@@ -14,8 +14,8 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = ({ content, isEditing, onUpdate }) => {
   return (
-    <div className="container mx-auto px-4 text-center">
-      <div className="mb-12">
+    <div className="w-full flex flex-col items-center">
+      <div className="mb-12 text-center max-w-3xl mx-auto">
         <InlineText
           tagName="h2"
           className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-foreground mb-4"
@@ -34,7 +34,7 @@ const Contact: React.FC<ContactProps> = ({ content, isEditing, onUpdate }) => {
         )}
       </div>
 
-      <div className="flex flex-wrap justify-center gap-8">
+      <div className="w-full flex flex-wrap justify-center gap-8">
         {content.email && (
           <div className="flex flex-col items-center gap-4 p-6 rounded-lg bg-card border shadow-sm flex-1 min-w-[250px] max-w-[400px]">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
