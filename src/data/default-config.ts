@@ -2,15 +2,16 @@ import type { LandingPageConfig } from '../types/schema';
 
 export const defaultConfig: LandingPageConfig = {
   meta: {
-    title: "My Awesome Landing Page",
-    description: "Built with the ultimate Landing Page Builder",
+    title: "Couvreur Champigny-sur-Marne (94) | Urgence & Rénovation Toiture",
+    description: "Artisan couvreur local à Champigny (94). Dépannage fuite 7j/7, rénovation complète, zinguerie. Devis gratuit sous 48h. Garantie décennale + Qualibat RGE.",
+    favicon: "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&w=32&h=32"
   },
   theme: {
     colors: {
-      primary: "#3b82f6",
-      secondary: "#10b981",
-      background: "#ffffff",
-      text: "#1f2937",
+      primary: "#c2410c",       // Terracotta / Roofing Orange
+      secondary: "#1e293b",     // Slate Blue / Dark
+      background: "#f8fafc",    // Very light gray
+      text: "#0f172a",          // Dark Slate
     },
     fonts: {
       heading: "Inter",
@@ -18,99 +19,292 @@ export const defaultConfig: LandingPageConfig = {
     },
   },
   whatsapp: {
-    enabled: false,
-    number: "",
-    message: "Hello! I would like more information.",
+    enabled: true,
+    number: "33612345678",
+    message: "Bonjour, je souhaite un devis pour ma toiture à Champigny.",
     position: "bottom-right"
   },
   sections: [
     {
-      id: "hero-1",
+      id: "header-1",
+      type: "header",
+      content: {
+        title: "Couvreur Champigny",
+        logoMode: "text",
+        links: [
+          { text: "Services", url: "#services", variant: "link" },
+          { text: "Réalisations", url: "#realisations", variant: "link" },
+          { text: "Avis", url: "#avis", variant: "link" },
+          { text: "Contact", url: "#contact", variant: "link" }
+        ],
+        cta: { text: "01 23 45 67 89", url: "tel:+33123456789", variant: "primary" }
+      },
+      settings: { visible: true, sticky: true, backgroundColor: "white", shadow: "sm" }
+    },
+    {
+      id: "hero-video",
       type: "hero",
+      content: {
+        headline: "Votre Toiture à Champigny Protégée pour 30 Ans",
+        subheadline: "Ne laissez pas une petite fuite devenir un gros dégât. Découvrez notre méthode de rénovation durable et nos réalisations en vidéo.",
+        alignment: "center",
+        videoUrl: "https://www.youtube.com/watch?v=LXb3EKWsInQ",
+        cta: [
+          { text: "Voir nos chantiers", url: "#realisations", variant: "primary" },
+          { text: "Obtenir un devis gratuit", url: "#contact", variant: "outline" }
+        ]
+      },
       settings: {
         visible: true,
         paddingTop: "xl",
         paddingBottom: "xl",
-        backgroundColor: "white",
-        container: true,
-        animation: "none",
-        border: false,
-        shadow: "none"
-      },
+        backgroundColor: "white"
+      }
+    },
+    {
+      id: "hero-image",
+      type: "hero",
       content: {
-        headline: "Build Faster with Our Tool",
-        subheadline: "The most powerful landing page builder for modern businesses. Drag, drop, and publish in minutes.",
+        headline: "Intervention Toiture en 24h sur le Val-de-Marne",
+        subheadline: "Tuiles cassées ? Infiltrations ? Notre équipe d'experts intervient immédiatement pour sécuriser votre habitat. Travail soigné et garanti.",
         alignment: "center",
         cta: [
-          { text: "Get Started", url: "#", variant: "primary", external: false },
-          { text: "Learn More", url: "#", variant: "outline", external: false }
-        ]
+          { text: "Appeler un expert", url: "tel:0123456789", variant: "primary" },
+          { text: "Demander un diagnostic", url: "#contact", variant: "outline" }
+        ],
+        image: {
+          src: "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
+          "alt": "Couvreur en intervention d'urgence"
+        }
+      },
+      settings: {
+        visible: true,
+        paddingTop: "xl",
+        paddingBottom: "xl",
+        backgroundColor: "gray"
       }
     },
     {
-      id: "features-1",
+      id: "process",
       type: "features",
+      content: {
+        title: "Notre Processus d'Intervention",
+        subtitle: "Un accompagnement transparent de A à Z",
+        columns: 4,
+        features: [
+          {
+            title: "1. Audit Gratuit",
+            description: "Visite sur place et inspection complète de la toiture sous 48h.",
+            icon: "FileText"
+          },
+          {
+            title: "2. Devis Transparent",
+            description: "Prix fixe et détaillé. Aucune surprise à la facturation.",
+            icon: "Calendar"
+          },
+          {
+            title: "3. Chantier Sécurisé",
+            description: "Installation d'échafaudages et protection de votre habitat.",
+            icon: "Hammer"
+          },
+          {
+            title: "4. Finitions Parfaites",
+            description: "Nettoyage complet du chantier et remise de la garantie décennale.",
+            icon: "CheckCircle"
+          }
+        ]
+      },
       settings: {
         visible: true,
+        backgroundColor: "white",
         paddingTop: "lg",
-        paddingBottom: "lg",
-        backgroundColor: "gray",
-        container: true,
-        animation: "none",
-        border: false,
-        shadow: "none"
-      },
+        paddingBottom: "lg"
+      }
+    },
+    {
+      id: "services",
+      type: "features",
       content: {
-        title: "Why Choose Us?",
-        subtitle: "Everything you need to launch your next project.",
+        title: "Nos Services de Couverture",
+        subtitle: "Une expertise complète pour tous vos besoins en toiture dans le Val-de-Marne.",
         columns: 3,
         features: [
-          { title: "Blazing Fast", description: "Optimized for speed and performance.", icon: "Zap" },
-          { title: "Secure", description: "Enterprise-grade security out of the box.", icon: "Shield" },
-          { title: "Customizable", description: "Fully flexible design system.", icon: "Layout" }
+          {
+            title: "Rénovation de Toiture",
+            description: "Remplacement de tuiles, ardoises et rénovation complète. Redonnez de la valeur à votre maison.",
+            icon: "Home"
+          },
+          {
+            title: "Zinguerie & Gouttières",
+            description: "Pose de gouttières zinc/PVC et abergements de cheminée pour une étanchéité parfaite.",
+            icon: "Droplets"
+          },
+          {
+            title: "Étanchéité & Isolation",
+            description: "Stop aux fuites et aux pertes de chaleur. Isolation combles et toiture terrasse.",
+            icon: "Shield"
+          },
+          {
+            title: "Nettoyage & Démoussage",
+            description: "Traitement hydrofuge et anti-mousse pour prolonger la durée de vie de vos tuiles.",
+            icon: "Sparkles"
+          },
+          {
+            title: "Pose de Velux",
+            description: "Installateur agréé Velux. Gagnez en lumière et en aération dans vos combles.",
+            icon: "Sun"
+          },
+          {
+            title: "Urgences 7j/7",
+            description: "Bâchage d'urgence après tempête. Intervention rapide sur tout le 94.",
+            icon: "Clock"
+          }
         ]
-      }
-    },
-    {
-      id: "cta-1",
-      type: "cta",
-      settings: {
-        visible: true,
-        paddingTop: "lg",
-        paddingBottom: "lg",
-        backgroundColor: "primary",
-        container: true,
-        animation: "none",
-        border: false,
-        shadow: "none"
       },
-      content: {
-        title: "Ready to Dive In?",
-        description: "Join thousands of satisfied users today.",
-        buttons: [
-          { text: "Start Free Trial", url: "#", variant: "secondary", external: false }
-        ]
+      settings: {
+        visible: true,
+        backgroundColor: "gray",
+        paddingTop: "lg",
+        paddingBottom: "lg"
       }
     },
     {
-      id: "footer-1",
-      type: "footer",
+      id: "realisations",
+      type: "gallery",
+      content: {
+        title: "Nos Derniers Chantiers",
+        columns: 3,
+        aspectRatio: "square",
+        images: [
+          { src: "https://images.unsplash.com/photo-1628131336496-52264663a8a9?auto=format&fit=crop&q=80", alt: "Rénovation toiture tuiles" },
+          { src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80", alt: "Maison moderne toiture" },
+          { src: "https://images.unsplash.com/photo-1623861214343-2287f3b879c7?auto=format&fit=crop&q=80", alt: "Détail zinguerie" }
+        ]
+      },
       settings: {
         visible: true,
+        backgroundColor: "white",
+        paddingTop: "lg",
+        paddingBottom: "lg"
+      }
+    },
+    {
+      id: "guarantees",
+      type: "features",
+      content: {
+        title: "Vos Garanties & Certifications",
+        subtitle: "Faites confiance à un artisan qualifié et assuré.",
+        columns: 4,
+        features: [
+          {
+            title: "Garantie Décennale",
+            description: "Tous nos travaux sont couverts pendant 10 ans.",
+            icon: "Award"
+          },
+          {
+            title: "Devis Gratuit",
+            description: "Estimation précise et sans engagement sous 48h.",
+            icon: "FileText"
+          },
+          {
+            title: "Respect des Délais",
+            description: "Nous nous engageons sur les dates d'intervention.",
+            icon: "Calendar"
+          },
+          {
+            title: "Qualité Artisanale",
+            description: "Savoir-faire traditionnel et matériaux de qualité.",
+            icon: "Hammer"
+          }
+        ]
+      },
+      settings: {
+        visible: true,
+        backgroundColor: "primary",
         paddingTop: "md",
         paddingBottom: "md",
-        backgroundColor: "dark",
-        container: true,
-        animation: "none",
-        border: false,
-        shadow: "none"
-      },
+        container: true
+      }
+    },
+    {
+      id: "avis",
+      type: "testimonials",
       content: {
-        copyright: "© 2024 LandingPage Inc. All rights reserved.",
-        socials: [
-          { platform: "twitter", url: "https://twitter.com", enabled: true },
-          { platform: "github", url: "https://github.com", enabled: true }
+        title: "Avis Clients à Champigny (94)",
+        testimonials: [
+          {
+            name: "Jean Dupont",
+            role: "Propriétaire à Champigny (Quartier du Plant)",
+            content: "Excellent travail pour la rénovation de ma toiture. Équipe ponctuelle, chantier laissé propre et délais respectés. Je recommande vivement !",
+            rating: 5
+          },
+          {
+            name: "Sophie Martin",
+            role: "Habitante à Coeuilly",
+            content: "J'ai fait appel à eux pour une fuite urgente après l'orage. Intervention dans la journée, problème réglé rapidement. Très pro.",
+            rating: 5
+          },
+          {
+            name: "Marc Durand",
+            role: "Chennevières-sur-Marne",
+            content: "Devis clair et compétitif. Le démoussage a redonné un coup de jeune à ma maison. Merci pour les conseils d'entretien.",
+            rating: 5
+          }
         ]
+      },
+      settings: {
+        visible: true,
+        backgroundColor: "gray",
+        paddingTop: "lg",
+        paddingBottom: "lg"
+      }
+    },
+    {
+      id: "map",
+      type: "map",
+      content: {
+        title: "Zone d'Intervention",
+        address: "Champigny-sur-Marne, France",
+        zoom: 13,
+        height: "400px"
+      },
+      settings: {
+        visible: true,
+        container: true
+      }
+    },
+    {
+      id: "contact",
+      type: "contact",
+      content: {
+        title: "Contactez-nous",
+        subtitle: "Notre équipe est à votre disposition pour toute demande.",
+        email: "contact@couvreur-champigny.fr",
+        phone: "01 23 45 67 89",
+        address: "12 Avenue de la République, 94500 Champigny-sur-Marne",
+        hours: "Lundi - Samedi : 8h00 - 19h00"
+      },
+      settings: {
+        visible: true,
+        backgroundColor: "white",
+        paddingTop: "lg",
+        paddingBottom: "lg"
+      }
+    },
+    {
+      id: "footer",
+      type: "footer",
+      content: {
+        copyright: "© 2024 Couvreur Champigny-sur-Marne. Tous droits réservés.",
+        socials: [
+          { platform: "facebook", url: "#", enabled: true },
+          { platform: "instagram", url: "#", enabled: true }
+        ],
+        ctaButton: { text: "Nous Contacter", url: "#contact", variant: "outline" }
+      },
+      settings: {
+        visible: true,
+        backgroundColor: "dark"
       }
     }
   ]
