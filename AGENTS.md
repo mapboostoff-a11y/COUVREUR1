@@ -1,0 +1,339 @@
+# AGENTS.md
+
+This file provides context and instructions for AI coding agents working on the **Landing Page Pas Cher - Base Template** project. It is the **primary reference** for understanding the project structure and **generating websites automatically**.
+
+> **⚠️ IMPORTANT FOR AGENTS**: The source of truth for all data structures is `src/types/schema.ts`. If this documentation conflicts with the Zod schemas defined there, **follow the Zod schemas**.
+
+## Project Overview
+
+This is a **Landing Page Builder** powered by a JSON configuration.
+- **Core Concept**: A single JSON object (`LandingPageConfig`) defines the entire website (theme, content, sections).
+- **Stack**: React 19, Vite, Tailwind CSS v4, Zustand, Zod.
+- **Goal**: Enable AI agents to generate complete, high-quality landing pages by simply producing a valid JSON configuration.
+
+## Setup Commands
+
+- **Install**: `pnpm install`
+- **Dev**: `pnpm dev`
+- **Build**: `pnpm build`
+- **Test**: `npx vitest`
+
+---
+
+## 🚀 Automatic Site Generation Guide
+
+To generate a website for a user (e.g., "Create a site for a Roofer"), follow these steps:
+
+### 1. Analyze the Request
+Extract key details from the user's prompt:
+- **Industry/Niche**: (e.g., Roofer, Dentist, SaaS) -> determines images, icons, and copy.
+- **Brand Name**: The name of the business.
+- **Contact Info**: Phone, Email, Address (use placeholders if not provided).
+- **Tone/Style**: Professional, Friendly, Luxury, Urgent, etc.
+
+### 2. Construct the Root Configuration
+Start with the root `LandingPageConfig` object. You **must** strictly follow this structure:
+
+```json
+{
+  "meta": {
+    "title": "Brand Name - Tagline",
+    "description": "SEO optimized description of the business.",
+    "favicon": "https://example.com/favicon.ico" // Optional
+  },
+  "theme": {
+    "colors": {
+      "primary": "#3b82f6",       // Main brand color (buttons, highlights)
+      "secondary": "#1e293b",     // Secondary/Accent color
+      "background": "#ffffff",    // Page background (usually white or very light)
+      "text": "#0f172a"           // Body text color
+    },
+    "fonts": {
+      "heading": "Inter",         // Options: Inter, Roboto, Open Sans, etc.
+      "body": "Inter"
+    }
+  },
+  "whatsapp": {                   // Optional: Floating WhatsApp button
+    "enabled": true,
+    "number": "1234567890",
+    "message": "Hi, I need a quote.",
+    "position": "bottom-right"
+  },
+  "sections": []                  // The array of sections (see below)
+}
+```
+
+### 3. Section Strategy
+Build the `sections` array using a standard high-converting structure.
+**Recommended Layout:**
+1.  **Header**: Navigation & Logo (Sticky).
+2.  **Hero**: First impression. High quality image + Strong CTA.
+3.  **Features**: 3-4 key selling points with icons.
+4.  **Gallery** (or Video): Visual proof of work.
+5.  **Testimonials**: Social proof.
+6.  **Pricing** (if applicable): Clear packages.
+7.  **Map** (for local businesses): Physical location.
+8.  **Contact**: Form and contact details.
+9.  **Footer**: Copyright and links.
+
+### 4. JSON Reference (Section Catalog)
+Use these snippets to populate the `sections` array.
+**Note**: `id` must be unique (e.g., `hero-1`, `features-1`).
+
+#### **Header (`type: 'header'`)**
+*Crucial for navigation. Usually the first section.*
+```json
+{
+  "id": "header-1",
+  "type": "header",
+  "content": {
+    "title": "BrandName",
+    "logo": "https://...",      // Optional: URL to logo image
+    "logoMode": "text",         // "text" | "image" | "both"
+    "links": [
+      { "text": "Services", "url": "#services" },
+      { "text": "Contact", "url": "#contact" }
+    ],
+    "cta": { "text": "Call Now", "url": "tel:+1234567890", "variant": "primary" }
+  },
+  "settings": { "visible": true, "sticky": true }
+}
+```
+
+#### **Hero (`type: 'hero'`)**
+```json
+{
+  "id": "hero-1",
+  "type": "hero",
+  "content": {
+    "headline": "Expert Services in Your City",
+    "subheadline": "Professional, reliable, and affordable solutions.",
+    "alignment": "center", // "left" | "center" | "right"
+    "cta": [
+      { "text": "Get a Free Quote", "url": "#contact", "variant": "primary" }
+    ],
+    "image": {
+      "src": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
+      "alt": "Hero Image"
+    }
+  },
+  "settings": { "paddingTop": "xl", "paddingBottom": "xl" }
+}
+```
+
+#### **Features (`type: 'features'`)**
+*Use Lucide icon names for `icon` (e.g., 'Shield', 'Hammer', 'Clock', 'Award', 'Star').*
+```json
+{
+  "id": "features-1",
+  "type": "features",
+  "content": {
+    "title": "Why Choose Us?",
+    "columns": 3,
+    "features": [
+      {
+        "title": "24/7 Service",
+        "description": "Always available when you need us.",
+        "icon": "Clock"
+      },
+      {
+        "title": "Certified Experts",
+        "description": "Fully licensed and insured team.",
+        "icon": "Award"
+      }
+    ]
+  },
+  "settings": { "backgroundColor": "gray" }
+}
+```
+
+#### **Gallery (`type: 'gallery'`)**
+```json
+{
+  "id": "gallery-1",
+  "type": "gallery",
+  "content": {
+    "title": "Our Recent Projects",
+    "columns": 3,
+    "aspectRatio": "square", // "square" | "video" | "portrait"
+    "images": [
+      { "src": "https://...", "alt": "Project 1" },
+      { "src": "https://...", "alt": "Project 2" }
+    ]
+  },
+  "settings": {}
+}
+```
+
+#### **Map (`type: 'map'`)**
+```json
+{
+  "id": "map-1",
+  "type": "map",
+  "content": {
+    "title": "Visit Our Office",
+    "address": "123 Rue de la Paix, Paris, France",
+    "zoom": 14,
+    "height": "400px"
+  },
+  "settings": { "visible": true }
+}
+```
+
+#### **Contact (`type: 'contact'`)**
+```json
+{
+  "id": "contact-1",
+  "type": "contact",
+  "content": {
+    "title": "Contact Us",
+    "subtitle": "Get a response within 24 hours.",
+    "email": "contact@example.com",
+    "phone": "+1 234 567 890",
+    "address": "123 Main St, City",
+    "submitButtonText": "Send Message"
+  },
+  "settings": { "backgroundColor": "gray" }
+}
+```
+
+#### **Footer (`type: 'footer'`)**
+```json
+{
+  "id": "footer-1",
+  "type": "footer",
+  "content": {
+    "copyright": "© 2024 Company Name. All rights reserved.",
+    "socials": [
+      { "platform": "facebook", "url": "https://facebook.com", "enabled": true },
+      { "platform": "instagram", "url": "https://instagram.com", "enabled": true }
+    ],
+    "ctaButton": { "text": "Client Portal", "url": "https://portal.com", "variant": "outline" }
+  },
+  "settings": { "backgroundColor": "dark" }
+}
+```
+
+---
+
+## 🧪 Full Example: "Roofer Site" Generation
+
+**User Input**: "Make a site for 'TopToit', a roofer in Bordeaux."
+
+**Generated JSON**:
+```json
+{
+  "meta": {
+    "title": "TopToit - Expert Couvreur Bordeaux",
+    "description": "Réparation et installation de toiture à Bordeaux. Devis gratuit.",
+    "favicon": ""
+  },
+  "theme": {
+    "colors": {
+      "primary": "#e63946",       // Red/Orange for urgency/construction
+      "secondary": "#1d3557",     // Navy Blue for trust
+      "background": "#f1faee",    // Off-white
+      "text": "#1d3557"
+    },
+    "fonts": {
+      "heading": "Inter",
+      "body": "Inter"
+    }
+  },
+  "whatsapp": {
+    "enabled": true,
+    "number": "33612345678",
+    "message": "Bonjour, je souhaite un devis.",
+    "position": "bottom-right"
+  },
+  "sections": [
+    {
+      "id": "header",
+      "type": "header",
+      "content": {
+        "title": "TopToit",
+        "logoMode": "text",
+        "links": [
+          { "text": "Services", "url": "#services" },
+          { "text": "Réalisations", "url": "#gallery" },
+          { "text": "Contact", "url": "#contact" }
+        ],
+        "cta": { "text": "06 12 34 56 78", "url": "tel:+33612345678", "variant": "primary" }
+      },
+      "settings": { "visible": true }
+    },
+    {
+      "id": "hero",
+      "type": "hero",
+      "content": {
+        "headline": "Votre Toiture Entre de Bonnes Mains",
+        "subheadline": "Spécialiste de la rénovation et de l'étanchéité à Bordeaux depuis 15 ans.",
+        "alignment": "left",
+        "cta": [{ "text": "Demander un Devis Gratuit", "url": "#contact", "variant": "primary" }],
+        "image": {
+          "src": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
+          "alt": "Toiture Bordeaux"
+        }
+      },
+      "settings": { "paddingTop": "xl", "paddingBottom": "xl" }
+    },
+    {
+      "id": "features",
+      "type": "features",
+      "content": {
+        "title": "Nos Services",
+        "columns": 3,
+        "features": [
+          { "title": "Rénovation Complète", "description": "Remise à neuf de tuiles et ardoises.", "icon": "Home" },
+          { "title": "Fuites & Urgences", "description": "Intervention rapide 7j/7.", "icon": "Droplets" },
+          { "title": "Isolation", "description": "Économisez de l'énergie.", "icon": "Thermometer" }
+        ]
+      },
+      "settings": { "backgroundColor": "white" }
+    },
+    {
+      "id": "map",
+      "type": "map",
+      "content": {
+        "title": "Zone d'Intervention",
+        "address": "Bordeaux, France",
+        "zoom": 12,
+        "height": "400px"
+      },
+      "settings": { "visible": true }
+    },
+    {
+      "id": "contact",
+      "type": "contact",
+      "content": {
+        "title": "Contactez-nous",
+        "subtitle": "Réponse sous 24h.",
+        "email": "contact@toptoit.fr",
+        "phone": "06 12 34 56 78",
+        "address": "Bordeaux Centre",
+        "submitButtonText": "Envoyer"
+      },
+      "settings": { "backgroundColor": "gray" }
+    },
+    {
+      "id": "footer",
+      "type": "footer",
+      "content": {
+        "copyright": "© 2024 TopToit.",
+        "socials": [
+          { "platform": "facebook", "url": "#", "enabled": true }
+        ]
+      },
+      "settings": { "backgroundColor": "dark" }
+    }
+  ]
+}
+```
+
+## Adding New Sections (Developer Only)
+
+To extend the capability of the builder:
+1.  **Schema**: Update `src/types/schema.ts`.
+2.  **Component**: Create `src/components/sections/NewSection.tsx`.
+3.  **Register**: Update `src/components/renderer/SectionRenderer.tsx`.
+4.  **UI**: Update `src/components/admin/SectionPicker.tsx`.
