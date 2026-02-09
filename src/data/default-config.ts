@@ -31,15 +31,25 @@ export const defaultConfig: LandingPageConfig = {
       content: {
         title: "Couvreur Champigny",
         logoMode: "text",
+        sticky: true,
         links: [
-          { text: "Services", url: "#services", variant: "link" },
-          { text: "Réalisations", url: "#realisations", variant: "link" },
-          { text: "Avis", url: "#avis", variant: "link" },
-          { text: "Contact", url: "#contact", variant: "link" }
+          { text: "Services", url: "#services", variant: "link", external: false },
+          { text: "Réalisations", url: "#realisations", variant: "link", external: false },
+          { text: "Avis", url: "#avis", variant: "link", external: false },
+          { text: "Contact", url: "#contact", variant: "link", external: false }
         ],
-        cta: { text: "01 23 45 67 89", url: "tel:+33123456789", variant: "primary" }
+        cta: { text: "01 23 45 67 89", url: "tel:+33123456789", variant: "primary", external: false }
       },
-      settings: { visible: true, sticky: true, backgroundColor: "white", shadow: "sm" }
+      settings: { 
+        visible: true, 
+        backgroundColor: "white", 
+        shadow: "sm",
+        container: true,
+        animation: "none",
+        border: false,
+        paddingTop: "none",
+        paddingBottom: "none"
+      }
     },
     {
       id: "hero-video",
@@ -50,15 +60,19 @@ export const defaultConfig: LandingPageConfig = {
         alignment: "center",
         videoUrl: "https://www.youtube.com/watch?v=LXb3EKWsInQ",
         cta: [
-          { text: "Voir nos chantiers", url: "#realisations", variant: "primary" },
-          { text: "Obtenir un devis gratuit", url: "#contact", variant: "outline" }
+          { text: "Voir nos chantiers", url: "#realisations", variant: "primary", external: false },
+          { text: "Obtenir un devis gratuit", url: "#contact", variant: "outline", external: false }
         ]
       },
       settings: {
         visible: true,
         paddingTop: "xl",
         paddingBottom: "xl",
-        backgroundColor: "white"
+        backgroundColor: "white",
+        container: true,
+        animation: "slide-up",
+        border: false,
+        shadow: "none"
       }
     },
     {
@@ -69,8 +83,8 @@ export const defaultConfig: LandingPageConfig = {
         subheadline: "Tuiles cassées ? Infiltrations ? Notre équipe d'experts intervient immédiatement pour sécuriser votre habitat. Travail soigné et garanti.",
         alignment: "center",
         cta: [
-          { text: "Appeler un expert", url: "tel:0123456789", variant: "primary" },
-          { text: "Demander un diagnostic", url: "#contact", variant: "outline" }
+          { text: "Appeler un expert", url: "tel:0123456789", variant: "primary", external: false },
+          { text: "Demander un diagnostic", url: "#contact", variant: "outline", external: false }
         ],
         image: {
           src: "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
@@ -81,7 +95,11 @@ export const defaultConfig: LandingPageConfig = {
         visible: true,
         paddingTop: "xl",
         paddingBottom: "xl",
-        backgroundColor: "gray"
+        backgroundColor: "gray",
+        container: true,
+        animation: "slide-up",
+        border: false,
+        shadow: "none"
       }
     },
     {
@@ -118,7 +136,11 @@ export const defaultConfig: LandingPageConfig = {
         visible: true,
         backgroundColor: "white",
         paddingTop: "lg",
-        paddingBottom: "lg"
+        paddingBottom: "lg",
+        container: true,
+        animation: "slide-up",
+        border: false,
+        shadow: "none"
       }
     },
     {
@@ -165,7 +187,11 @@ export const defaultConfig: LandingPageConfig = {
         visible: true,
         backgroundColor: "gray",
         paddingTop: "lg",
-        paddingBottom: "lg"
+        paddingBottom: "lg",
+        container: true,
+        animation: "slide-up",
+        border: false,
+        shadow: "none"
       }
     },
     {
@@ -185,7 +211,11 @@ export const defaultConfig: LandingPageConfig = {
         visible: true,
         backgroundColor: "white",
         paddingTop: "lg",
-        paddingBottom: "lg"
+        paddingBottom: "lg",
+        container: true,
+        animation: "slide-up",
+        border: false,
+        shadow: "none"
       }
     },
     {
@@ -223,7 +253,10 @@ export const defaultConfig: LandingPageConfig = {
         backgroundColor: "primary",
         paddingTop: "md",
         paddingBottom: "md",
-        container: true
+        container: true,
+        animation: "slide-up",
+        border: false,
+        shadow: "none"
       }
     },
     {
@@ -256,7 +289,11 @@ export const defaultConfig: LandingPageConfig = {
         visible: true,
         backgroundColor: "gray",
         paddingTop: "lg",
-        paddingBottom: "lg"
+        paddingBottom: "lg",
+        container: true,
+        animation: "slide-up",
+        border: false,
+        shadow: "none"
       }
     },
     {
@@ -270,7 +307,13 @@ export const defaultConfig: LandingPageConfig = {
       },
       settings: {
         visible: true,
-        container: true
+        container: true,
+        paddingTop: "md",
+        paddingBottom: "md",
+        backgroundColor: "white",
+        animation: "slide-up",
+        border: false,
+        shadow: "none"
       }
     },
     {
@@ -288,7 +331,11 @@ export const defaultConfig: LandingPageConfig = {
         visible: true,
         backgroundColor: "white",
         paddingTop: "lg",
-        paddingBottom: "lg"
+        paddingBottom: "lg",
+        container: true,
+        animation: "slide-up",
+        border: false,
+        shadow: "none"
       }
     },
     {
@@ -300,11 +347,17 @@ export const defaultConfig: LandingPageConfig = {
           { platform: "facebook", url: "#", enabled: true },
           { platform: "instagram", url: "#", enabled: true }
         ],
-        ctaButton: { text: "Nous Contacter", url: "#contact", variant: "outline" }
+        ctaButton: { text: "Nous Contacter", url: "#contact", variant: "outline", external: false }
       },
       settings: {
         visible: true,
-        backgroundColor: "dark"
+        backgroundColor: "dark",
+        paddingTop: "md",
+        paddingBottom: "md",
+        container: true,
+        animation: "none",
+        border: false,
+        shadow: "none"
       }
     }
   ]

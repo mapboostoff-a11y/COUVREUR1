@@ -6,7 +6,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Header Navigation",
     type: 'header',
-    settings: { visible: true, paddingTop: 'none', paddingBottom: 'none', backgroundColor: 'white', container: false },
+    settings: { visible: true, paddingTop: 'none', paddingBottom: 'none', backgroundColor: 'white', container: false, animation: 'none', border: false, shadow: 'sm' },
     content: {
       logo: "MyBrand",
       title: "MyBrand",
@@ -23,20 +23,19 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Contact Form",
     type: 'contact',
-    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'white', container: true },
+    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       title: "Get in Touch",
       subtitle: "We'd love to hear from you. Fill out the form below.",
       email: "hello@example.com",
       phone: "+1 (555) 000-0000",
-      address: "123 Main St, San Francisco, CA",
-      submitButtonText: "Send Message"
+      address: "123 Main St, San Francisco, CA"
     }
   },
   {
     name: "Hero (Split)",
     type: 'hero',
-    settings: { visible: true, paddingTop: 'xl', paddingBottom: 'xl', backgroundColor: 'white', container: true },
+    settings: { visible: true, paddingTop: 'xl', paddingBottom: 'xl', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       headline: "Drive Growth Faster",
       subheadline: "All the tools you need to scale your business, in one platform.",
@@ -55,7 +54,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Hero (Minimal)",
     type: 'hero',
-    settings: { visible: true, paddingTop: 'xl', paddingBottom: 'xl', backgroundColor: 'gray', container: true },
+    settings: { visible: true, paddingTop: 'xl', paddingBottom: 'xl', backgroundColor: 'gray', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       headline: "Less is More",
       subheadline: "Focus on what matters with our distraction-free interface.",
@@ -69,7 +68,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Hero (Classic)",
     type: 'hero',
-    settings: { visible: true, paddingTop: 'xl', paddingBottom: 'xl', backgroundColor: 'white', container: true },
+    settings: { visible: true, paddingTop: 'xl', paddingBottom: 'xl', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       headline: "Your Main Value Proposition",
       subheadline: "Describe what your product or service does in a short, catchy sentence.",
@@ -89,7 +88,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Hero (Video)",
     type: 'hero',
-    settings: { visible: true, paddingTop: 'none', paddingBottom: 'none', backgroundColor: 'white', container: true },
+    settings: { visible: true, paddingTop: 'none', paddingBottom: 'none', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       headline: "Showcase Your Product",
       subheadline: "Watch the video to learn more about our amazing features.",
@@ -101,7 +100,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Features Grid",
     type: 'features',
-    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'gray', container: true },
+    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'gray', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       title: "Why Choose Us",
       subtitle: "Everything you need to succeed",
@@ -116,7 +115,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Pricing Table",
     type: 'pricing',
-    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'white', container: true },
+    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       title: "Simple Pricing",
       description: "Choose the plan that fits your needs",
@@ -150,7 +149,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Testimonials",
     type: 'testimonials',
-    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'gray', container: true },
+    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'gray', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       title: "Trusted by Developers",
       testimonials: [
@@ -174,7 +173,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Call to Action",
     type: 'cta',
-    settings: { visible: true, paddingTop: 'xl', paddingBottom: 'xl', backgroundColor: 'primary', container: true },
+    settings: { visible: true, paddingTop: 'xl', paddingBottom: 'xl', backgroundColor: 'primary', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       title: "Ready to Get Started?",
       description: "Join thousands of satisfied customers today.",
@@ -186,12 +185,12 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Footer",
     type: 'footer',
-    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'dark', container: true },
+    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'dark', container: true, animation: 'none', border: false, shadow: 'none' },
     content: {
       copyright: "© 2024 Your Company. All rights reserved.",
       socials: [
-        { platform: "twitter", url: "https://twitter.com" },
-        { platform: "github", url: "https://github.com" }
+        { platform: "twitter", url: "https://twitter.com", enabled: true },
+        { platform: "github", url: "https://github.com", enabled: true }
       ],
       columns: [
         {
@@ -214,7 +213,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Video Player",
     type: 'video',
-    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'dark', container: true },
+    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'dark', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       title: "Watch Our Story",
@@ -227,7 +226,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Image Gallery",
     type: 'gallery',
-    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'white', container: true },
+    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       title: "Our Work",
       columns: 3,
@@ -245,7 +244,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Header (Minimal)",
     type: 'header',
-    settings: { visible: true, paddingTop: 'none', paddingBottom: 'none', backgroundColor: 'white', container: false },
+    settings: { visible: true, paddingTop: 'none', paddingBottom: 'none', backgroundColor: 'white', container: false, animation: 'none', border: false, shadow: 'sm' },
     content: {
       logo: "Startup",
       title: "Startup",
@@ -258,7 +257,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Header (Dark)",
     type: 'header',
-    settings: { visible: true, paddingTop: 'none', paddingBottom: 'none', backgroundColor: 'dark', container: false },
+    settings: { visible: true, paddingTop: 'none', paddingBottom: 'none', backgroundColor: 'dark', container: false, animation: 'none', border: false, shadow: 'sm' },
     content: {
       logo: "Enterprise",
       title: "Enterprise",
@@ -274,7 +273,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Video (Startup)",
     type: 'video',
-    settings: { visible: true, paddingTop: 'xl', paddingBottom: 'xl', backgroundColor: 'white', container: true },
+    settings: { visible: true, paddingTop: 'xl', paddingBottom: 'xl', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       title: "How We Started",
@@ -287,7 +286,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Map Location",
     type: 'map',
-    settings: { visible: true, paddingTop: 'none', paddingBottom: 'none', backgroundColor: 'white', container: false },
+    settings: { visible: true, paddingTop: 'none', paddingBottom: 'none', backgroundColor: 'white', container: false, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       title: "Our Location",
       address: "Eiffel Tower, Paris",
@@ -298,7 +297,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Simple Footer",
     type: 'footer',
-    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'dark', container: true },
+    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'dark', container: true, animation: 'none', border: false, shadow: 'none' },
     content: {
       copyright: "© 2024 Your Company. All rights reserved.",
       socials: [
@@ -312,7 +311,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
     name: "Video Gallery",
     type: 'video-gallery',
-    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'white', container: true },
+    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
       title: "Watch Our Tutorials",
       columns: 3,

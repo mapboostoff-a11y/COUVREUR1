@@ -3,8 +3,6 @@ import { FooterContentSchema } from '../../types/schema';
 import { z } from 'zod';
 import * as Icons from 'lucide-react';
 import { InlineText } from '../admin/InlineText';
-import { LinkEditor } from '../admin/LinkEditor';
-import { cn } from '../../lib/utils';
 
 type Content = z.infer<typeof FooterContentSchema>;
 
@@ -15,22 +13,6 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ content, isEditing, onUpdate }) => {
-  const handleColumnTitleUpdate = (index: number, value: string) => {
-      if (!onUpdate || !content.columns) return;
-      const newColumns = [...content.columns];
-      newColumns[index] = { ...newColumns[index], title: value };
-      onUpdate({ columns: newColumns });
-  }
-
-  const handleLinkTextUpdate = (colIndex: number, linkIndex: number, value: string) => {
-      if (!onUpdate || !content.columns) return;
-      const newColumns = [...content.columns];
-      const newLinks = [...newColumns[colIndex].links];
-      newLinks[linkIndex] = { ...newLinks[linkIndex], text: value };
-      newColumns[colIndex] = { ...newColumns[colIndex], links: newLinks };
-      onUpdate({ columns: newColumns });
-  }
-
   const getIcon = (platform: string) => {
     switch (platform.toLowerCase()) {
       case 'facebook': return Icons.Facebook;
@@ -41,13 +23,6 @@ const Footer: React.FC<FooterProps> = ({ content, isEditing, onUpdate }) => {
       case 'youtube': return Icons.Youtube;
       default: return Icons.Link;
     }
-  };
-
-  const buttonVariants = {
-      primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
-      secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-      outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-      link: 'text-primary underline-offset-4 hover:underline'
   };
 
   return (

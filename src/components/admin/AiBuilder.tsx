@@ -287,13 +287,14 @@ export const AiBuilder: React.FC = () => {
             title: formData.name,
             logo: formData.logo || '',
             logoMode: formData.logo ? 'image' : 'text',
+            sticky: true,
             links: [
               { text: 'Services', url: '#services', variant: 'link', external: false },
               { text: 'Contact', url: '#contact', variant: 'link', external: false }
             ],
             cta: { text: 'Call Us', url: `tel:${formData.phone}`, variant: 'primary', external: false }
           },
-          settings: { visible: true, paddingBottom: 'md', paddingTop: 'md' }
+          settings: { visible: true, paddingBottom: 'md', paddingTop: 'md', backgroundColor: 'white', container: true, animation: 'none', border: false, shadow: 'sm' }
         },
         {
           id: 'hero',
@@ -305,7 +306,7 @@ export const AiBuilder: React.FC = () => {
             cta: [{ text: "Get a Quote", url: "#contact", variant: "primary", external: false }],
             image: { src: images.hero, alt: formData.industry }
           },
-          settings: { paddingTop: 'xl', paddingBottom: 'xl', visible: true }
+          settings: { paddingTop: 'xl', paddingBottom: 'xl', visible: true, backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' }
         },
         {
           id: 'features',
@@ -320,7 +321,7 @@ export const AiBuilder: React.FC = () => {
               { title: "Affordable Prices", description: "Best value for your money.", icon: "DollarSign" }
             ].slice(0, 3)
           },
-          settings: { backgroundColor: "gray", visible: true, paddingBottom: 'lg', paddingTop: 'lg' }
+          settings: { backgroundColor: "gray", visible: true, paddingBottom: 'lg', paddingTop: 'lg', container: true, animation: 'slide-up', border: false, shadow: 'none' }
         },
         {
             id: 'gallery',
@@ -331,7 +332,7 @@ export const AiBuilder: React.FC = () => {
                 aspectRatio: "square",
                 images: images.gallery.map((src, i) => ({ src, alt: `Project ${i+1}` }))
             },
-            settings: { visible: true, paddingBottom: 'lg', paddingTop: 'lg' }
+            settings: { visible: true, paddingBottom: 'lg', paddingTop: 'lg', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' }
         },
         {
           id: 'contact',
@@ -341,10 +342,9 @@ export const AiBuilder: React.FC = () => {
             subtitle: "Get in touch for a free consultation.",
             email: formData.email,
             phone: formData.phone,
-            address: "123 Main St",
-            submitButtonText: "Send Message"
+            address: "123 Main St"
           },
-          settings: { backgroundColor: "gray", visible: true, paddingBottom: 'lg', paddingTop: 'lg' }
+          settings: { backgroundColor: "gray", visible: true, paddingBottom: 'lg', paddingTop: 'lg', container: true, animation: 'slide-up', border: false, shadow: 'none' }
         },
         {
           id: 'footer',
@@ -356,7 +356,7 @@ export const AiBuilder: React.FC = () => {
               { platform: 'instagram', url: '#', enabled: true }
             ]
           },
-          settings: { backgroundColor: "dark", visible: true, paddingBottom: 'md', paddingTop: 'md' }
+          settings: { backgroundColor: "dark", visible: true, paddingBottom: 'md', paddingTop: 'md', container: true, animation: 'none', border: false, shadow: 'none' }
         }
       ]
     };

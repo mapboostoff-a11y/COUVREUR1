@@ -3,8 +3,7 @@ import { VideoGalleryContentSchema } from '../../types/schema';
 import { z } from 'zod';
 import { cn } from '../../lib/utils';
 import { InlineText } from '../admin/InlineText';
-import { X, Plus, Play, Trash2, Film } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Plus, Play, Trash2, Film } from 'lucide-react';
 
 type Content = z.infer<typeof VideoGalleryContentSchema>;
 

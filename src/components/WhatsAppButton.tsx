@@ -1,4 +1,3 @@
-import { MessageCircle } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useConfigStore } from '../store/use-config-store';
 
