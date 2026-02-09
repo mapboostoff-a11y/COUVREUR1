@@ -65,6 +65,12 @@ Start with the root `LandingPageConfig` object. You **must** strictly follow thi
 
 ### 3. Section Strategy
 Build the `sections` array using a standard high-converting structure.
+
+> **⚠️ CRITICAL LAYOUT REQUIREMENT**:
+> For **ALL** sections, the `settings.container` property **MUST be `true`** (or omitted, as it defaults to `true`).
+> This ensures content is centered and bounded by the site's max-width, preventing elements from sticking to the screen edges.
+> *Only set to `false` if a full-width background with edge-to-edge content is explicitly requested.*
+
 **Recommended Layout:**
 1.  **Header**: Navigation & Logo (Sticky).
 2.  **Hero**: First impression. High quality image + Strong CTA.

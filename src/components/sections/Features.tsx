@@ -28,7 +28,7 @@ const Features: React.FC<FeaturesProps> = ({ content, isEditing, onUpdate }) => 
   };
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 px-4 md:px-8">
       <div className="text-center space-y-4 max-w-2xl mx-auto">
         <InlineText
           tagName="h2"
