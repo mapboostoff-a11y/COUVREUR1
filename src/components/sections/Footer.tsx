@@ -51,74 +51,8 @@ const Footer: React.FC<FooterProps> = ({ content, isEditing, onUpdate }) => {
   };
 
   return (
-    <div className="container mx-auto px-4 md:px-6">
-        {/* CTA Button Section - Added based on user request */}
-        {content.ctaButton && (
-            <div className="flex flex-col items-center justify-center pb-12 mb-12 border-b border-border/50 gap-6">
-                {isEditing && (
-                     <div className="text-xs text-muted-foreground mb-2">Button Settings (Edit URL in popup or sidebar)</div>
-                )}
-                <div className="relative group">
-                    <a 
-                        href={content.ctaButton.url} 
-                        target={content.ctaButton.external ? "_blank" : undefined}
-                        rel={content.ctaButton.external ? "noopener noreferrer" : undefined}
-                        onClick={(e) => isEditing && e.preventDefault()}
-                        className={cn(
-                            "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 py-2 shadow-sm",
-                            buttonVariants[content.ctaButton.variant as keyof typeof buttonVariants] || buttonVariants.primary
-                        )}
-                    >
-                        <InlineText 
-                            tagName="span"
-                            value={content.ctaButton.text}
-                            isEditing={isEditing}
-                            onUpdate={(val) => onUpdate?.({ ctaButton: { ...content.ctaButton!, text: val } })}
-                        />
-                    </a>
-                    {isEditing && (
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 hidden group-hover:flex z-50">
-                            <LinkEditor 
-                                link={content.ctaButton} 
-                                onUpdate={(updates) => onUpdate?.({ ctaButton: { ...content.ctaButton!, ...updates } })}
-                            />
-                        </div>
-                    )}
-                </div>
-            </div>
-        )}
-
-      {content.columns && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mb-12">
-          {content.columns.map((col, idx) => (
-            <div key={idx} className="flex flex-col gap-4">
-              <InlineText
-                  tagName="h4"
-                  className="font-bold text-lg tracking-tight text-foreground"
-                  value={col.title}
-                  isEditing={isEditing}
-                  onUpdate={(val) => handleColumnTitleUpdate(idx, val)}
-              />
-              <ul className="space-y-3">
-                {col.links.map((link, i) => (
-                  <li key={i}>
-                    <a href={link.url} onClick={(e) => isEditing && e.preventDefault()} className="text-sm text-muted-foreground hover:text-primary transition-colors block">
-                      <InlineText
-                          tagName="span"
-                          value={link.text}
-                          isEditing={isEditing}
-                          onUpdate={(val) => handleLinkTextUpdate(idx, i, val)}
-                      />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-border/50">
+    <div className="container mx-auto px-4 md:px-6 py-8">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-6">
         <InlineText
             tagName="div"
             className="text-sm text-muted-foreground/80 font-medium"

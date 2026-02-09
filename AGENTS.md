@@ -409,13 +409,11 @@ Use these snippets to populate the `sections` array.
 ```
 
 #### **Footer (`type: 'footer'`)**
-*Copyright and links.*
+*Simple footer with copyright and social links.*
 
 **Attributes:**
 - `copyright` (string): Copyright text.
 - `socials` (Array): Social links `{ platform, url, enabled }`.
-- `ctaButton` (Object): Optional button.
-- `columns` (Array): Link groups `{ title, links }`.
 
 ```json
 {
@@ -426,8 +424,7 @@ Use these snippets to populate the `sections` array.
     "socials": [
       { "platform": "facebook", "url": "https://facebook.com", "enabled": true },
       { "platform": "instagram", "url": "https://instagram.com", "enabled": true }
-    ],
-    "ctaButton": { "text": "Client Portal", "url": "https://portal.com", "variant": "outline" }
+    ]
   },
   "settings": { "backgroundColor": "dark" }
 }
