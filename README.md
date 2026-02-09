@@ -1,88 +1,84 @@
-# Modern React Landing Page Builder
+# Générateur de Landing Pages React
 
-A professional, fully customizable landing page builder using React, TypeScript, Tailwind CSS, and JSON configuration.
+Une solution professionnelle et entièrement personnalisable pour la création de sites vitrines, propulsée par **React**, **TypeScript**, **Tailwind CSS** et une configuration **JSON** centralisée.
 
-## Features
+## ✨ Fonctionnalités Clés
 
-- **Modular Architecture:** Section-based design (Hero, Features, Testimonials, etc.).
-- **JSON Driven:** Entire page content and settings controlled by a strict JSON schema.
-- **Admin Interface:**
-  - Secure Login (Mock).
-  - Drag-and-Drop Section Reordering.
-  - Real-time JSON Properties Editor with Validation.
-  - Live Preview (Desktop, Tablet, Mobile).
-- **Performance:** Lazy loaded sections, optimized assets.
-- **SEO Ready:** Dynamic meta tags and Open Graph support.
+- **Architecture Modulaire** : Conception basée sur des sections indépendantes et réutilisables (Hero, Services, Témoignages, etc.).
+- **Pilotage par JSON** : L'intégralité du contenu, du thème et des paramètres est contrôlée par un schéma JSON strict et typé.
+- **Interface d'Administration Complète** :
+  - Authentification sécurisée (Simulée pour le dév).
+  - Réorganisation des sections par Glisser-Déposer (Drag-and-Drop).
+  - Éditeur de propriétés JSON en temps réel avec validation instantanée.
+  - Aperçu en Direct multi-supports (Bureau, Tablette, Mobile).
+  - Génération de site par IA (Intégration Backend Agno).
+- **Performance** : Chargement différé (Lazy loading) des composants, optimisation des assets.
+- **SEO Ready** : Gestion dynamique des balises méta et support Open Graph.
 
-## Project Structure
+## 📂 Structure du Projet
 
 ```
 src/
-├── admin/           # Admin specific logic
+├── admin/           # Logique spécifique à l'administration
 ├── components/
-│   ├── admin/       # Admin UI components (Editor, List)
-│   ├── renderer/    # Dynamic Section Renderer
-│   ├── sections/    # Individual Section Components
-│   └── ui/          # Generic UI components
-├── data/            # Default Configuration
-├── layouts/         # Layout wrappers (Public, Admin)
-├── pages/           # Route Pages
-├── store/           # Zustand State Management
-├── types/           # TypeScript Types & Zod Schemas
-└── lib/             # Utilities
+│   ├── admin/       # Composants UI de l'admin (Éditeur, Liste, Sidebar)
+│   ├── renderer/    # Moteur de rendu dynamique des sections
+│   ├── sections/    # Composants individuels (Hero, Features, etc.)
+│   └── ui/          # Composants UI génériques (Boutons, Inputs)
+├── data/            # Configuration par défaut et données initiales
+├── layouts/         # Wrappers de mise en page (Public, Admin)
+├── pages/           # Pages de routage
+├── store/           # Gestion d'état global avec Zustand
+├── types/           # Définitions TypeScript & Schémas Zod
+└── lib/             # Utilitaires et helpers
 ```
 
-## Getting Started
+## 🚀 Démarrage Rapide
 
-1.  **Install Dependencies:**
+1.  **Installation des dépendances :**
     ```bash
     pnpm install
     ```
 
-2.  **Start Development Server:**
+2.  **Lancement du serveur de développement :**
     ```bash
     pnpm dev
     ```
 
-3.  **Run Tests:**
+3.  **Lancement des tests :**
     ```bash
     pnpm test
     ```
 
-## Usage
+## 📖 Utilisation
 
-### Public View
-Navigate to `http://localhost:5173/` to see the generated landing page.
+### Vue Publique
+Accédez à `http://localhost:5173/` pour voir le rendu final de la landing page générée.
 
-### Admin Interface
-1.  Navigate to `http://localhost:5173/login`.
-2.  Login with any email and password: `password`.
-3.  Use the **Drag Handle** on the left to reorder sections.
-4.  Click a section to edit its JSON properties on the right.
-5.  Toggle visibility with the **Eye** icon.
-6.  Add new sections with the **+** button.
+### Interface d'Administration
+1.  Accédez à `http://localhost:5173/login`.
+2.  Connectez-vous avec n'importe quel email et le mot de passe : `password`.
+3.  Utilisez la **Poignée** à gauche des cartes pour réorganiser les sections.
+4.  Cliquez sur une section pour éditer ses propriétés JSON dans le panneau de droite.
+5.  Activez/Désactivez la visibilité d'une section avec l'icône **Oeil**.
+6.  Ajoutez de nouvelles sections via le bouton **+** flottant ou dans la barre latérale.
 
-## Configuration
+## ⚙️ Configuration & Extension
 
-The core data model is defined in `src/types/schema.ts`.
-The default configuration is in `src/data/default-config.ts`.
+Le modèle de données central est défini dans `src/types/schema.ts`.
+La configuration initiale se trouve dans `src/data/default-config.ts`.
 
-### Adding a New Section
-1.  Create the component in `src/components/sections/`.
-2.  Define its Zod schema in `src/types/schema.ts`.
-3.  Add it to the `SectionSchema` discriminated union.
-4.  Update `SectionRenderer` to handle the new type.
+### Ajouter une Nouvelle Section
+Pour étendre les capacités du builder :
+1.  Créez le composant React dans `src/components/sections/`.
+2.  Définissez son schéma Zod dans `src/types/schema.ts`.
+3.  Ajoutez le type à l'union discriminée `SectionSchema`.
+4.  Mettez à jour le `SectionRenderer` pour gérer le nouveau type.
 
-## Tech Stack
--   React 19
--   TypeScript
--   Tailwind CSS 4
--   Vite
--   Zustand
--   React Router DOM
--   dnd-kit
--   Zod
--   React Hook Form
-# base-landing-page
-# base-landing-page
-# base-landing-page
+## 🛠 Stack Technique
+-   **Core** : React 19, TypeScript, Vite
+-   **Styles** : Tailwind CSS 4
+-   **State** : Zustand
+-   **Routing** : React Router DOM
+-   **Drag & Drop** : dnd-kit
+-   **Validation** : Zod, React Hook Form
