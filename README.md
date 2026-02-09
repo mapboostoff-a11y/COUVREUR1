@@ -84,3 +84,4 @@ The default configuration is in `src/data/default-config.ts`.
 -   Zod
 -   React Hook Form
 # base-landing-page
+# base-landing-page
