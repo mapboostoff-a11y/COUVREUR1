@@ -103,64 +103,32 @@ const JsonEditorDialog = ({ config, onUpdate }: { config: any, onUpdate: (newCon
 };
 
 const PublishDialog = ({ config }: { config: any }) => {
-  const [token, setToken] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const [saveToken, setSaveToken] = useState(true);
-
-  useEffect(() => {
-    const savedToken = localStorage.getItem('github_token');
-    if (savedToken) {
-      setToken(savedToken);
-    }
-  }, []);
-
-  const handleDownload = () => {
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(config, null, 2));
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "config.json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
-  };
-
-  const copyToClipboard = () => {
-    const content = JSON.stringify(config, null, 2);
-    navigator.clipboard.writeText(content);
-    alert("Configuration copiée ! Remplacez le contenu de src/data/config.json");
-  };
 
   const handlePublish = async () => {
-    if (!token) {
-      setStatus('error');
-      setErrorMessage("Token GitHub manquant");
-      return;
-    }
-
     setStatus('loading');
     setErrorMessage('');
 
     try {
-      if (saveToken) {
-        localStorage.setItem('github_token', token);
+      const response = await fetch('/api/storage', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          config
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to publish');
       }
-
-      const ghConfig = {
-        owner: 'mapboostoff-a11y',
-        repo: 'COUVREUR1',
-        path: 'src/data/config.json',
-        token: token
-      };
-
-      // 1. Get current SHA
-      const sha = await getFileSha(ghConfig);
-
-      // 2. Update file
-      await updateFile(ghConfig, JSON.stringify(config, null, 2), sha, "Update config via Admin");
 
       setStatus('success');
     } catch (error) {
+      console.error('Publish error:', error);
       setStatus('error');
       setErrorMessage((error as Error).message);
     }
@@ -171,103 +139,69 @@ const PublishDialog = ({ config }: { config: any }) => {
       <DialogTrigger asChild>
         <Button variant="default" className="gap-2 bg-green-600 hover:bg-green-700 text-white">
           <Save size={16} />
-          Publier
+          Mettre à jour
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Publier les changements</DialogTitle>
+          <DialogTitle>Mise à jour du site</DialogTitle>
           <DialogDescription>
-            Choisissez une méthode pour mettre à jour votre site en production.
+            Cette action met à jour le site instantanément.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="grid gap-6 py-4">
-          {/* Method 1: Automatic */}
-          <div className="border rounded-lg p-4 space-y-4">
-            <div className="flex items-center gap-2 font-semibold text-primary">
-              <Github size={20} />
-              <h3>Méthode Automatique (Recommandée)</h3>
-            </div>
-            
-            {status === 'success' ? (
-              <div className="bg-green-50 text-green-700 p-4 rounded-lg flex items-center gap-2">
-                <CheckCircle size={20} />
-                <div>
-                  <p className="font-bold">Mise à jour réussie !</p>
-                  <p className="text-sm">Le site sera à jour sur Vercel dans quelques minutes.</p>
-                  <Button variant="link" className="p-0 h-auto text-green-800" onClick={() => setStatus('idle')}>
-                    Faire une autre modification
-                  </Button>
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-4">
+        <div className="py-6 space-y-6">
+          {status === 'idle' && (
+             <div className="space-y-4">
                 <p className="text-sm text-muted-foreground">
-                  Publiez directement sur GitHub. Nécessite un Personal Access Token (Classic) avec les droits 'repo'.
+                  Êtes-vous sûr de vouloir sauvegarder la configuration actuelle ?
                 </p>
-                <div className="space-y-2">
-                  <Label>GitHub Token</Label>
-                  <Input 
-                    type="password" 
-                    value={token} 
-                    onChange={(e) => setToken(e.target.value)} 
-                    placeholder="ghp_..."
-                  />
-                  <div className="flex items-center gap-2">
-                    <input 
-                      type="checkbox" 
-                      id="saveToken" 
-                      checked={saveToken} 
-                      onChange={(e) => setSaveToken(e.target.checked)} 
-                      className="rounded border-gray-300"
-                    />
-                    <label htmlFor="saveToken" className="text-sm text-muted-foreground">Se souvenir du token</label>
-                  </div>
+                <Button onClick={handlePublish} className="w-full gap-2">
+                  <Monitor size={16} />
+                  Sauvegarder et Publier
+                </Button>
+             </div>
+          )}
+
+          {status === 'loading' && (
+            <div className="flex flex-col items-center justify-center space-y-4 py-4">
+              <Loader2 className="h-10 w-10 animate-spin text-primary" />
+              <p className="text-sm font-medium">Enregistrement en cours...</p>
+            </div>
+          )}
+
+          {status === 'success' && (
+            <div className="flex flex-col items-center justify-center space-y-4 py-4 text-green-600">
+              <CheckCircle className="h-12 w-12" />
+              <div className="text-center">
+                <p className="font-bold text-lg">Succès !</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Les modifications sont en ligne.
+                </p>
+              </div>
+              <Button variant="outline" onClick={() => setStatus('idle')} className="mt-4">
+                Fermer
+              </Button>
+            </div>
+          )}
+
+          {status === 'error' && (
+            <div className="space-y-4">
+              <div className="bg-destructive/10 text-destructive p-4 rounded-lg flex items-start gap-3">
+                <AlertCircle className="h-5 w-5 shrink-0 mt-0.5" />
+                <div className="text-sm">
+                  <p className="font-semibold">Erreur de publication</p>
+                  <p className="mt-1 opacity-90">{errorMessage}</p>
                 </div>
-
-                {status === 'error' && (
-                  <div className="text-destructive text-sm flex items-center gap-2">
-                    <AlertCircle size={16} />
-                    {errorMessage}
-                  </div>
-                )}
-
-                <Button onClick={handlePublish} disabled={status === 'loading'} className="w-full">
-                  {status === 'loading' && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  Publier sur Vercel
-                </Button>
               </div>
-            )}
-          </div>
-
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
+              <p className="text-xs text-muted-foreground">
+                Vérifiez que la base de données Vercel KV est bien connectée au projet.
+              </p>
+              <Button onClick={handlePublish} variant="outline" className="w-full">
+                Réessayer
+              </Button>
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">Ou manuellement</span>
-            </div>
-          </div>
-
-          {/* Method 2: Manual */}
-          <div className="bg-muted/50 p-4 rounded-lg space-y-4 opacity-80 hover:opacity-100 transition-opacity">
-            <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-sm">Téléchargement Manuel</h3>
-              <div className="flex gap-2">
-                <Button onClick={copyToClipboard} variant="outline" size="sm" className="gap-2">
-                  Copier
-                </Button>
-                <Button onClick={handleDownload} variant="outline" size="sm" className="gap-2">
-                  <Download size={14} />
-                  Télécharger
-                </Button>
-              </div>
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Téléchargez config.json, remplacez-le dans src/data/, et faites un git push.
-            </p>
-          </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>

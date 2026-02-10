@@ -20,13 +20,33 @@ interface ConfigState {
   removeSection: (id: string) => void;
   reorderSections: (activeId: string, overId: string) => void;
   resetToDefault: () => void;
+  fetchRemoteConfig: () => Promise<void>;
 }
 
 export const useConfigStore = create<ConfigState>()(
   persist(
     (set) => ({
       config: defaultConfig,
-      setConfig: (config) => set({ config }),
+      
+      fetchRemoteConfig: async () => {
+        // En développement, on utilise le fichier local
+        if (import.meta.env.DEV) return;
+
+        try {
+          const response = await fetch('/api/storage');
+          if (response.ok) {
+            const remoteConfig = await response.json();
+            if (remoteConfig) {
+              set({ config: remoteConfig });
+              console.log('Configuration loaded from Vercel KV');
+            }
+          }
+        } catch (error) {
+          console.warn('Failed to fetch remote config, using default/local', error);
+        }
+      },
+
+      setConfig: (newConfig) => set({ config: newConfig }),
       updateSection: (id, updates) =>
         set((state) => ({
           config: {
