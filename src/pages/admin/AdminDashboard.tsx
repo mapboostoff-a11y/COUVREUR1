@@ -120,8 +120,15 @@ const PublishDialog = ({ config }: { config: any }) => {
       });
 
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || 'Failed to publish');
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await response.json();
+          throw new Error(data.error || 'Erreur lors de la publication');
+        } else {
+          const text = await response.text();
+          console.error('Non-JSON response:', text);
+          throw new Error('Le serveur API est inaccessible ou a retourné une erreur (500/404). Si vous êtes en local, utilisez "vercel dev" pour tester l\'API.');
+        }
       }
 
       setStatus('success');
@@ -158,6 +165,11 @@ const PublishDialog = ({ config }: { config: any }) => {
                   <Monitor size={16} />
                   Sauvegarder et Publier
                 </Button>
+                {import.meta.env.DEV && (
+                  <p className="text-xs text-amber-600 bg-amber-50 p-2 rounded border border-amber-200">
+                    Note : En mode développement local (Vite), l'API de stockage peut ne pas être active. Utilisez l'export JSON si besoin.
+                  </p>
+                )}
              </div>
           )}
 
@@ -193,7 +205,7 @@ const PublishDialog = ({ config }: { config: any }) => {
                 </div>
               </div>
               <p className="text-xs text-muted-foreground">
-                Vérifiez que la base de données Vercel KV est bien connectée au projet.
+                Vérifiez la connexion à la base de données.
               </p>
               <Button onClick={handlePublish} variant="outline" className="w-full">
                 Réessayer
@@ -326,10 +338,10 @@ export const AdminDashboard = () => {
       {/* Middle Panel: Preview */}
       <div className="flex-1 bg-muted/50 flex flex-col min-w-0 transition-all duration-300">
         {/* Toolbar */}
-        <div className="h-14 bg-card border-b border-border flex items-center justify-between gap-4 px-4 shadow-sm z-10 relative">
+        <div className="bg-card border-b border-border flex flex-wrap items-center justify-between gap-2 p-2 shadow-sm z-10 relative min-h-14">
            
            {/* Left Controls */}
-           <div className="flex items-center gap-2">
+           <div className="flex flex-wrap items-center gap-2">
              <button
                 onClick={() => setShowLeftPanel(!showLeftPanel)}
                 className={cn("p-2 rounded hover:bg-muted transition-colors", !showLeftPanel && "text-muted-foreground")}
@@ -378,7 +390,7 @@ export const AdminDashboard = () => {
            <div className="text-xs text-muted-foreground hidden lg:block">Live Preview</div>
            
            {/* Right Controls */}
-           <div className="flex items-center gap-2">
+           <div className="flex flex-wrap items-center gap-2 justify-end">
              <button
                onClick={() => {
                    setRightPanelMode('ai');

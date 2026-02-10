@@ -38,7 +38,7 @@ export const useConfigStore = create<ConfigState>()(
             const remoteConfig = await response.json();
             if (remoteConfig) {
               set({ config: remoteConfig });
-              console.log('Configuration loaded from Vercel KV');
+              console.log('Configuration loaded from remote storage');
             }
           }
         } catch (error) {
