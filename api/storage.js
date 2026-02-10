@@ -374,14 +374,42 @@ const DEFAULT_CONFIG = {
 };
 
 // Initialize client with environment variables or fallback to local file
-const client = createClient({
-  url: process.env.TURSO_DATABASE_URL || 'file:local.db',
-  authToken: process.env.TURSO_AUTH_TOKEN,
-});
+const dbUrl = process.env.TURSO_DATABASE_URL || (process.env.NODE_ENV === 'development' ? 'file:local.db' : null);
+const authToken = process.env.TURSO_AUTH_TOKEN;
+
+const client = dbUrl ? createClient({
+  url: dbUrl,
+  authToken: authToken,
+}) : null;
 
 export default async function handler(request) {
   try {
     const url = new URL(request.url);
+
+    // If no database client (e.g. deployment without Turso env vars),
+    // behave like a mock server to prevent crashes.
+    if (!client) {
+      console.warn('No database configured. Using mock mode.');
+      
+      if (request.method === 'GET') {
+        return new Response(JSON.stringify(DEFAULT_CONFIG), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+
+      if (request.method === 'POST') {
+         return new Response(JSON.stringify({ 
+           success: true, 
+           warning: "Mode démo : Base de données non configurée. Les changements ne seront pas sauvegardés." 
+         }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 });
+    }
 
     // AUTO-MIGRATION: Create table if not exists (Django style)
     await client.execute(`

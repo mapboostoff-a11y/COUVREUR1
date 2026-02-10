@@ -103,10 +103,12 @@ const JsonEditorDialog = ({ config, onUpdate }: { config: any, onUpdate: (newCon
 const PublishDialog = ({ config }: { config: any }) => {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [warningMessage, setWarningMessage] = useState('');
 
   const handlePublish = async () => {
     setStatus('loading');
     setErrorMessage('');
+    setWarningMessage('');
 
     try {
       const response = await fetch('/api/storage', {
@@ -127,8 +129,13 @@ const PublishDialog = ({ config }: { config: any }) => {
         } else {
           const text = await response.text();
           console.error('Non-JSON response:', text);
-          throw new Error('Le serveur API est inaccessible ou a retourné une erreur (500/404). Si vous êtes en local, utilisez "vercel dev" pour tester l\'API.');
+          throw new Error('Le serveur API est inaccessible ou a retourné une erreur (500/404). Vérifiez que le serveur backend est bien démarré.');
         }
+      }
+
+      const data = await response.json();
+      if (data.warning) {
+        setWarningMessage(data.warning);
       }
 
       setStatus('success');
@@ -188,6 +195,12 @@ const PublishDialog = ({ config }: { config: any }) => {
                 <p className="text-sm text-muted-foreground mt-1">
                   Les modifications sont en ligne.
                 </p>
+                {warningMessage && (
+                  <div className="mt-4 p-3 bg-amber-50 text-amber-700 rounded-md border border-amber-200 text-sm flex items-start gap-2 text-left">
+                    <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
+                    <span>{warningMessage}</span>
+                  </div>
+                )}
               </div>
               <Button variant="outline" onClick={() => setStatus('idle')} className="mt-4">
                 Fermer
