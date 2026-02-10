@@ -23,13 +23,80 @@ import { SectionPicker } from '../../components/admin/SectionPicker';
 import { WelcomeGuide } from '../../components/admin/WelcomeGuide';
 import { ThemeToggle } from '../../components/theme-toggle';
 import { PreviewFrame, useFrameDocument } from '../../components/admin/PreviewFrame';
-import { Plus, Monitor, Smartphone, Tablet, HelpCircle, RotateCw, Settings, PanelLeft, PanelRight, Bot } from 'lucide-react';
+import { Plus, Monitor, Smartphone, Tablet, HelpCircle, RotateCw, Settings, PanelLeft, PanelRight, Bot, Download, Save } from 'lucide-react';
 import { ThemeInjector } from '../../components/renderer/ThemeInjector';
 import { WhatsAppButton } from '../../components/WhatsAppButton';
+import { Button } from '../../components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../../components/ui/dialog";
 
 const FrameThemeInjector = () => {
   const doc = useFrameDocument();
   return <ThemeInjector target={doc?.documentElement} />;
+};
+
+const PublishDialog = ({ config }: { config: any }) => {
+  const handleDownload = () => {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(config, null, 2));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "default-config.ts.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  };
+
+  const copyToClipboard = () => {
+    const content = JSON.stringify(config, null, 2);
+    navigator.clipboard.writeText(content);
+    alert("Configuration copiée ! Collez-la dans src/data/default-config.ts");
+  };
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="default" className="gap-2 bg-green-600 hover:bg-green-700 text-white">
+          <Save size={16} />
+          Publier
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>Publier les changements</DialogTitle>
+          <DialogDescription>
+            Ce site fonctionne sans base de données pour garantir rapidité et sécurité.
+            Pour rendre vos modifications visibles par tous, vous devez mettre à jour le code source.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-4 py-4">
+          <div className="bg-muted p-4 rounded-lg text-sm space-y-2">
+            <p className="font-semibold">Procédure de mise à jour :</p>
+            <ol className="list-decimal list-inside space-y-1">
+              <li>Téléchargez la configuration ci-dessous.</li>
+              <li>Ouvrez le fichier <code className="bg-background px-1 rounded">src/data/default-config.ts</code></li>
+              <li>Remplacez tout son contenu par le nouveau JSON.</li>
+              <li>Poussez les changements sur GitHub (git push).</li>
+            </ol>
+          </div>
+          <div className="flex gap-4 justify-center">
+            <Button onClick={copyToClipboard} variant="outline" className="gap-2">
+              Copier le JSON
+            </Button>
+            <Button onClick={handleDownload} className="gap-2">
+              <Download size={16} />
+              Télécharger le fichier
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
 };
 
 export const AdminDashboard = () => {
@@ -234,7 +301,19 @@ export const AdminDashboard = () => {
              >
                <Settings size={20} />
              </button>
+             <button
+               onClick={() => {
+                 if (window.confirm('Are you sure you want to reset all changes?')) {
+                   useConfigStore.getState().resetToDefault();
+                 }
+               }}
+               className="p-2 hover:bg-destructive/10 text-destructive rounded-md transition-colors"
+               title="Reset to Default"
+             >
+               <RotateCw size={20} />
+             </button>
              <ThemeToggle />
+             <PublishDialog config={config} />
              <button 
                onClick={() => setShowGuide(true)}
                className="p-2 text-muted-foreground hover:text-primary transition-colors"
