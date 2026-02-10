@@ -29,9 +29,6 @@ export const useConfigStore = create<ConfigState>()(
       config: defaultConfig,
       
       fetchRemoteConfig: async () => {
-        // En développement, on utilise le fichier local
-        if (import.meta.env.DEV) return;
-
         try {
           const response = await fetch('/api/storage');
           if (response.ok) {

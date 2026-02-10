@@ -1,5 +1,7 @@
 
 import { createClient } from '@libsql/client';
+import path from 'path';
+import os from 'os';
 
 export const config = {
   // Using nodejs runtime to support better file operations and broader compatibility
@@ -373,45 +375,30 @@ const DEFAULT_CONFIG = {
   ]
 };
 
-// Initialize client with environment variables or fallback to local file
-const dbUrl = process.env.TURSO_DATABASE_URL || (process.env.NODE_ENV === 'development' ? 'file:local.db' : null);
-const authToken = process.env.TURSO_AUTH_TOKEN;
+// Configuration SQLite locale stricte
+// En local : utilise 'local.db' à la racine du projet
+// En production (Vercel) : utilise le dossier temporaire /tmp (seul répertoire inscriptible)
+// ATTENTION : Sur Vercel, le dossier /tmp est éphémère. Les données peuvent être perdues lors des redémarrages.
+const dbPath = process.env.NODE_ENV === 'development' 
+  ? 'file:local.db' 
+  : `file:${path.join(os.tmpdir(), 'site-data.db')}`;
 
-const client = dbUrl ? createClient({
-  url: dbUrl,
-  authToken: authToken,
-}) : null;
+console.log(`Using SQLite database at: ${dbPath}`);
+
+const client = createClient({
+  url: dbPath,
+});
 
 export default async function handler(req, res) {
   try {
-    // If no database client (e.g. deployment without Turso env vars),
-    // behave like a mock server to prevent crashes.
-    if (!client) {
-      console.warn('No database configured. Using mock mode.');
-      
-      if (req.method === 'GET') {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(200).send(JSON.stringify(DEFAULT_CONFIG));
-      }
-
-      if (req.method === 'POST') {
-         return res.status(200).json({ 
-           success: true, 
-           warning: "Mode démo : Base de données non configurée. Les changements ne seront pas sauvegardés." 
-         });
-      }
-
-      return res.status(405).json({ error: 'Method not allowed' });
-    }
-
-    // AUTO-MIGRATION: Create table if not exists (Django style)
+    // Initialisation de la table si elle n'existe pas
     await client.execute(`
       CREATE TABLE IF NOT EXISTS site_config (
         key TEXT PRIMARY KEY,
         value TEXT
       )
     `);
-    
+
     // GET request: Fetch config
     if (req.method === 'GET') {
       const result = await client.execute({
