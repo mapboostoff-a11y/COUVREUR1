@@ -23,10 +23,14 @@ import { SectionPicker } from '../../components/admin/SectionPicker';
 import { WelcomeGuide } from '../../components/admin/WelcomeGuide';
 import { ThemeToggle } from '../../components/theme-toggle';
 import { PreviewFrame, useFrameDocument } from '../../components/admin/PreviewFrame';
-import { Plus, Monitor, Smartphone, Tablet, HelpCircle, RotateCw, Settings, PanelLeft, PanelRight, Bot, Download, Save } from 'lucide-react';
+import { Plus, Monitor, Smartphone, Tablet, HelpCircle, RotateCw, Settings, PanelLeft, PanelRight, Bot, Download, Save, Code, Loader2, CheckCircle, AlertCircle, Github } from 'lucide-react';
 import { ThemeInjector } from '../../components/renderer/ThemeInjector';
 import { WhatsAppButton } from '../../components/WhatsAppButton';
 import { Button } from '../../components/ui/button';
+import { Textarea } from '../../components/ui/textarea';
+import { Input } from '../../components/ui/input';
+import { Label } from '../../components/ui/label';
+import { getFileSha, updateFile } from '../../lib/github';
 import {
   Dialog,
   DialogContent,
@@ -41,12 +45,81 @@ const FrameThemeInjector = () => {
   return <ThemeInjector target={doc?.documentElement} />;
 };
 
+const JsonEditorDialog = ({ config, onUpdate }: { config: any, onUpdate: (newConfig: any) => void }) => {
+  const [jsonContent, setJsonContent] = useState(JSON.stringify(config, null, 2));
+  const [error, setError] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setJsonContent(JSON.stringify(config, null, 2));
+    }
+  }, [isOpen, config]);
+
+  const handleSave = () => {
+    try {
+      const parsed = JSON.parse(jsonContent);
+      onUpdate(parsed);
+      setError(null);
+      setIsOpen(false);
+    } catch (e) {
+      setError((e as Error).message);
+    }
+  };
+
+  return (
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <button
+          className="p-2 hover:bg-muted rounded-md transition-colors"
+          title="Éditeur JSON"
+        >
+          <Code size={20} />
+        </button>
+      </DialogTrigger>
+      <DialogContent className="max-w-4xl h-[80vh] flex flex-col">
+        <DialogHeader>
+          <DialogTitle>Éditeur JSON Avancé</DialogTitle>
+          <DialogDescription>
+            Modifiez directement la structure du site. Attention aux erreurs de syntaxe.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="flex-1 min-h-0 py-4">
+          <Textarea 
+            value={jsonContent}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setJsonContent(e.target.value)}
+            className="font-mono text-sm h-full resize-none"
+            spellCheck={false}
+          />
+        </div>
+        {error && <p className="text-destructive text-sm">{error}</p>}
+        <div className="flex justify-end gap-2">
+          <Button variant="outline" onClick={() => setIsOpen(false)}>Annuler</Button>
+          <Button onClick={handleSave}>Appliquer les changements</Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 const PublishDialog = ({ config }: { config: any }) => {
+  const [token, setToken] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [saveToken, setSaveToken] = useState(true);
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem('github_token');
+    if (savedToken) {
+      setToken(savedToken);
+    }
+  }, []);
+
   const handleDownload = () => {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(config, null, 2));
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "default-config.ts.json");
+    downloadAnchorNode.setAttribute("download", "config.json");
     document.body.appendChild(downloadAnchorNode);
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
@@ -55,7 +128,42 @@ const PublishDialog = ({ config }: { config: any }) => {
   const copyToClipboard = () => {
     const content = JSON.stringify(config, null, 2);
     navigator.clipboard.writeText(content);
-    alert("Configuration copiée ! Collez-la dans src/data/default-config.ts");
+    alert("Configuration copiée ! Remplacez le contenu de src/data/config.json");
+  };
+
+  const handlePublish = async () => {
+    if (!token) {
+      setStatus('error');
+      setErrorMessage("Token GitHub manquant");
+      return;
+    }
+
+    setStatus('loading');
+    setErrorMessage('');
+
+    try {
+      if (saveToken) {
+        localStorage.setItem('github_token', token);
+      }
+
+      const ghConfig = {
+        owner: 'mapboostoff-a11y',
+        repo: 'COUVREUR1',
+        path: 'src/data/config.json',
+        token: token
+      };
+
+      // 1. Get current SHA
+      const sha = await getFileSha(ghConfig);
+
+      // 2. Update file
+      await updateFile(ghConfig, JSON.stringify(config, null, 2), sha, "Update config via Admin");
+
+      setStatus('success');
+    } catch (error) {
+      setStatus('error');
+      setErrorMessage((error as Error).message);
+    }
   };
 
   return (
@@ -70,28 +178,95 @@ const PublishDialog = ({ config }: { config: any }) => {
         <DialogHeader>
           <DialogTitle>Publier les changements</DialogTitle>
           <DialogDescription>
-            Ce site fonctionne sans base de données pour garantir rapidité et sécurité.
-            Pour rendre vos modifications visibles par tous, vous devez mettre à jour le code source.
+            Choisissez une méthode pour mettre à jour votre site en production.
           </DialogDescription>
         </DialogHeader>
-        <div className="space-y-4 py-4">
-          <div className="bg-muted p-4 rounded-lg text-sm space-y-2">
-            <p className="font-semibold">Procédure de mise à jour :</p>
-            <ol className="list-decimal list-inside space-y-1">
-              <li>Téléchargez la configuration ci-dessous.</li>
-              <li>Ouvrez le fichier <code className="bg-background px-1 rounded">src/data/default-config.ts</code></li>
-              <li>Remplacez tout son contenu par le nouveau JSON.</li>
-              <li>Poussez les changements sur GitHub (git push).</li>
-            </ol>
+
+        <div className="grid gap-6 py-4">
+          {/* Method 1: Automatic */}
+          <div className="border rounded-lg p-4 space-y-4">
+            <div className="flex items-center gap-2 font-semibold text-primary">
+              <Github size={20} />
+              <h3>Méthode Automatique (Recommandée)</h3>
+            </div>
+            
+            {status === 'success' ? (
+              <div className="bg-green-50 text-green-700 p-4 rounded-lg flex items-center gap-2">
+                <CheckCircle size={20} />
+                <div>
+                  <p className="font-bold">Mise à jour réussie !</p>
+                  <p className="text-sm">Le site sera à jour sur Vercel dans quelques minutes.</p>
+                  <Button variant="link" className="p-0 h-auto text-green-800" onClick={() => setStatus('idle')}>
+                    Faire une autre modification
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  Publiez directement sur GitHub. Nécessite un Personal Access Token (Classic) avec les droits 'repo'.
+                </p>
+                <div className="space-y-2">
+                  <Label>GitHub Token</Label>
+                  <Input 
+                    type="password" 
+                    value={token} 
+                    onChange={(e) => setToken(e.target.value)} 
+                    placeholder="ghp_..."
+                  />
+                  <div className="flex items-center gap-2">
+                    <input 
+                      type="checkbox" 
+                      id="saveToken" 
+                      checked={saveToken} 
+                      onChange={(e) => setSaveToken(e.target.checked)} 
+                      className="rounded border-gray-300"
+                    />
+                    <label htmlFor="saveToken" className="text-sm text-muted-foreground">Se souvenir du token</label>
+                  </div>
+                </div>
+
+                {status === 'error' && (
+                  <div className="text-destructive text-sm flex items-center gap-2">
+                    <AlertCircle size={16} />
+                    {errorMessage}
+                  </div>
+                )}
+
+                <Button onClick={handlePublish} disabled={status === 'loading'} className="w-full">
+                  {status === 'loading' && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  Publier sur Vercel
+                </Button>
+              </div>
+            )}
           </div>
-          <div className="flex gap-4 justify-center">
-            <Button onClick={copyToClipboard} variant="outline" className="gap-2">
-              Copier le JSON
-            </Button>
-            <Button onClick={handleDownload} className="gap-2">
-              <Download size={16} />
-              Télécharger le fichier
-            </Button>
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">Ou manuellement</span>
+            </div>
+          </div>
+
+          {/* Method 2: Manual */}
+          <div className="bg-muted/50 p-4 rounded-lg space-y-4 opacity-80 hover:opacity-100 transition-opacity">
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold text-sm">Téléchargement Manuel</h3>
+              <div className="flex gap-2">
+                <Button onClick={copyToClipboard} variant="outline" size="sm" className="gap-2">
+                  Copier
+                </Button>
+                <Button onClick={handleDownload} variant="outline" size="sm" className="gap-2">
+                  <Download size={14} />
+                  Télécharger
+                </Button>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Téléchargez config.json, remplacez-le dans src/data/, et faites un git push.
+            </p>
           </div>
         </div>
       </DialogContent>
@@ -313,6 +488,7 @@ export const AdminDashboard = () => {
                <RotateCw size={20} />
              </button>
              <ThemeToggle />
+             <JsonEditorDialog config={config} onUpdate={(newConfig) => useConfigStore.getState().setConfig(newConfig)} />
              <PublishDialog config={config} />
              <button 
                onClick={() => setShowGuide(true)}
