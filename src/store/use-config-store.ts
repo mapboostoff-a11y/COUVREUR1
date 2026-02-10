@@ -132,7 +132,7 @@ export const useConfigStore = create<ConfigState>()(
       resetToDefault: () => set({ config: defaultConfig }),
     }),
     {
-      name: 'landing-page-config-v3',
+      name: 'landing-page-config-v4',
     }
   )
 );

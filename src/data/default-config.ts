@@ -4,7 +4,8 @@ export const defaultConfig: LandingPageConfig = {
   meta: {
     title: "Couvreur Champigny-sur-Marne (94) | Urgence & Rénovation Toiture",
     description: "Artisan couvreur local à Champigny (94). Dépannage fuite 7j/7, rénovation complète, zinguerie. Devis gratuit sous 48h. Garantie décennale + Qualibat RGE.",
-    favicon: "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&w=32&h=32"
+    favicon: "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&w=32&h=32",
+    ogImage: "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80"
   },
   theme: {
     colors: {

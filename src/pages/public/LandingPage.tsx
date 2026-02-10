@@ -12,7 +12,19 @@ export const LandingPage = () => {
       <Helmet>
         <title>{meta.title}</title>
         <meta name="description" content={meta.description} />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={meta.title} />
+        <meta property="og:description" content={meta.description} />
         {meta.ogImage && <meta property="og:image" content={meta.ogImage} />}
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={meta.title} />
+        <meta name="twitter:description" content={meta.description} />
+        {meta.ogImage && <meta name="twitter:image" content={meta.ogImage} />}
+
         {meta.favicon && <link rel="icon" href={meta.favicon} />}
       </Helmet>
       
