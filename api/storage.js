@@ -382,33 +382,26 @@ const client = dbUrl ? createClient({
   authToken: authToken,
 }) : null;
 
-export default async function handler(request) {
+export default async function handler(req, res) {
   try {
-    const url = new URL(request.url);
-
     // If no database client (e.g. deployment without Turso env vars),
     // behave like a mock server to prevent crashes.
     if (!client) {
       console.warn('No database configured. Using mock mode.');
       
-      if (request.method === 'GET') {
-        return new Response(JSON.stringify(DEFAULT_CONFIG), {
-          status: 200,
-          headers: { 'Content-Type': 'application/json' }
-        });
+      if (req.method === 'GET') {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(200).send(JSON.stringify(DEFAULT_CONFIG));
       }
 
-      if (request.method === 'POST') {
-         return new Response(JSON.stringify({ 
+      if (req.method === 'POST') {
+         return res.status(200).json({ 
            success: true, 
            warning: "Mode démo : Base de données non configurée. Les changements ne seront pas sauvegardés." 
-         }), {
-          status: 200,
-          headers: { 'Content-Type': 'application/json' }
-        });
+         });
       }
-      
-      return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 });
+
+      return res.status(405).json({ error: 'Method not allowed' });
     }
 
     // AUTO-MIGRATION: Create table if not exists (Django style)
@@ -420,7 +413,7 @@ export default async function handler(request) {
     `);
     
     // GET request: Fetch config
-    if (request.method === 'GET') {
+    if (req.method === 'GET') {
       const result = await client.execute({
         sql: "SELECT value FROM site_config WHERE key = ?",
         args: ["current_config"]
@@ -442,25 +435,17 @@ export default async function handler(request) {
         });
       }
       
-      return new Response(storedConfig, {
-        status: 200,
-        headers: { 
-          'Content-Type': 'application/json',
-          'Cache-Control': 'no-store, max-age=0'
-        }
-      });
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader('Cache-Control', 'no-store, max-age=0');
+      return res.status(200).send(storedConfig);
     }
 
     // POST request: Save config
-    if (request.method === 'POST') {
-      const body = await request.json();
-      const { config } = body;
+    if (req.method === 'POST') {
+      const { config } = req.body || {};
       
       if (!config) {
-        return new Response(JSON.stringify({ error: 'No config provided' }), {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' }
-        });
+        return res.status(400).json({ error: 'No config provided' });
       }
 
       const configString = JSON.stringify(config);
@@ -473,23 +458,14 @@ export default async function handler(request) {
         args: ["current_config", configString]
       });
       
-      return new Response(JSON.stringify({ success: true }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      return res.status(200).json({ success: true });
     }
 
     // Method not allowed
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-      status: 405,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    return res.status(405).json({ error: 'Method not allowed' });
 
   } catch (error) {
     console.error('Database Error:', error);
-    return new Response(JSON.stringify({ error: 'Internal Server Error', details: error.message }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    return res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
 }
