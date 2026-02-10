@@ -1,42 +1,66 @@
-import { createClient } from '@vercel/kv';
 
-export default async function handler(request, response) {
-  // Configurer le client KV
-  // Ces variables d'environnement sont automatiquement ajoutées par Vercel 
-  // quand on lie une base de données KV au projet
-  const kv = createClient({
-    url: process.env.KV_REST_API_URL,
-    token: process.env.KV_REST_API_TOKEN,
-  });
+import { kv } from '@vercel/kv';
 
-  if (request.method === 'GET') {
-    try {
-      // Lire la configuration
-      const config = await kv.get('site_config');
-      return response.status(200).json(config || null);
-    } catch (error) {
-      console.error('KV Read Error:', error);
-      return response.status(500).json({ error: 'Failed to read configuration' });
+export const config = {
+  runtime: 'edge',
+};
+
+export default async function handler(request) {
+  try {
+    const url = new URL(request.url);
+    
+    // GET request: Fetch config
+    if (request.method === 'GET') {
+      const storedConfig = await kv.get('site_config');
+      
+      if (!storedConfig) {
+        // Return 404 if not found, frontend should handle fallback
+        return new Response(JSON.stringify(null), {
+          status: 404,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      return new Response(JSON.stringify(storedConfig), {
+        status: 200,
+        headers: { 
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store, max-age=0' // Ensure fresh data
+        }
+      });
     }
-  }
 
-  if (request.method === 'POST') {
-    try {
-      const { config } = request.body;
+    // POST request: Save config
+    if (request.method === 'POST') {
+      const body = await request.json();
+      const { config } = body;
       
       if (!config) {
-        return response.status(400).json({ error: 'Missing config data' });
+        return new Response(JSON.stringify({ error: 'No config provided' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' }
+        });
       }
 
-      // Sauvegarder la configuration
       await kv.set('site_config', config);
       
-      return response.status(200).json({ success: true });
-    } catch (error) {
-      console.error('KV Write Error:', error);
-      return response.status(500).json({ error: 'Failed to save configuration' });
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
-  }
 
-  return response.status(405).json({ error: 'Method Not Allowed' });
+    // Method not allowed
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+      status: 405,
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+  } catch (error) {
+    console.error('KV Error:', error);
+    return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 }

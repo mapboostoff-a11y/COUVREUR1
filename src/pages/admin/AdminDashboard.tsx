@@ -23,14 +23,12 @@ import { SectionPicker } from '../../components/admin/SectionPicker';
 import { WelcomeGuide } from '../../components/admin/WelcomeGuide';
 import { ThemeToggle } from '../../components/theme-toggle';
 import { PreviewFrame, useFrameDocument } from '../../components/admin/PreviewFrame';
-import { Plus, Monitor, Smartphone, Tablet, HelpCircle, RotateCw, Settings, PanelLeft, PanelRight, Bot, Download, Save, Code, Loader2, CheckCircle, AlertCircle, Github } from 'lucide-react';
+import { Plus, Monitor, Smartphone, Tablet, HelpCircle, RotateCw, Settings, PanelLeft, PanelRight, Bot, Save, Code, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { ThemeInjector } from '../../components/renderer/ThemeInjector';
 import { WhatsAppButton } from '../../components/WhatsAppButton';
 import { Button } from '../../components/ui/button';
 import { Textarea } from '../../components/ui/textarea';
-import { Input } from '../../components/ui/input';
-import { Label } from '../../components/ui/label';
-import { getFileSha, updateFile } from '../../lib/github';
+
 import {
   Dialog,
   DialogContent,
