@@ -441,14 +441,12 @@ const DEFAULT_CONFIG = {
     }
   ]
 };
-  ]
-};
 
 // Configuration SQLite
 // Cela permet les mises à jour à chaud sans redéploiement.
 // Le fichier sera créé à la racine du projet ou dans le dossier courant.
 const dbFile = path.resolve(process.cwd(), 'site-data.db');
-const dbPath = `file:${dbFile}`;
+const dbPath = `file:${dbFile.replace(/\\/g, '/')}`;
 
 console.log(`Using SQLite database at: ${dbPath}`);
 
