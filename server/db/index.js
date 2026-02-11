@@ -74,13 +74,11 @@ class MockDB {
     }
 
     async get(sql, ...params) {
-        // sql is like "SELECT value FROM site_config WHERE key = ?"
-        // or "SELECT key FROM site_config WHERE key = ?"
-        if (sql.toLowerCase().includes('from site_config')) {
+        const normalizedSql = sql.toLowerCase();
+        if (normalizedSql.includes('from site_config')) {
             const key = params[0] || 'current_config';
             const value = this.data.get(key);
             if (value) {
-                // Return an object that has both key and value if requested
                 return { 
                     key: key,
                     value: value 
@@ -91,8 +89,8 @@ class MockDB {
     }
 
     async run(sql, ...params) {
-        // sql is like "INSERT INTO site_config (key, value) VALUES (?, ?)..."
-        if (sql.includes('INSERT INTO site_config')) {
+        const normalizedSql = sql.toLowerCase();
+        if (normalizedSql.includes('insert into site_config')) {
             const key = params[0] || 'current_config';
             const value = params[1];
             if (value) {
@@ -108,6 +106,18 @@ class MockDB {
 export async function getDb() {
     if (dbInstance) return dbInstance;
 
+    const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_ENV !== undefined;
+
+    // On Vercel, if we don't have a remote TURSO URL, we MUST use MockDB
+    // because native SQLite bindings often fail or are read-only.
+    const hasRemoteUrl = process.env.DATABASE_URL && !process.env.DATABASE_URL.startsWith('file:');
+
+    if (isVercel && !hasRemoteUrl) {
+        console.log('Vercel detected without remote DATABASE_URL, using MockDB (JSON fallback) for ephemeral storage.');
+        dbInstance = new MockDB();
+        return dbInstance;
+    }
+
     try {
         const client = createClient({ url: dbUrl });
         
@@ -117,7 +127,7 @@ export async function getDb() {
         dbInstance = new LibSqlClientWrapper(client);
         return dbInstance;
     } catch (err) {
-        console.error('Failed to open native SQLite database with @libsql/client:', err.message);
+        console.error('Failed to open native SQLite database:', err.message);
         console.log('Falling back to MockDB with JSON persistence...');
         dbInstance = new MockDB();
         return dbInstance;

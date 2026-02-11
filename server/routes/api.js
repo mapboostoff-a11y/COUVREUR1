@@ -11,7 +11,13 @@ const router = express.Router();
 
 // Initialize DB and Seed
 (async () => {
-    await seed();
+    try {
+        console.log('Starting DB seeding...');
+        await seed();
+        console.log('DB seeding completed.');
+    } catch (err) {
+        console.error('Fatal error during DB seeding:', err);
+    }
 })();
 
 router.get('/config', async (req, res) => {
@@ -56,10 +62,12 @@ router.post(['/config', '/storage'], async (req, res) => {
     const config = req.body.config || req.body;
     
     if (!config || Object.keys(config).length === 0) {
+        console.error('Save error: Missing or empty config');
         return res.status(400).json({ error: 'Missing or empty config' });
     }
 
     try {
+        console.log('Attempting to save config to DB...');
         const db = await getDb();
         await db.run(`
             INSERT INTO site_config (key, value) 
@@ -67,9 +75,10 @@ router.post(['/config', '/storage'], async (req, res) => {
             ON CONFLICT(key) DO UPDATE SET value = excluded.value
         `, 'current_config', JSON.stringify(config));
         
+        console.log('Config saved successfully to DB.');
         res.json({ success: true });
     } catch (err) {
-        console.error('Save error:', err);
+        console.error('Save error in /storage:', err);
         res.status(500).json({ error: err.message });
     }
 });
