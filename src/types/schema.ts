@@ -139,7 +139,7 @@ export const GalleryContentSchema = z.object({
   title: z.string().optional(),
   images: z.array(ImageSchema),
   columns: z.number().min(1).max(6).default(3),
-  aspectRatio: z.enum(['square', 'video', 'portrait']).default('square'),
+  aspectRatio: z.enum(['square', 'video', 'portrait', 'none']).default('square'),
 });
 
 export const VideoItemSchema = z.object({

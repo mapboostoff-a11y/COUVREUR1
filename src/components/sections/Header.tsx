@@ -23,14 +23,6 @@ const Header: React.FC<HeaderProps> = ({ content, isEditing, onUpdate }) => {
   const [editingLinkIndex, setEditingLinkIndex] = useState<number | null>(null);
   const sections = useConfigStore(state => state.config.sections);
   
-  // Get potential anchors (sections with IDs)
-  const anchors = sections
-    .filter(s => s.settings.visible && s.type !== 'header' && s.type !== 'footer')
-    .map(s => ({ 
-      id: s.id, 
-      label: (s as any).name || s.type.charAt(0).toUpperCase() + s.type.slice(1) 
-    }));
-
   const handleLinkUpdate = (index: number, updates: any) => {
     if (!onUpdate) return;
     const newLinks = [...content.links];
