@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { PublicLayout } from './layouts/PublicLayout';
 import { AdminLayout } from './layouts/AdminLayout';
 import { LandingPage } from './pages/public/LandingPage';
@@ -7,6 +7,30 @@ import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { Login } from './pages/auth/Login';
 import { useAuthStore } from './store/use-auth-store';
 import { useConfigStore } from './store/use-config-store';
+
+const ConfigLoader = () => {
+  const { fetchRemoteConfig } = useConfigStore();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Charger la config distante au démarrage et à chaque changement de route
+    fetchRemoteConfig();
+  }, [location.pathname, fetchRemoteConfig]);
+
+  useEffect(() => {
+    // Rafraîchir quand l'onglet redevient actif
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        fetchRemoteConfig();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [fetchRemoteConfig]);
+
+  return null;
+};
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -17,15 +41,9 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 };
 
 function App() {
-  const { fetchRemoteConfig } = useConfigStore();
-
-  useEffect(() => {
-    // Charger la config distante au démarrage
-    fetchRemoteConfig();
-  }, [fetchRemoteConfig]);
-
   return (
     <BrowserRouter>
+      <ConfigLoader />
       <Routes>
         {/* Public Routes */}
         <Route element={<PublicLayout />}>

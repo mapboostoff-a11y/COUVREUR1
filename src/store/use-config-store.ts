@@ -30,13 +30,25 @@ export const useConfigStore = create<ConfigState>()(
       
       fetchRemoteConfig: async () => {
         try {
-          const response = await fetch('/api/storage');
+          // Utiliser /api/config directement au lieu de /api/storage (évite les redirections)
+          const response = await fetch('/api/config', {
+            headers: {
+              'Cache-Control': 'no-cache',
+              'Pragma': 'no-cache'
+            }
+          });
+          
           if (response.ok) {
             const remoteConfig = await response.json();
-            if (remoteConfig) {
+            // Validation basique pour s'assurer qu'on a un objet de configuration valide
+            if (remoteConfig && typeof remoteConfig === 'object' && remoteConfig.sections) {
               set({ config: remoteConfig });
               console.log('Configuration loaded from remote storage');
+            } else {
+              console.warn('Received invalid configuration from server:', remoteConfig);
             }
+          } else {
+            console.error('Failed to fetch remote config:', response.status, response.statusText);
           }
         } catch (error) {
           console.warn('Failed to fetch remote config, using default/local', error);

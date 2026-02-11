@@ -44,8 +44,15 @@ src/
     ```bash
     pnpm dev
     ```
+    *Ceci lance à la fois le frontend (Vite) et le backend (Express) via un middleware.*
 
-3.  **Lancement des tests :**
+3.  **Lancement en Production (Local/VPS) :**
+    ```bash
+    pnpm build
+    pnpm start
+    ```
+
+4.  **Lancement des tests :**
     ```bash
     pnpm test
     ```
@@ -67,6 +74,7 @@ Accédez à `http://localhost:5173/` pour voir le rendu final de la landing page
 
 Le modèle de données central est défini dans `src/types/schema.ts`.
 La configuration initiale se trouve dans `src/data/default-config.ts`.
+La persistance est assurée par **SQLite** (`site-data.db`).
 
 ### Ajouter une Nouvelle Section
 Pour étendre les capacités du builder :
@@ -77,9 +85,20 @@ Pour étendre les capacités du builder :
 
 ## 🛠 Stack Technique
 -   **Core** : React 19, TypeScript, Vite
+-   **Backend** : Express.js, Node.js
+-   **Database** : SQLite (better-sqlite3)
 -   **Styles** : Tailwind CSS 4
 -   **State** : Zustand
 -   **Routing** : React Router DOM
 -   **Drag & Drop** : dnd-kit
 -   **Validation** : Zod, React Hook Form
+
+## ☁️ Déploiement (Vercel)
+
+Le projet est prêt pour Vercel.
+1.  Installez Vercel CLI : `npm i -g vercel`
+2.  Déployez : `vercel`
+3.  Le fichier `vercel.json` configure automatiquement les fonctions serverless pour l'API Express.
+
+*Note : Sur Vercel, la base de données SQLite est réinitialisée à chaque déploiement (système de fichiers éphémère). Pour la production sur Vercel, envisagez une base de données externe ou un VPS.*
 # COUVREUR1

@@ -9,14 +9,49 @@ This file provides context and instructions for AI coding agents working on the 
 This is a **Landing Page Builder** powered by a JSON configuration.
 - **Core Concept**: A single JSON object (`LandingPageConfig`) defines the entire website (theme, content, sections).
 - **Stack**: React 19, Vite, Tailwind CSS v4, Zustand, Zod.
+- **Backend**: Express.js (REST API), SQLite (better-sqlite3) for persistence.
 - **Goal**: Enable AI agents to generate complete, high-quality landing pages by simply producing a valid JSON configuration.
 
 ## Setup Commands
 
 - **Install**: `pnpm install`
-- **Dev**: `pnpm dev`
+- **Dev**: `pnpm dev` (Runs both Vite frontend and Express backend via middleware)
 - **Build**: `pnpm build`
+- **Start**: `pnpm start` (Production server)
 - **Test**: `npx vitest`
+
+---
+
+## 🏗️ Backend Architecture (Express.js + SQLite)
+
+The project now uses a robust backend architecture to handle data persistence and deployment.
+
+### 1. Express.js Server
+- **Entry Point**: `server/index.js` (starts the server).
+- **App Config**: `server/app.js` (middleware, routes).
+- **API Routes**: `server/routes/api.js` (handles config read/write).
+- **Middleware**: `cors`, `helmet`, `body-parser`.
+
+### 2. SQLite Database
+- **Library**: `better-sqlite3`.
+- **File**: `site-data.db` (created automatically in project root).
+- **Schema**:
+  - Table `site_config`:
+    - `key` (TEXT PRIMARY KEY)
+    - `value` (TEXT - JSON content)
+    - `updated_at` (DATETIME)
+- **Seeding**: Automatically seeds from `exempleenproduction.json` if the database is empty.
+
+### 3. API Endpoints
+- `GET /api/config`: Retrieves the current active configuration.
+- `POST /api/config`: Updates the configuration (hot reload).
+- `POST /api/publish`: Updates the configuration and optionally syncs to Git (if configured).
+
+### 4. Deployment (Vercel)
+The project is configured for Vercel Serverless Functions.
+- **Config**: `vercel.json` rewrites `/api/*` to `api/index.js`.
+- **Entry**: `api/index.js` wraps the Express app for Vercel.
+- **Persistence**: Note that on Vercel, the local SQLite file is ephemeral. For permanent storage in production, consider an external DB or accept that changes reset on redeploy (unless using a VPS).
 
 ---
 

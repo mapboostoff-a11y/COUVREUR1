@@ -118,9 +118,7 @@ const PublishDialog = ({ config }: { config: any }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          config
-        }),
+        body: JSON.stringify(config),
       });
 
       if (!dbResponse.ok) throw new Error('Erreur lors de la sauvegarde en base de données');
@@ -133,9 +131,7 @@ const PublishDialog = ({ config }: { config: any }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            config
-          }),
+          body: JSON.stringify(config),
         });
       } catch (fileError) {
         console.warn('Erreur non critique lors de la sauvegarde fichier:', fileError);
@@ -176,11 +172,6 @@ const PublishDialog = ({ config }: { config: any }) => {
                   <Monitor size={16} />
                   Sauvegarder et Publier
                 </Button>
-                {import.meta.env.DEV && (
-                  <p className="text-xs text-amber-600 bg-amber-50 p-2 rounded border border-amber-200">
-                    Note : En mode développement local (Vite), l'API de stockage peut ne pas être active. Utilisez l'export JSON si besoin.
-                  </p>
-                )}
              </div>
           )}
 
