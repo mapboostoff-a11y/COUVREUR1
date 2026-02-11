@@ -3,6 +3,7 @@ import { GalleryContentSchema } from '../../types/schema';
 import { z } from 'zod';
 import { cn } from '../../lib/utils';
 import { InlineText } from '../admin/InlineText';
+import { EditableImage } from '../admin/EditableImage';
 import { X, ChevronLeft, ChevronRight, Plus, Trash2 } from 'lucide-react';
 import { Button } from '../ui/button';
 
@@ -55,6 +56,13 @@ const Gallery: React.FC<GalleryProps> = ({ content, isEditing, onUpdate }) => {
     if (!onUpdate) return;
     const newImages = [...content.images];
     newImages.splice(index, 1);
+    onUpdate({ images: newImages });
+  };
+
+  const handleImageUpdate = (index: number, newSrc: string) => {
+     if (!onUpdate) return;
+    const newImages = [...content.images];
+    newImages[index] = { ...newImages[index], src: newSrc };
     onUpdate({ images: newImages });
   };
 
@@ -133,9 +141,11 @@ const Gallery: React.FC<GalleryProps> = ({ content, isEditing, onUpdate }) => {
             )}
             onClick={() => openLightbox(idx)}
           >
-             <img
+             <EditableImage
                 src={image.src}
                 alt={image.alt}
+                isEditing={isEditing}
+                onUpdate={(src) => handleImageUpdate(idx, src)}
                 className={cn(
                   "w-full h-full transition-transform duration-300 hover:scale-105 cursor-pointer",
                   content.aspectRatio === 'none' ? "object-contain" : "object-cover"

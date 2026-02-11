@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HeroContentSchema } from '../../types/schema';
 import { z } from 'zod';
 import { cn } from '../../lib/utils';
 import { InlineText } from '../admin/InlineText';
 import { EditableImage } from '../admin/EditableImage';
 import { LinkEditor } from '../admin/LinkEditor';
-import { X } from 'lucide-react';
+import { X, Settings } from 'lucide-react';
 
 type Content = z.infer<typeof HeroContentSchema>;
 
@@ -16,6 +16,8 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ content, isEditing, onUpdate }) => {
+  const [editingLinkIndex, setEditingLinkIndex] = useState<number | null>(null);
+
   const handleCtaUpdate = (index: number, value: string) => {
     if (!onUpdate || !content.cta) return;
     const newCta = [...content.cta];
@@ -117,12 +119,26 @@ const Hero: React.FC<HeroProps> = ({ content, isEditing, onUpdate }) => {
                   />
                 </a>
                 {isEditing && (
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 hidden group-hover:flex z-50">
-                        <LinkEditor 
-                            link={link} 
-                            onUpdate={(updates) => handleCtaLinkUpdate(idx, updates)} 
-                        />
-                    </div>
+                    <>
+                        <button
+                            className="absolute -top-3 -right-3 p-1.5 bg-background border border-border rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary z-10 shadow-sm"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setEditingLinkIndex(editingLinkIndex === idx ? null : idx);
+                            }}
+                        >
+                            <Settings size={14} />
+                        </button>
+                        
+                        {editingLinkIndex === idx && (
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 animate-in fade-in zoom-in-95">
+                                <LinkEditor 
+                                    link={link} 
+                                    onUpdate={(updates) => handleCtaLinkUpdate(idx, updates)} 
+                                />
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
           ))}

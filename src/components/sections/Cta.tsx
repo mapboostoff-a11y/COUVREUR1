@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CtaContentSchema } from '../../types/schema';
 import { z } from 'zod';
 import { InlineText } from '../admin/InlineText';
 import { LinkEditor } from '../admin/LinkEditor';
 import { cn } from '../../lib/utils';
+import { Settings } from 'lucide-react';
 
 type Content = z.infer<typeof CtaContentSchema>;
 
@@ -14,6 +15,8 @@ interface CtaProps {
 }
 
 const Cta: React.FC<CtaProps> = ({ content, isEditing, onUpdate }) => {
+  const [editingLinkIndex, setEditingLinkIndex] = useState<number | null>(null);
+
   const handleButtonUpdate = (index: number, value: string) => {
     if (!onUpdate) return;
     const newButtons = [...content.buttons];
@@ -69,12 +72,26 @@ const Cta: React.FC<CtaProps> = ({ content, isEditing, onUpdate }) => {
               />
             </a>
             {isEditing && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 hidden group-hover:flex z-50">
-                    <LinkEditor 
-                        link={btn} 
-                        onUpdate={(updates) => handleLinkUpdate(idx, updates)} 
-                    />
-                </div>
+                <>
+                    <button
+                        className="absolute -top-3 -right-3 p-1.5 bg-background border border-border rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary z-10 shadow-sm"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setEditingLinkIndex(editingLinkIndex === idx ? null : idx);
+                        }}
+                    >
+                        <Settings size={14} />
+                    </button>
+                    
+                    {editingLinkIndex === idx && (
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 animate-in fade-in zoom-in-95">
+                            <LinkEditor 
+                                link={btn} 
+                                onUpdate={(updates) => handleLinkUpdate(idx, updates)} 
+                            />
+                        </div>
+                    )}
+                </>
             )}
           </div>
         ))}
