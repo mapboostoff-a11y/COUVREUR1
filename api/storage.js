@@ -442,13 +442,12 @@ const DEFAULT_CONFIG = {
   ]
 };
 
-// Configuration SQLite locale stricte
-// En local : utilise 'local.db' à la racine du projet
-// En production (Vercel) : utilise le dossier temporaire /tmp (seul répertoire inscriptible)
-// ATTENTION : Sur Vercel, le dossier /tmp est éphémère. Les données peuvent être perdues lors des redémarrages.
-const dbPath = process.env.NODE_ENV === 'development' 
-  ? 'file:local.db' 
-  : `file:${path.join(os.tmpdir(), 'site-data.db')}`;
+// Configuration SQLite
+// En développement ET production (VPS/Node) : on utilise un fichier local persistant.
+// Cela permet les mises à jour à chaud sans redéploiement.
+// Le fichier sera créé à la racine du projet ou dans le dossier courant.
+const dbFile = 'site-data.db';
+const dbPath = `file:${dbFile}`;
 
 console.log(`Using SQLite database at: ${dbPath}`);
 

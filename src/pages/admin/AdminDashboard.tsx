@@ -111,8 +111,9 @@ const PublishDialog = ({ config }: { config: any }) => {
     setWarningMessage('');
 
     try {
-      // 1. Sauvegarde locale (SQLite) pour affichage immédiat
-      await fetch('/api/storage', {
+      // 1. Sauvegarde en Base de Données (Mise à jour à chaud immédiate)
+      // C'est la source de vérité pour le site en direct.
+      const dbResponse = await fetch('/api/storage', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -122,32 +123,23 @@ const PublishDialog = ({ config }: { config: any }) => {
         }),
       });
 
-      // 2. Sauvegarde fichier (Mise à jour du code source uniquement)
-      const response = await fetch('/api/publish', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          config
-        }),
-      });
+      if (!dbResponse.ok) throw new Error('Erreur lors de la sauvegarde en base de données');
 
-      if (!response.ok) {
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          const data = await response.json();
-          throw new Error(data.error || 'Erreur lors de la publication');
-        } else {
-          const text = await response.text();
-          console.error('Non-JSON response:', text);
-          throw new Error('Le serveur API est inaccessible ou a retourné une erreur (500/404). Vérifiez que le serveur backend est bien démarré.');
-        }
-      }
-
-      const data = await response.json();
-      if (data.message) {
-        setWarningMessage(data.message);
+      // 2. Sauvegarde sur Disque (Persistance du fichier source)
+      // Utile pour les redémarrages serveur ou backups, mais pas critique pour l'instant T.
+      try {
+        await fetch('/api/publish', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            config
+          }),
+        });
+      } catch (fileError) {
+        console.warn('Erreur non critique lors de la sauvegarde fichier:', fileError);
+        // On ne bloque pas le succès si la DB est OK
       }
 
       setStatus('success');
