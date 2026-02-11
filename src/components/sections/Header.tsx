@@ -240,64 +240,17 @@ const Header: React.FC<HeaderProps> = ({ content, isEditing, onUpdate }) => {
 
               {/* Link Settings Popover */}
               {isEditing && editingLinkIndex === idx && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-background border border-border rounded-lg shadow-xl p-3 z-50 animate-in fade-in zoom-in-95">
-                    <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs font-semibold">Link Settings</span>
-                        <button onClick={() => setEditingLinkIndex(null)}><X size={14} /></button>
-                    </div>
-                    <div className="space-y-3">
-                        <div className="space-y-1">
-                            <label className="text-xs text-muted-foreground">Target Section</label>
-                            <select 
-                                className="w-full text-xs p-1 rounded border border-input bg-background"
-                                value={link.url}
-                                onChange={(e) => handleLinkUpdate(idx, { url: e.target.value })}
-                            >
-                                <option value="#">-- Select Anchor --</option>
-                                {anchors.map(anchor => (
-                                    <option key={anchor.id} value={`#${anchor.id}`}>
-                                        {anchor.label}
-                                    </option>
-                                ))}
-                                <option value="/custom">Custom URL...</option>
-                            </select>
-                        </div>
-                        {link.url === '/custom' && (
-                             <div className="space-y-1">
-                                <label className="text-xs text-muted-foreground">Custom URL</label>
-                                <input 
-                                    type="text" 
-                                    className="w-full text-xs p-1 rounded border border-input bg-background"
-                                    value={link.url}
-                                    onChange={(e) => handleLinkUpdate(idx, { url: e.target.value })}
-                                    placeholder="https://..."
-                                />
-                             </div>
-                        )}
-                         <div className="space-y-1">
-                            <label className="text-xs text-muted-foreground">Style</label>
-                            <select 
-                                className="w-full text-xs p-1 rounded border border-input bg-background"
-                                value={link.variant}
-                                onChange={(e) => handleLinkUpdate(idx, { variant: e.target.value })}
-                            >
-                                <option value="link">Link</option>
-                                <option value="primary">Primary Button</option>
-                                <option value="secondary">Secondary Button</option>
-                                <option value="outline">Outline Button</option>
-                            </select>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <input 
-                                type="checkbox" 
-                                id={`external-${idx}`}
-                                checked={link.external || false}
-                                onChange={(e) => handleLinkUpdate(idx, { external: e.target.checked })}
-                                className="h-3 w-3"
-                            />
-                            <label htmlFor={`external-${idx}`} className="text-xs text-muted-foreground cursor-pointer">Open in new tab</label>
-                        </div>
-                    </div>
+                <div className="absolute top-full left-0 mt-2 z-50 animate-in fade-in zoom-in-95">
+                  <LinkEditor 
+                    link={link} 
+                    onUpdate={(updates) => handleLinkUpdate(idx, updates)}
+                    onRemove={() => {
+                      const newLinks = [...content.links];
+                      newLinks.splice(idx, 1);
+                      onUpdate?.({ links: newLinks });
+                      setEditingLinkIndex(null);
+                    }}
+                  />
                 </div>
               )}
             </div>
@@ -342,20 +295,35 @@ const Header: React.FC<HeaderProps> = ({ content, isEditing, onUpdate }) => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 w-full bg-background border-b border-border p-4 flex flex-col gap-4 shadow-lg animate-in slide-in-from-top-5">
+        <div className="md:hidden absolute top-16 left-0 w-full bg-background border-b border-border p-4 flex flex-col gap-4 shadow-lg animate-in slide-in-from-top-5 z-[100]">
           {content.links.map((link, idx) => (
              <a 
                 key={idx}
                 href={link.url}
                 className="text-base font-medium text-foreground py-2 border-b border-border/50 last:border-0 block"
-                onClick={(e) => isEditing && e.preventDefault()}
+                onClick={(e) => {
+                  if (isEditing) {
+                    e.preventDefault();
+                  } else {
+                    setIsMenuOpen(false);
+                  }
+                }}
               >
                 {link.text}
               </a>
           ))}
           {content.cta && (
             <div className="pt-2">
-              <Button className="w-full" variant={content.cta.variant as any || "default"}>
+              <Button 
+                className="w-full" 
+                variant={content.cta.variant as any || "default"}
+                onClick={() => {
+                  if (!isEditing && content.cta?.url) {
+                    setIsMenuOpen(false);
+                    window.location.href = content.cta.url;
+                  }
+                }}
+              >
                 <InlineText
                   tagName="span"
                   value={content.cta.text}

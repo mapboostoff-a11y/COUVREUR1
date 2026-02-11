@@ -111,7 +111,7 @@ const Pricing: React.FC<PricingProps> = ({ content, isEditing, onUpdate }) => {
             
             <ul className="space-y-3 mb-8">
               {plan.features.map((feat, i) => (
-                <li key={i} className="flex items-center gap-2 text-gray-600">
+                <li key={i} className="flex items-center gap-2 text-muted-foreground">
                   <Check size={18} className="text-green-500 shrink-0" />
                   <InlineText
                     tagName="span"
@@ -132,8 +132,8 @@ const Pricing: React.FC<PricingProps> = ({ content, isEditing, onUpdate }) => {
                   className={cn(
                     "block w-full py-3 rounded-lg font-medium text-center transition-colors",
                     plan.highlight || plan.cta.variant === 'primary'
-                      ? "bg-blue-600 text-white hover:bg-blue-700"
-                      : "bg-gray-100 text-gray-900 hover:bg-gray-200"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "bg-muted text-muted-foreground hover:bg-muted/80"
                   )}
                 >
                   <InlineText

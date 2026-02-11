@@ -36,7 +36,8 @@ const Gallery: React.FC<GalleryProps> = ({ content, isEditing, onUpdate }) => {
     switch (ratio) {
       case 'video': return 'aspect-video';
       case 'portrait': return 'aspect-[3/4]';
-      case 'square': default: return 'aspect-square';
+      case 'square': return 'aspect-square';
+      default: return ''; // No fixed aspect ratio
     }
   };
 

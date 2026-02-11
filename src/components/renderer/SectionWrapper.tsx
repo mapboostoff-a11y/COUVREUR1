@@ -31,9 +31,9 @@ const paddingBottomMap: Record<string, string> = {
 
 const bgMap = {
   white: 'bg-background text-foreground',
-  gray: 'bg-muted/30 text-foreground',
+  gray: 'bg-muted/50 dark:bg-muted/20 text-foreground',
   primary: 'bg-primary text-primary-foreground',
-  dark: 'bg-secondary text-secondary-foreground',
+  dark: 'bg-secondary dark:bg-secondary/50 text-secondary-foreground',
 };
 
 const shadowMap = {

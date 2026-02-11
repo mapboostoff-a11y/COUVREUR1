@@ -1,8 +1,9 @@
 import React from 'react';
 import { LinkSchema } from '../../types/schema';
 import { z } from 'zod';
-import { ExternalLink, Check } from 'lucide-react';
+import { ExternalLink, Check, Anchor } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { useConfigStore } from '../../store/use-config-store';
 
 type Link = z.infer<typeof LinkSchema>;
 
@@ -14,17 +15,58 @@ interface LinkEditorProps {
 }
 
 export const LinkEditor: React.FC<LinkEditorProps> = ({ link, onUpdate, onRemove, className }) => {
+  const sections = useConfigStore(state => state.config.sections);
+  
+  // Get potential anchors (sections with IDs)
+  const anchors = sections
+    .filter(s => s.settings.visible && s.type !== 'header' && s.type !== 'footer')
+    .map(s => ({ 
+      id: s.id, 
+      label: (s as any).name || (s as any).content?.title || (s as any).content?.headline || s.type.charAt(0).toUpperCase() + s.type.slice(1) 
+    }));
+
+  const isInternal = link.url.startsWith('#');
+
   return (
-    <div className={cn("bg-popover text-popover-foreground p-3 rounded-md border shadow-lg flex flex-col gap-3 min-w-[240px]", className)} onClick={(e) => e.stopPropagation()}>
+    <div className={cn("bg-popover text-popover-foreground p-3 rounded-md border shadow-lg flex flex-col gap-3 min-w-[260px]", className)} onClick={(e) => e.stopPropagation()}>
       <div className="space-y-1">
-        <label className="text-xs font-semibold text-muted-foreground">URL</label>
-        <input 
-          type="text" 
-          value={link.url}
-          onChange={(e) => onUpdate({ url: e.target.value })}
-          className="flex-1 bg-background border rounded px-2 py-1 text-sm w-full focus:outline-none focus:ring-1 focus:ring-primary"
-          placeholder="https://..."
-        />
+        <div className="flex justify-between items-center mb-1">
+          <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Lien / URL</label>
+        </div>
+        
+        <div className="flex flex-col gap-2">
+          <div className="space-y-1">
+            <label className="text-[10px] text-muted-foreground uppercase flex items-center gap-1">
+              <Anchor size={10} /> Aller à une section
+            </label>
+            <select 
+              className="w-full bg-background border rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+              value={isInternal ? link.url : ''}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (val) onUpdate({ url: val, external: false });
+              }}
+            >
+              <option value="">-- Choisir une section --</option>
+              {anchors.map(anchor => (
+                <option key={anchor.id} value={`#${anchor.id}`}>
+                  {anchor.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="space-y-1">
+            <label className="text-[10px] text-muted-foreground uppercase">Ou URL externe</label>
+            <input 
+              type="text" 
+              value={isInternal ? '' : link.url}
+              onChange={(e) => onUpdate({ url: e.target.value })}
+              className="flex-1 bg-background border rounded px-2 py-1.5 text-sm w-full focus:outline-none focus:ring-1 focus:ring-primary"
+              placeholder="https://..."
+            />
+          </div>
+        </div>
       </div>
 
       <div className="flex gap-2">
