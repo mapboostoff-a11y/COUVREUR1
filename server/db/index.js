@@ -41,19 +41,40 @@ export async function getDb() {
                     sql,
                     args: params
                 });
-                return rs.rows[0];
+                if (rs.rows.length === 0) return null;
+                const row = rs.rows[0];
+                // Convert Row object to plain object for compatibility
+                const obj = {};
+                rs.columns.forEach((col, i) => {
+                    obj[col] = row[i];
+                });
+                return obj;
             },
             async all(sql, ...params) {
                 const rs = await client.execute({
                     sql,
                     args: params
                 });
-                return rs.rows;
+                return rs.rows.map(row => {
+                    const obj = {};
+                    rs.columns.forEach((col, i) => {
+                        obj[col] = row[i];
+                    });
+                    return obj;
+                });
             },
             client // Expose raw client if needed
         };
 
-        console.log('LibSQL (SQLite) database opened successfully.');
+        // Ensure table exists
+        await dbInstance.exec(`
+            CREATE TABLE IF NOT EXISTS site_config (
+                key TEXT PRIMARY KEY,
+                value TEXT
+            )
+        `);
+
+        console.log('LibSQL (SQLite) database opened and initialized successfully.');
         return dbInstance;
     } catch (err) {
         console.error('Failed to open LibSQL database:', err.message);

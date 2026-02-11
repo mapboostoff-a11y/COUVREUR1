@@ -21,17 +21,24 @@ router.get('/config', async (req, res) => {
         if (row && row.value) {
             res.json(JSON.parse(row.value));
         } else {
+            console.log('Config non trouvée en DB, tentative de seeding...');
             // Seed if empty and try again
             await seed();
             const rowRetry = await db.get('SELECT value FROM site_config WHERE key = ?', 'current_config');
-            if (rowRetry) {
+            if (rowRetry && rowRetry.value) {
                 res.json(JSON.parse(rowRetry.value));
             } else {
+                console.warn('Config toujours introuvable après seeding');
                 res.status(404).json({ error: 'Config introuvable' });
             }
         }
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        console.error('Erreur API GET /config:', err);
+        res.status(500).json({ 
+            error: 'Erreur lors de la récupération de la configuration',
+            details: err.message,
+            stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+        });
     }
 });
 
@@ -67,8 +74,12 @@ router.post(['/config', '/publish', '/storage'], async (req, res) => {
 
         res.json({ success: true });
     } catch (err) {
-        console.error('Erreur API:', err);
-        res.status(500).json({ error: 'Erreur lors de la sauvegarde' });
+        console.error('Erreur API POST /publish:', err);
+        res.status(500).json({ 
+            error: 'Erreur lors de la sauvegarde',
+            details: err.message,
+            stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+        });
     }
 });
 

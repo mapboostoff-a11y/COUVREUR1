@@ -5,8 +5,12 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import fs from 'fs';
 import apiRoutes from './routes/api.js';
+import { seed } from './db/seed.js';
 
 const app = express();
+
+// Initialize DB in background (useful for Vercel cold starts)
+seed().catch(err => console.error('Background seeding failed:', err));
 
 const __dirname = path.resolve();
 const distPath = path.join(__dirname, 'dist');
