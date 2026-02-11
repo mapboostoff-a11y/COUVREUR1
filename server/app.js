@@ -48,11 +48,8 @@ if (fs.existsSync(distPath)) {
     
     // The "catchall" handler: for any request that doesn't
     // match one above, send back React's index.html file.
-    app.get('*', (req, res) => {
-        // Only for non-API routes
-        if (!req.path.startsWith('/api')) {
-            res.sendFile(path.join(distPath, 'index.html'));
-        }
+    app.get(/^(?!\/api).+/, (req, res) => {
+        res.sendFile(path.join(distPath, 'index.html'));
     });
 }
 

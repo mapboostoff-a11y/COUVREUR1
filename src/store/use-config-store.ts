@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 import type { LandingPageConfig, Section } from '../types/schema';
 import { defaultConfig } from '../data/default-config';
 import { arrayMove } from '@dnd-kit/sortable';
@@ -24,38 +23,31 @@ interface ConfigState {
 }
 
 export const useConfigStore = create<ConfigState>()(
-  persist(
-    (set) => ({
-      config: defaultConfig,
-      
-      fetchRemoteConfig: async () => {
-        try {
-          // Utiliser /api/config directement au lieu de /api/storage (évite les redirections)
-          const response = await fetch('/api/config', {
-            headers: {
-              'Cache-Control': 'no-cache',
-              'Pragma': 'no-cache'
-            }
-          });
-          
-          if (response.ok) {
-            const remoteConfig = await response.json();
-            // Validation basique pour s'assurer qu'on a un objet de configuration valide
-            if (remoteConfig && typeof remoteConfig === 'object' && remoteConfig.sections) {
-              set({ config: remoteConfig });
-              console.log('Configuration loaded from remote storage');
-            } else {
-              console.warn('Received invalid configuration from server:', remoteConfig);
-            }
-          } else {
-            console.error('Failed to fetch remote config:', response.status, response.statusText);
+  (set) => ({
+    config: defaultConfig,
+    
+    fetchRemoteConfig: async () => {
+      try {
+        const response = await fetch('/api/config', {
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
           }
-        } catch (error) {
-          console.warn('Failed to fetch remote config, using default/local', error);
+        });
+        
+        if (response.ok) {
+          const remoteConfig = await response.json();
+          if (remoteConfig && typeof remoteConfig === 'object' && remoteConfig.sections) {
+            set({ config: remoteConfig });
+            console.log('Configuration loaded from SQLite');
+          }
         }
-      },
+      } catch (error) {
+        console.warn('Failed to fetch remote config', error);
+      }
+    },
 
-      setConfig: (newConfig) => set({ config: newConfig }),
+    setConfig: (newConfig) => set({ config: newConfig }),
       updateSection: (id, updates) =>
         set((state) => ({
           config: {
@@ -159,9 +151,5 @@ export const useConfigStore = create<ConfigState>()(
           };
         }),
       resetToDefault: () => set({ config: defaultConfig }),
-    }),
-    {
-      name: 'landing-page-config-v4',
-    }
-  )
+    })
 );

@@ -1,135 +1,36 @@
-import { createClient } from '@libsql/client';
+import sqlite3 from 'sqlite3';
+import { open } from 'sqlite';
 import path from 'path';
 import fs from 'fs';
 
 const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_ENV !== undefined;
-const dbPath = process.env.DATABASE_PATH || (isVercel ? path.join('/tmp', 'site-data.db') : path.resolve(process.cwd(), 'site-data.db'));
-const dbUrl = `file:${dbPath.replace(/\\/g, '/')}`;
+const dbPath = isVercel ? path.join('/tmp', 'site-data.db') : path.resolve(process.cwd(), 'site-data.db');
 
-console.log(`Initializing SQLite database at ${dbUrl} (isVercel: ${isVercel})`);
+console.log(`Database path: ${dbPath} (isVercel: ${isVercel})`);
 
 let dbInstance = null;
-
-// Wrapper for @libsql/client to match the expected interface (get, run, exec)
-class LibSqlClientWrapper {
-    constructor(client) {
-        this.client = client;
-    }
-
-    async exec(sql) {
-        return await this.client.execute(sql);
-    }
-
-    async get(sql, ...params) {
-        const result = await this.client.execute({ sql, args: params });
-        return result.rows[0];
-    }
-
-    async all(sql, ...params) {
-        const result = await this.client.execute({ sql, args: params });
-        return result.rows;
-    }
-
-    async run(sql, ...params) {
-        const result = await this.client.execute({ sql, args: params });
-        return { lastID: result.lastInsertRowid, changes: result.rowsAffected };
-    }
-}
-
-// Mock DB with JSON persistence for environments where native bindings are missing
-class MockDB {
-    constructor() {
-        this.fallbackFile = isVercel ? path.join('/tmp', 'site-config-fallback.json') : path.resolve(process.cwd(), 'site-config-fallback.json');
-        this.data = new Map();
-        this.load();
-        console.warn('⚠️ USING JSON FALLBACK DATABASE. ⚠️');
-        console.warn(`Data will be persisted in: ${this.fallbackFile}`);
-    }
-
-    load() {
-        try {
-            if (fs.existsSync(this.fallbackFile)) {
-                const content = fs.readFileSync(this.fallbackFile, 'utf8');
-                const json = JSON.parse(content);
-                Object.entries(json).forEach(([key, value]) => {
-                    this.data.set(key, value);
-                });
-            }
-        } catch (err) {
-            console.error('Error loading fallback JSON:', err);
-        }
-    }
-
-    save() {
-        try {
-            const obj = Object.fromEntries(this.data);
-            fs.writeFileSync(this.fallbackFile, JSON.stringify(obj, null, 2));
-        } catch (err) {
-            console.error('Error saving fallback JSON:', err);
-        }
-    }
-
-    async exec(sql) {
-        return;
-    }
-
-    async get(sql, ...params) {
-        const normalizedSql = sql.toLowerCase();
-        if (normalizedSql.includes('from site_config')) {
-            const key = params[0] || 'current_config';
-            const value = this.data.get(key);
-            if (value) {
-                return { 
-                    key: key,
-                    value: value 
-                };
-            }
-        }
-        return undefined;
-    }
-
-    async run(sql, ...params) {
-        const normalizedSql = sql.toLowerCase();
-        if (normalizedSql.includes('insert into site_config')) {
-            const key = params[0] || 'current_config';
-            const value = params[1];
-            if (value) {
-                this.data.set(key, value);
-                this.save();
-                return { lastID: 0, changes: 1 };
-            }
-        }
-        return { lastID: 0, changes: 0 };
-    }
-}
 
 export async function getDb() {
     if (dbInstance) return dbInstance;
 
-    const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_ENV !== undefined;
-
-    // On Vercel, if we don't have a remote TURSO URL, we MUST use MockDB
-    // because native SQLite bindings often fail or are read-only.
-    const hasRemoteUrl = process.env.DATABASE_URL && !process.env.DATABASE_URL.startsWith('file:');
-
-    if (isVercel && !hasRemoteUrl) {
-        console.log('Vercel detected without remote DATABASE_URL, using MockDB (JSON fallback) for ephemeral storage.');
-        dbInstance = new MockDB();
-        return dbInstance;
-    }
-
     try {
-        const client = createClient({ url: dbUrl });
-        
-        // Test connection
-        await client.execute('SELECT 1');
-        
-        dbInstance = new LibSqlClientWrapper(client);
+        // Ensure directory exists for local dev
+        if (!isVercel) {
+            const dir = path.dirname(dbPath);
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, { recursive: true });
+            }
+        }
+
+        dbInstance = await open({
+            filename: dbPath,
+            driver: sqlite3.Database
+        });
+
+        console.log('SQLite database opened successfully.');
         return dbInstance;
     } catch (err) {
-        console.error('Failed to open native SQLite database:', err.message);
-        console.log('Falling back to MockDB with JSON persistence...');
-        dbInstance = new MockDB();
-        return dbInstance;
+        console.error('Failed to open SQLite database:', err.message);
+        throw err;
     }
 }

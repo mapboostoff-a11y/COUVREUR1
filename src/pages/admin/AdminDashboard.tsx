@@ -111,9 +111,8 @@ const PublishDialog = ({ config }: { config: any }) => {
     setWarningMessage('');
 
     try {
-      // 1. Sauvegarde en Base de Données (Mise à jour à chaud immédiate)
-      // C'est la source de vérité pour le site en direct.
-      const dbResponse = await fetch('/api/storage', {
+      // Un seul appel au serveur qui gère tout (DB + Fichier si nécessaire)
+      const response = await fetch('/api/publish', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -121,21 +120,9 @@ const PublishDialog = ({ config }: { config: any }) => {
         body: JSON.stringify(config),
       });
 
-      if (!dbResponse.ok) throw new Error('Erreur lors de la sauvegarde en base de données');
-
-      // 2. Sauvegarde sur Disque (Persistance du fichier source)
-      // Utile pour les redémarrages serveur ou backups, mais pas critique pour l'instant T.
-      try {
-        await fetch('/api/publish', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(config),
-        });
-      } catch (fileError) {
-        console.warn('Erreur non critique lors de la sauvegarde fichier:', fileError);
-        // On ne bloque pas le succès si la DB est OK
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Erreur lors de la publication');
       }
 
       setStatus('success');
