@@ -89,8 +89,11 @@ router.post('/publish', async (req, res) => {
             ON CONFLICT(key) DO UPDATE SET value = excluded.value
         `, 'current_config', JSON.stringify(config));
 
-        const configPath = path.resolve(process.cwd(), 'exempleenproduction.json');
-        fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+        const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_ENV !== undefined;
+        if (!isVercel) {
+            const configPath = path.resolve(process.cwd(), 'exempleenproduction.json');
+            fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+        }
 
         res.json({ success: true, message: 'Published successfully.' });
     } catch (err) {

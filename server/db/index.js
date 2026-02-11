@@ -2,10 +2,11 @@ import { createClient } from '@libsql/client';
 import path from 'path';
 import fs from 'fs';
 
-const dbPath = process.env.DATABASE_PATH || path.resolve(process.cwd(), 'site-data.db');
+const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_ENV !== undefined;
+const dbPath = process.env.DATABASE_PATH || (isVercel ? path.join('/tmp', 'site-data.db') : path.resolve(process.cwd(), 'site-data.db'));
 const dbUrl = `file:${dbPath.replace(/\\/g, '/')}`;
 
-console.log(`Initializing SQLite database at ${dbUrl}`);
+console.log(`Initializing SQLite database at ${dbUrl} (isVercel: ${isVercel})`);
 
 let dbInstance = null;
 
@@ -38,7 +39,7 @@ class LibSqlClientWrapper {
 // Mock DB with JSON persistence for environments where native bindings are missing
 class MockDB {
     constructor() {
-        this.fallbackFile = path.resolve(process.cwd(), 'site-config-fallback.json');
+        this.fallbackFile = isVercel ? path.join('/tmp', 'site-config-fallback.json') : path.resolve(process.cwd(), 'site-config-fallback.json');
         this.data = new Map();
         this.load();
         console.warn('⚠️ USING JSON FALLBACK DATABASE. ⚠️');
