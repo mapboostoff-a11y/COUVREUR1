@@ -155,6 +155,16 @@ export const VideoGalleryContentSchema = z.object({
   aspectRatio: z.enum(['video', 'square', 'portrait']).default('video'),
 });
 
+export const IframeContentSchema = z.object({
+  url: z.string(),
+  title: z.string().optional(),
+  width: z.string().default('100%'),
+  height: z.string().default('500px'),
+  maxWidth: z.string().default('1200px'),
+  border: z.boolean().default(false),
+  allowFullScreen: z.boolean().default(true),
+});
+
 // Discriminated Union for Sections
 export const SectionSchema = z.discriminatedUnion('type', [
   z.object({ id: z.string(), name: z.string().optional(), type: z.literal('header'), content: HeaderContentSchema, settings: SectionSettingsSchema }),
@@ -169,6 +179,7 @@ export const SectionSchema = z.discriminatedUnion('type', [
   z.object({ id: z.string(), name: z.string().optional(), type: z.literal('gallery'), content: GalleryContentSchema, settings: SectionSettingsSchema }),
   z.object({ id: z.string(), name: z.string().optional(), type: z.literal('video-gallery'), content: VideoGalleryContentSchema, settings: SectionSettingsSchema }),
   z.object({ id: z.string(), name: z.string().optional(), type: z.literal('map'), content: MapContentSchema, settings: SectionSettingsSchema }),
+  z.object({ id: z.string(), name: z.string().optional(), type: z.literal('iframe'), content: IframeContentSchema, settings: SectionSettingsSchema }),
 ]);
 
 // Global Theme Schema

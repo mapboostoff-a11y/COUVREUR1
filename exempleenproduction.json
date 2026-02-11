@@ -394,6 +394,30 @@
       }
     },
     {
+      "id": "1847643e-17e2-49c5-8ad2-395ecbee1bfd",
+      "name": "Embedded Content (Iframe)",
+      "type": "iframe",
+      "settings": {
+        "visible": true,
+        "paddingTop": "none",
+        "paddingBottom": "lg",
+        "backgroundColor": "white",
+        "container": true,
+        "animation": "slide-up",
+        "border": false,
+        "shadow": "none"
+      },
+      "content": {
+        "url": "https://docs.google.com/forms/d/e/1FAIpQLSfuTMKQZPQvlvRQKk-WR0dtGQ2cFj963HAVnXRC6XNBRVYjdw/viewform?usp=header",
+        "title": "Formulaire de contact",
+        "width": "100%",
+        "height": "600px",
+        "maxWidth": "600px",
+        "border": true,
+        "allowFullScreen": true
+      }
+    },
+    {
       "id": "footer",
       "type": "footer",
       "content": {

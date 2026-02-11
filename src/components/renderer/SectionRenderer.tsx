@@ -16,6 +16,7 @@ const Video = React.lazy(() => import('../sections/Video'));
 const Gallery = React.lazy(() => import('../sections/Gallery'));
 const MapSection = React.lazy(() => import('../sections/Map'));
 const VideoGallery = React.lazy(() => import('../sections/VideoGallery'));
+const Iframe = React.lazy(() => import('../sections/Iframe'));
 
 interface SectionRendererProps {
   section: Section;
@@ -62,6 +63,8 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({ section, isEdi
         return <MapSection content={section.content} isEditing={isEditing} onUpdate={handleContentUpdate} />;
       case 'video-gallery':
         return <VideoGallery content={section.content} isEditing={isEditing} onUpdate={handleContentUpdate} />;
+      case 'iframe':
+        return <Iframe content={section.content} isEditing={isEditing} onUpdate={handleContentUpdate} />;
       default:
         return <div>Unknown section type</div>;
     }

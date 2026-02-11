@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { SECTION_TEMPLATES } from '../../constants/templates';
 import { 
   Plus, LayoutTemplate, Type, MessageSquare, CreditCard, MousePointerClick, 
-  X, Search, Layout, List, Phone, Menu, Play, Image, MapPin, Film
+  X, Search, Layout, List, Phone, Menu, Play, Image, MapPin, Film, ExternalLink
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Input } from '../ui/input';
@@ -26,6 +26,7 @@ const CATEGORIES = [
   { id: 'gallery', label: 'Gallery', icon: Image },
   { id: 'map', label: 'Map', icon: MapPin },
   { id: 'video-gallery', label: 'Video Gallery', icon: Film },
+  { id: 'iframe', label: 'Iframe', icon: ExternalLink },
 ];
 
 const getIconForType = (type: string) => {
@@ -42,6 +43,7 @@ const getIconForType = (type: string) => {
     case 'gallery': return <Image size={24} />;
     case 'map': return <MapPin size={24} />;
     case 'video-gallery': return <Film size={24} />;
+    case 'iframe': return <ExternalLink size={24} />;
     default: return <Plus size={24} />;
   }
 };
@@ -80,7 +82,7 @@ export const SectionPicker: React.FC<SectionPickerProps> = ({ onSelect, onClose 
         <div className="flex flex-1 overflow-hidden">
           {/* Sidebar - Categories */}
           <div className="w-64 border-r border-border bg-muted/10 p-4 overflow-y-auto hidden md:block">
-            <div className="space-y-1">
+            <div className="space-y-1">d
               {CATEGORIES.map(category => (
                 <button
                   key={category.id}
