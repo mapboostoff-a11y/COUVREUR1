@@ -41,7 +41,7 @@ const DEFAULT_CONFIG = {
       "id": "header-1",
       "type": "header",
       "content": {
-        "title": "Couvreur Champigny",
+        "title": "Couvreur Champigndddy",
         "logoMode": "text",
         "sticky": true,
         "links": [
@@ -95,7 +95,7 @@ const DEFAULT_CONFIG = {
         "headline": "Votre Toiture à Champigny Protégée pour 30 Ans",
         "subheadline": "Ne laissez pas une petite fuite devenir un gros dégât. Découvrez notre méthode de rénovation durable et nos réalisations en vidéo.",
         "alignment": "center",
-        "videoUrl": "https://www.youtube.com/watch?v=LXb3EKWsInQ",
+        "videoUrl": "https://www.youtube.com/embed/JvHJJaMtGI0",
         "cta": [
           {
             "text": "Voir nos chantiers",
@@ -440,7 +440,7 @@ const DEFAULT_CONFIG = {
       }
     }
   ]
-};
+}
 
 // Configuration SQLite
 // Cela permet les mises à jour à chaud sans redéploiement.

@@ -1,5 +1,9 @@
 import fs from 'fs';
 import path from 'path';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+
+const execAsync = promisify(exec);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -20,17 +24,14 @@ export default async function handler(req, res) {
 
     let content = fs.readFileSync(storagePath, 'utf8');
 
-    // Strategy: Replace everything between "const DEFAULT_CONFIG =" and "// Configuration SQLite locale stricte"
-    // We assume the file structure is maintained.
+    // Strategy: Replace everything between "const DEFAULT_CONFIG =" and "// Configuration SQLite"
     const startMarker = 'const DEFAULT_CONFIG = {';
-    const endMarker = '// Configuration SQLite locale stricte';
+    const endMarker = '// Configuration SQLite';
     
     const startIndex = content.indexOf(startMarker);
     const endIndex = content.indexOf(endMarker);
     
     if (startIndex === -1 || endIndex === -1) {
-       // Fallback: Try to find just the variable definition if end marker is missing/changed
-       // But strictly, we expect the file I just wrote.
        console.error('Markers not found', { startIndex, endIndex });
        return res.status(500).json({ error: 'Could not parse api/storage.js structure. Markers missing.' });
     }
@@ -46,9 +47,28 @@ export default async function handler(req, res) {
     fs.writeFileSync(storagePath, newContent);
     console.log('api/storage.js updated successfully.');
     
-    const msg = 'Configuration saved to file (api/storage.js). You must commit and push manually to deploy.';
-
-    return res.status(200).json({ success: true, message: msg });
+    // Git Automation
+    try {
+      console.log('Executing git commands...');
+      await execAsync('git add api/storage.js');
+      await execAsync('git commit -m "Auto-update: Sync production config from Admin"');
+      await execAsync('git push');
+      console.log('Git push successful.');
+      
+      return res.status(200).json({ 
+        success: true, 
+        message: 'Configuration saved and pushed to repository. Deployment triggered.' 
+      });
+    } catch (gitError) {
+      console.error('Git Error:', gitError);
+      // Even if git fails, the file is saved, so it's a partial success or a warning.
+      // But we return 200 with a warning message to the frontend.
+      return res.status(200).json({ 
+        success: true, 
+        warning: 'File saved, but git auto-publish failed. Please push manually.',
+        details: gitError.message
+      });
+    }
 
   } catch (error) {
     console.error('Publish API Error:', error);
