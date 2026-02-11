@@ -42,13 +42,22 @@ const Contact: React.FC<ContactProps> = ({ content, isEditing, onUpdate }) => {
             </div>
             <div className="text-center w-full">
               <p className="text-sm font-medium text-muted-foreground mb-1">Email</p>
-              <InlineText
-                tagName="p"
-                className="text-foreground font-semibold break-all"
-                value={content.email}
-                isEditing={isEditing}
-                onUpdate={(val) => onUpdate && onUpdate({ email: val })}
-              />
+              {isEditing ? (
+                <InlineText
+                  tagName="p"
+                  className="text-foreground font-semibold break-all"
+                  value={content.email}
+                  isEditing={isEditing}
+                  onUpdate={(val) => onUpdate && onUpdate({ email: val })}
+                />
+              ) : (
+                <a 
+                  href={`mailto:${content.email}`}
+                  className="text-foreground font-semibold break-all hover:text-primary transition-colors"
+                >
+                  {content.email}
+                </a>
+              )}
             </div>
           </div>
         )}
@@ -60,13 +69,22 @@ const Contact: React.FC<ContactProps> = ({ content, isEditing, onUpdate }) => {
             </div>
             <div className="text-center w-full">
               <p className="text-sm font-medium text-muted-foreground mb-1">Téléphone</p>
-              <InlineText
-                tagName="p"
-                className="text-foreground font-semibold"
-                value={content.phone}
-                isEditing={isEditing}
-                onUpdate={(val) => onUpdate && onUpdate({ phone: val })}
-              />
+              {isEditing ? (
+                <InlineText
+                  tagName="p"
+                  className="text-foreground font-semibold"
+                  value={content.phone}
+                  isEditing={isEditing}
+                  onUpdate={(val) => onUpdate && onUpdate({ phone: val })}
+                />
+              ) : (
+                <a 
+                  href={`tel:${content.phone.replace(/\s/g, '')}`}
+                  className="text-foreground font-semibold hover:text-primary transition-colors"
+                >
+                  {content.phone}
+                </a>
+              )}
             </div>
           </div>
         )}

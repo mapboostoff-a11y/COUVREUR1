@@ -14,7 +14,7 @@ try {
     console.warn('Could not load exempleenproduction.json, using empty object', err);
 }
 
-export async function seed() {
+export async function seed(force = false) {
     try {
         const db = await getDb();
         
@@ -24,6 +24,16 @@ export async function seed() {
                 value TEXT
             )
         `);
+
+        if (force) {
+            console.log('Force seeding database with default config...');
+            await db.run(`
+                INSERT INTO site_config (key, value) 
+                VALUES (?, ?)
+                ON CONFLICT(key) DO UPDATE SET value = excluded.value
+            `, 'current_config', JSON.stringify(defaultConfig));
+            return;
+        }
 
         const row = await db.get('SELECT key FROM site_config WHERE key = ?', 'current_config');
 

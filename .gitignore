@@ -24,3 +24,6 @@ dist-ssr
 *.sln
 *.sw?
 local.db
+site-data.db
+*.db
+*.db-journal

@@ -3,7 +3,8 @@
     "title": "Couvreur Champigny-sur-Marne (94) | Urgence & Rénovation Toiture",
     "description": "Artisan couvreur local à Champigny (94). Dépannage fuite 7j/7, rénovation complète, zinguerie. Devis gratuit sous 48h. Garantie décennale + Qualibat RGE.",
     "favicon": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&w=32&h=32",
-    "ogImage": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80"
+    "ogImage": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
+    "canonical": "https://www.couvreur-champigny-sur-marne.org/"
   },
   "theme": {
     "colors": {
@@ -54,10 +55,10 @@
       "id": "hero-video",
       "type": "hero",
       "content": {
-        "headline": "Votre Toiture à Champigny Protégée pour 30 Ans",
-        "subheadline": "Ne laissez pas une petite fuite devenir un gros dégât. Découvrez notre méthode de rénovation durable et nos réalisations en vidéo.",
+        "headline": "Expert Couvreur à Champigny-sur-Marne",
+        "subheadline": "Artisan de confiance pour votre toiture dans le 94. Travail soigné et durable.",
         "alignment": "center",
-        "videoUrl": "https://www.youtube.com/watch?v=LXb3EKWsInQ",
+        "videoUrl": "https://www.youtube.com/embed/JvHJJaMtGI0",
         "cta": [
           { "text": "Voir nos chantiers", "url": "#realisations", "variant": "primary", "external": false },
           { "text": "Obtenir un devis gratuit", "url": "#contact", "variant": "outline", "external": false }
@@ -201,9 +202,18 @@
         "columns": 3,
         "aspectRatio": "square",
         "images": [
-          { "src": "https://images.unsplash.com/photo-1628131336496-52264663a8a9?auto=format&fit=crop&q=80", "alt": "Rénovation toiture tuiles" },
-          { "src": "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80", "alt": "Maison moderne toiture" },
-          { "src": "https://images.unsplash.com/photo-1623861214343-2287f3b879c7?auto=format&fit=crop&q=80", "alt": "Détail zinguerie" }
+          {
+            "src": "https://images.unsplash.com/photo-1635339001026-6114ad430721?auto=format&fit=crop&q=80",
+            "alt": "Rénovation toiture tuiles"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80",
+            "alt": "Maison moderne toiture"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1516594709413-e9395a4b73e3?auto=format&fit=crop&q=80",
+            "alt": "Détail zinguerie"
+          }
         ]
       },
       "settings": {
