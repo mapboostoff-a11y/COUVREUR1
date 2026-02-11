@@ -82,7 +82,7 @@ export const SectionPicker: React.FC<SectionPickerProps> = ({ onSelect, onClose 
         <div className="flex flex-1 overflow-hidden">
           {/* Sidebar - Categories */}
           <div className="w-64 border-r border-border bg-muted/10 p-4 overflow-y-auto hidden md:block">
-            <div className="space-y-1">d
+            <div className="space-y-1">
               {CATEGORIES.map(category => (
                 <button
                   key={category.id}

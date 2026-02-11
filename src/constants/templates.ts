@@ -4,20 +4,6 @@ type SectionTemplate = Omit<Section, 'id'> & { name: string; icon?: string };
 
 export const SECTION_TEMPLATES: SectionTemplate[] = [
   {
-    name: "Embedded Content (Iframe)",
-    type: 'iframe',
-    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' },
-    content: {
-      url: "https://www.wikipedia.org",
-      title: "Embedded Content",
-      width: "100%",
-      height: "600px",
-      maxWidth: "1200px",
-      border: true,
-      allowFullScreen: true
-    }
-  },
-  {
     name: "Header Navigation",
     type: 'header',
     settings: { visible: true, paddingTop: 'none', paddingBottom: 'none', backgroundColor: 'white', container: false, animation: 'none', border: false, shadow: 'sm' },
@@ -32,6 +18,20 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
         { text: "About", url: "#about", variant: "link", external: false }
       ],
       cta: { text: "Get Started", url: "#signup", variant: "primary", external: false }
+    }
+  },
+  {
+    name: "Iframe Embedded Content",
+    type: 'iframe',
+    settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' },
+    content: {
+      url: "https://www.wikipedia.org",
+      title: "Embedded Content",
+      width: "100%",
+      height: "600px",
+      maxWidth: "1200px",
+      border: true,
+      allowFullScreen: true
     }
   },
   {
