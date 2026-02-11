@@ -2,30 +2,23 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-// @ts-ignore
-import expressApp from './server/app.js';
-
-// Middleware to integrate Express with Vite
-const expressMiddleware = () => ({
-  name: 'express-middleware',
-  configureServer(server: any) {
-    // Mount Express app
-    // Note: Express handles its own routing, so we just pass requests to it.
-    // However, Vite handles /api requests if we mount it.
-    server.middlewares.use(expressApp);
-  },
-});
-
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
     react(),
     tailwindcss(),
-    expressMiddleware()
+    command === 'serve' ? {
+      name: 'express-middleware',
+      async configureServer(server: any) {
+        // @ts-ignore
+        const { default: expressApp } = await import('./server/app.js');
+        server.middlewares.use(expressApp);
+      },
+    } : []
   ],
   test: {
     globals: true,
     environment: 'jsdom',
     setupFiles: './vitest.setup.ts',
   },
-});
+}));

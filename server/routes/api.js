@@ -9,17 +9,6 @@ import { promisify } from 'util';
 const execAsync = promisify(exec);
 const router = express.Router();
 
-// Initialize DB and Seed
-(async () => {
-    try {
-        console.log('Starting DB seeding...');
-        await seed();
-        console.log('DB seeding completed.');
-    } catch (err) {
-        console.error('Fatal error during DB seeding:', err);
-    }
-})();
-
 router.get('/config', async (req, res) => {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
     res.setHeader('Pragma', 'no-cache');
