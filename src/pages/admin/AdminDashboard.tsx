@@ -111,7 +111,19 @@ const PublishDialog = ({ config }: { config: any }) => {
     setWarningMessage('');
 
     try {
-      const response = await fetch('/api/storage', {
+      // 1. Sauvegarde locale (SQLite) pour affichage immédiat
+      await fetch('/api/storage', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          config
+        }),
+      });
+
+      // 2. Sauvegarde fichier (Mise à jour du code source uniquement)
+      const response = await fetch('/api/publish', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -134,8 +146,8 @@ const PublishDialog = ({ config }: { config: any }) => {
       }
 
       const data = await response.json();
-      if (data.warning) {
-        setWarningMessage(data.warning);
+      if (data.message) {
+        setWarningMessage(data.message);
       }
 
       setStatus('success');
