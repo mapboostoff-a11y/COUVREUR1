@@ -1,5 +1,4 @@
-import sqlite3 from 'sqlite3';
-import { open } from 'sqlite';
+import { createClient } from '@libsql/client';
 import path from 'path';
 import fs from 'fs';
 
@@ -22,15 +21,42 @@ export async function getDb() {
             }
         }
 
-        dbInstance = await open({
-            filename: dbPath,
-            driver: sqlite3.Database
+        const client = createClient({
+            url: `file:${dbPath}`,
         });
 
-        console.log('SQLite database opened successfully.');
+        // Compatibility layer to match sqlite-like API used in the project
+        dbInstance = {
+            async exec(sql) {
+                return await client.execute(sql);
+            },
+            async run(sql, ...params) {
+                return await client.execute({
+                    sql,
+                    args: params
+                });
+            },
+            async get(sql, ...params) {
+                const rs = await client.execute({
+                    sql,
+                    args: params
+                });
+                return rs.rows[0];
+            },
+            async all(sql, ...params) {
+                const rs = await client.execute({
+                    sql,
+                    args: params
+                });
+                return rs.rows;
+            },
+            client // Expose raw client if needed
+        };
+
+        console.log('LibSQL (SQLite) database opened successfully.');
         return dbInstance;
     } catch (err) {
-        console.error('Failed to open SQLite database:', err.message);
+        console.error('Failed to open LibSQL database:', err.message);
         throw err;
     }
 }
