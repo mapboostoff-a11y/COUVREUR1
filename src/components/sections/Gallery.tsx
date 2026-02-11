@@ -119,6 +119,7 @@ const Gallery: React.FC<GalleryProps> = ({ content, isEditing, onUpdate }) => {
                     onChange={(e) => onUpdate?.({ aspectRatio: e.target.value as any })}
                     className="p-1 rounded border border-input text-sm"
                   >
+                      <option value="none">Original (No Crop)</option>
                       <option value="square">Square</option>
                       <option value="video">Video (16:9)</option>
                       <option value="portrait">Portrait (3:4)</option>
@@ -145,7 +146,10 @@ const Gallery: React.FC<GalleryProps> = ({ content, isEditing, onUpdate }) => {
                 alt={image.alt}
                 isEditing={isEditing}
                 onUpdate={(src) => handleImageUpdate(idx, src)}
-                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 cursor-pointer"
+                className={cn(
+                  "w-full h-full transition-transform duration-300 hover:scale-105 cursor-pointer",
+                  content.aspectRatio === 'none' ? "object-contain" : "object-cover"
+                )}
              />
              
              {isEditing && (
