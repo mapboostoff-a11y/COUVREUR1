@@ -441,12 +441,13 @@ const DEFAULT_CONFIG = {
     }
   ]
 };
+  ]
+};
 
 // Configuration SQLite
-// En développement ET production (VPS/Node) : on utilise un fichier local persistant.
 // Cela permet les mises à jour à chaud sans redéploiement.
 // Le fichier sera créé à la racine du projet ou dans le dossier courant.
-const dbFile = 'site-data.db';
+const dbFile = path.resolve(process.cwd(), 'site-data.db');
 const dbPath = `file:${dbFile}`;
 
 console.log(`Using SQLite database at: ${dbPath}`);
