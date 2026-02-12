@@ -83,3 +83,45 @@ export async function getCroppedImg(
   // As Base64 string with compression
   return canvas.toDataURL('image/jpeg', 0.8)
 }
+
+/**
+ * Compresses a base64 image string by resizing it and reducing quality.
+ */
+export async function compressImage(
+  base64Str: string,
+  maxWidth = 1600,
+  maxHeight = 1600,
+  quality = 0.7
+): Promise<string> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.src = base64Str;
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      let width = img.width;
+      let height = img.height;
+
+      if (width > maxWidth || height > maxHeight) {
+        if (width > height) {
+          height = (maxWidth / width) * height;
+          width = maxWidth;
+        } else {
+          width = (maxHeight / height) * width;
+          height = maxHeight;
+        }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        resolve(base64Str);
+        return;
+      }
+
+      ctx.drawImage(img, 0, 0, width, height);
+      resolve(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.onerror = () => resolve(base64Str);
+  });
+}

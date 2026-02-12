@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Cropper from 'react-easy-crop';
-import { getCroppedImg } from '../../lib/image-utils';
+import { getCroppedImg, compressImage } from '../../lib/image-utils';
 import { cn } from '../../lib/utils';
 import { Image as ImageIcon, Upload, X, Check, Crop as CropIcon, RotateCcw } from 'lucide-react';
 
@@ -32,8 +32,10 @@ export const EditableImage: React.FC<EditableImageProps> = ({
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewSrc(reader.result as string);
+      reader.onloadend = async () => {
+        const base64 = reader.result as string;
+        const compressed = await compressImage(base64);
+        setPreviewSrc(compressed);
         setIsCropping(true); // Automatically start cropping for new images
       };
       reader.readAsDataURL(file);
@@ -51,6 +53,7 @@ export const EditableImage: React.FC<EditableImageProps> = ({
           previewSrc,
           croppedAreaPixels
         );
+        // getCroppedImg already compresses to 0.8, but we can double check
         setPreviewSrc(croppedImage);
         setIsCropping(false);
       } catch (e) {
@@ -59,9 +62,13 @@ export const EditableImage: React.FC<EditableImageProps> = ({
     }
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (onUpdate && previewSrc) {
-      onUpdate(previewSrc);
+      // Ensure the image is compressed before sending to store
+      const finalSrc = previewSrc.startsWith('data:image') 
+        ? await compressImage(previewSrc)
+        : previewSrc;
+      onUpdate(finalSrc);
     }
     setShowModal(false);
   };

@@ -37,7 +37,8 @@ app.use(helmet({
 app.use(cors());
 
 // Body parser
-app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // Routes
 app.use('/api', apiRoutes);
@@ -57,9 +58,14 @@ if (fs.existsSync(distPath)) {
         try {
             let html = fs.readFileSync(path.join(distPath, 'index.html'), 'utf8');
             
+            // Récupérer le domaine pour la clé de config
+            const host = req.get('host') || 'default';
+            const domain = host.split(':')[0];
+            const configKey = `config:${domain}`;
+
             // Récupérer la config actuelle depuis la DB
             const db = await getDb();
-            const row = await db.get('SELECT value FROM site_config WHERE key = ?', 'current_config');
+            const row = await db.get('SELECT value FROM site_config WHERE key = ?', configKey);
             
             if (row && row.value) {
                 const config = JSON.parse(row.value);
