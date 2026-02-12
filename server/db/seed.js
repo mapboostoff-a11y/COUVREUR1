@@ -14,9 +14,10 @@ try {
     console.warn('Could not load exempleenproduction.json, using empty object', err);
 }
 
-export async function seed(force = false) {
+export async function seed(domain = 'default', force = false) {
     try {
         const db = await getDb();
+        const configKey = `config:${domain}`;
         
         await db.exec(`
             CREATE TABLE IF NOT EXISTS site_config (
@@ -26,25 +27,25 @@ export async function seed(force = false) {
         `);
 
         if (force) {
-            console.log('Force seeding database with default config...');
+            console.log(`Force seeding database for domain: ${domain}...`);
             await db.run(`
                 INSERT INTO site_config (key, value) 
                 VALUES (?, ?)
                 ON CONFLICT(key) DO UPDATE SET value = excluded.value
-            `, 'current_config', JSON.stringify(defaultConfig));
+            `, configKey, JSON.stringify(defaultConfig));
             return;
         }
 
-        const row = await db.get('SELECT key FROM site_config WHERE key = ?', 'current_config');
+        const row = await db.get('SELECT key FROM site_config WHERE key = ?', configKey);
 
         if (!row) {
-            console.log('Seeding database with default config...');
-            await db.run('INSERT INTO site_config (key, value) VALUES (?, ?)', 'current_config', JSON.stringify(defaultConfig));
+            console.log(`Seeding database for domain: ${domain}...`);
+            await db.run('INSERT INTO site_config (key, value) VALUES (?, ?)', configKey, JSON.stringify(defaultConfig));
         } else {
-            console.log('Database already seeded.');
+            console.log(`Database already seeded for domain: ${domain}.`);
         }
     } catch (err) {
-        console.error('Seeding failed:', err);
+        console.error(`Seeding failed for domain ${domain}:`, err);
     }
 }
 
