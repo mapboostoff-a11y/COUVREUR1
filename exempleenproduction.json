@@ -1,20 +1,20 @@
 {
   "meta": {
-    "title": "Artuiles & toits - Couvreur Arles (13200) | Spécialiste Toitures Provençales",
-    "description": "Artuiles & toits : Votre artisan de confiance pour la rénovation de tuiles canal et la zinguerie à Arles. Intervention rapide Mistral, étanchéité garantie et devis gratuit.",
-    "favicon": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&w=32&h=32",
-    "ogImage": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
-    "canonicalUrl": "https://couvreur-arles-01.vercel.app/",
+    "title": "Art & Couleurs - Peintre Arles (13200) | Rénovation & Décoration",
+    "description": "Art & Couleurs : Votre artisan peintre de confiance à Arles. Peinture intérieure, ravalement de façade et décoration. Travail soigné, produits éco-responsables et devis gratuit.",
+    "favicon": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=32&h=32",
+    "ogImage": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&q=80",
+    "canonicalUrl": "https://peintre-arles-01.vercel.app/",
     "robots": "index, follow",
-    "businessType": "RoofingContractor",
-    "businessName": "Artuiles & toits"
+    "businessType": "HousePainter",
+    "businessName": "Art & Couleurs"
   },
   "theme": {
     "colors": {
-      "primary": "#b45309",
-      "secondary": "#1e3a8a",
+      "primary": "#0891b2",
+      "secondary": "#334155",
       "background": "#ffffff",
-      "text": "#111827"
+      "text": "#0f172a"
     },
     "fonts": {
       "heading": "Inter",
@@ -24,7 +24,7 @@
   "whatsapp": {
     "enabled": true,
     "number": "33465080441",
-    "message": "Bonjour, je souhaite un devis pour ma toiture à Arles.",
+    "message": "Bonjour, je souhaite un devis pour des travaux de peinture à Arles.",
     "position": "bottom-right"
   },
   "sections": [
@@ -32,7 +32,7 @@
       "id": "header-1",
       "type": "header",
       "content": {
-        "title": "Artuiles & toits",
+        "title": "Art & Couleurs",
         "logoMode": "text",
         "sticky": true,
         "links": [
@@ -42,23 +42,23 @@
             "variant": "link"
           },
           {
-            "text": "Vidéos Chantiers",
+            "text": "Vidéos Projets",
             "url": "#videos",
             "variant": "link"
           },
           {
-            "text": "Conseils (Blog)",
+            "text": "Conseils Déco",
             "url": "#blog-video",
             "variant": "link"
           },
           {
-            "text": "Réalisations",
+            "text": "Galerie",
             "url": "#realisations",
             "variant": "link"
           }
         ],
         "cta": {
-          "text": "Appel d'Urgence",
+          "text": "Devis Gratuit",
           "url": "tel:+33465080441",
           "variant": "primary"
         }
@@ -74,24 +74,24 @@
       "id": "hero-unique",
       "type": "hero",
       "content": {
-        "headline": "Une Toiture Saine face au Mistral",
-        "subheadline": "Experts en rénovation de tuiles anciennes et étanchéité moderne à Arles. Nous protégeons votre habitat avec la rigueur d'un artisan passionné.",
+        "headline": "Sublimez votre Intérieur avec Art & Couleurs",
+        "subheadline": "Artisan peintre expert en rénovation et décoration à Arles. Nous transformons vos espaces avec des finitions impeccables et des couleurs qui vous ressemblent.",
         "alignment": "left",
         "cta": [
           {
-            "text": "Expertise Gratuite",
+            "text": "Demander un Devis",
             "url": "#contact",
             "variant": "primary"
           },
           {
-            "text": "Voir nos Projets",
+            "text": "Voir nos Réalisations",
             "url": "#realisations",
             "variant": "outline"
           }
         ],
         "image": {
-          "src": "https://images.unsplash.com/photo-1635339001026-6114ad430721?auto=format&fit=crop&q=80",
-          "alt": "Artisan couvreur travaillant sur une toiture à Arles"
+          "src": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80",
+          "alt": "Artisan peintre appliquant de la peinture sur un mur intérieur"
         }
       },
       "settings": {
@@ -111,24 +111,24 @@
         "columns": 4,
         "features": [
           {
-            "title": "Garantie Décennale",
-            "description": "Sérénité totale pendant 10 ans",
-            "icon": "ShieldCheck"
+            "title": "Peinture Éco-label",
+            "description": "Produits sains sans odeur (A+)",
+            "icon": "Leaf"
           },
           {
-            "title": "Local & Réactif",
-            "description": "Basé au cœur d'Arles (13200)",
-            "icon": "MapPin"
+            "title": "Chantier Propre",
+            "description": "Protection totale et nettoyage",
+            "icon": "Sparkles"
           },
           {
-            "title": "Astreinte 7j/7",
-            "description": "Intervention fuite immédiate",
-            "icon": "Clock"
+            "title": "Finitions de Luxe",
+            "description": "Rigueur et précision absolue",
+            "icon": "CheckCircle"
           },
           {
-            "title": "Zéro Surprise",
-            "description": "Devis fixe et détaillé sous 48h",
-            "icon": "Zap"
+            "title": "Conseils Couleurs",
+            "description": "Accompagnement déco personnalisé",
+            "icon": "Palette"
           }
         ]
       },
@@ -144,19 +144,19 @@
       "id": "videos",
       "type": "video-gallery",
       "content": {
-        "title": "Nos Chantiers en Action",
+        "title": "Nos Chantiers en Vidéo",
         "videos": [
           {
             "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "title": "Remplacement de tuiles canal"
+            "title": "Rénovation d'un salon complet"
           },
           {
             "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "title": "Nettoyage et Hydrofuge"
+            "title": "Application peinture Airless (Grandes surfaces)"
           },
           {
             "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "title": "Pose de Zinguerie"
+            "title": "Pose de papier peint panoramique"
           }
         ],
         "columns": 3,
@@ -175,39 +175,39 @@
       "id": "services",
       "type": "features",
       "content": {
-        "title": "Notre Savoir-Faire Artisanal",
-        "subtitle": "De la toiture historique aux solutions d'isolation modernes.",
+        "title": "Nos Prestations de Peinture",
+        "subtitle": "Un savoir-faire complet pour l'embellissement de votre habitat.",
         "columns": 3,
         "features": [
           {
-            "title": "Toitures Anciennes",
-            "description": "Restauration de tuiles canal et romanes dans le respect du patrimoine arlésien.",
+            "title": "Peinture Intérieure",
+            "description": "Murs, plafonds et boiseries avec des finitions mat, velours ou satin.",
+            "icon": "Paintbrush"
+          },
+          {
+            "title": "Ravalement de Façade",
+            "description": "Nettoyage, réparation et mise en peinture pour protéger vos murs extérieurs.",
             "icon": "Home"
           },
           {
-            "title": "Zinguerie de Précision",
-            "description": "Chéneaux, gouttières et abergements de cheminée pour une évacuation parfaite.",
-            "icon": "Wrench"
+            "title": "Enduits Décoratifs",
+            "description": "Béton ciré, stuc et enduits à la chaux pour un style unique.",
+            "icon": "Layers"
           },
           {
-            "title": "Étanchéité & Urgence",
-            "description": "Bâchage d'urgence et recherche de fuites pour stopper tout sinistre.",
-            "icon": "Droplets"
+            "title": "Revêtements de Murs",
+            "description": "Pose de papier peint, toile de verre et revêtements acoustiques.",
+            "icon": "Image"
           },
           {
-            "title": "Isolation Thermique",
-            "description": "Réduisez vos factures en isolant vos combles par soufflage ou panneaux.",
-            "icon": "Thermometer"
+            "title": "Peinture Boiseries",
+            "description": "Rénovation de volets, portes, fenêtres et escaliers en bois.",
+            "icon": "Wind"
           },
           {
-            "title": "Traitement de Toit",
-            "description": "Démoussage curatif et protection hydrofuge pour prolonger la vie de vos tuiles.",
-            "icon": "Sparkles"
-          },
-          {
-            "title": "Fenêtres de Toit",
-            "description": "Pose certifiée de Velux pour transformer vos combles en pièces de vie.",
-            "icon": "Sun"
+            "title": "Relooking Cuisine",
+            "description": "Peinture spécifique sur meubles et crédences pour une cuisine neuve.",
+            "icon": "Coffee"
           }
         ]
       },
@@ -223,21 +223,21 @@
       "id": "realisations",
       "type": "gallery",
       "content": {
-        "title": "Quelques Réalisations Récentes",
+        "title": "Nos Dernières Réalisations",
         "columns": 3,
         "aspectRatio": "square",
         "images": [
           {
-            "src": "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80",
-            "alt": "Rénovation de toiture à Arles"
+            "src": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&q=80",
+            "alt": "Salon moderne fraîchement peint en gris perle"
           },
           {
-            "src": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
-            "alt": "Chantier d'isolation"
+            "src": "https://images.unsplash.com/photo-1595844730298-b960ff98fee0?auto=format&fit=crop&q=80",
+            "alt": "Chambre d'enfant avec mur de couleur pastel"
           },
           {
-            "src": "https://images.unsplash.com/photo-1516594709413-e9395a4b73e3?auto=format&fit=crop&q=80",
-            "alt": "Détail zinguerie zinc"
+            "src": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80",
+            "alt": "Détail d'une finition peinture sur boiserie"
           }
         ]
       },
@@ -253,19 +253,19 @@
       "id": "blog-video",
       "type": "video-gallery",
       "content": {
-        "title": "Blog Vidéo : Nos Conseils Experts",
+        "title": "Blog Vidéo : Conseils de Pro",
         "videos": [
           {
             "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "title": "Comment détecter une fuite de toit ?"
+            "title": "Comment choisir sa finition (Mat vs Satin) ?"
           },
           {
             "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "title": "Choisir ses tuiles pour le Mistral"
+            "title": "3 astuces pour agrandir une pièce avec la couleur"
           },
           {
             "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "title": "L'importance du démoussage régulier"
+            "title": "Pourquoi préparer ses murs est crucial ?"
           }
         ],
         "columns": 3,
@@ -284,31 +284,31 @@
       "id": "avis",
       "type": "testimonials",
       "content": {
-        "title": "Ce que disent nos Clients",
+        "title": "Avis de nos Clients",
         "testimonials": [
           {
-            "name": "Jean-Marc T.",
-            "role": "Propriétaire à Trinquetaille",
-            "content": "Artisan sérieux qui connaît les contraintes de nos toitures anciennes. Chantier propre et rapide.",
+            "name": "Marc L.",
+            "role": "Maison à Pont-de-Crau",
+            "content": "Un travail d'une propreté exemplaire. Les découpes sont parfaites et les conseils couleurs très avisés.",
             "rating": 5
           },
           {
-            "name": "Sophie B.",
-            "role": "Habitante Centre-Ville",
-            "content": "Intervention d'urgence après un gros Mistral. Très efficace et rassurant.",
+            "name": "Julie D.",
+            "role": "Appartement Centre Arles",
+            "content": "Rénovation complète de mon séjour. Équipe discrète, rapide et résultat magnifique. Je recommande !",
             "rating": 5
           },
           {
-            "name": "Luc P.",
-            "role": "Maison de campagne",
-            "content": "Isolation parfaite des combles. On sent déjà la différence de température. Merci !",
+            "name": "Pierre G.",
+            "role": "Local Commercial",
+            "content": "Peinture Airless effectuée dans nos bureaux. Rapidité incroyable et rendu très uniforme. Merci.",
             "rating": 5
           }
         ]
       },
       "settings": {
         "visible": true,
-        "backgroundColor": "gray",
+        "backgroundColor": "white",
         "paddingTop": "lg",
         "paddingBottom": "lg",
         "container": true
@@ -318,29 +318,29 @@
       "id": "process-alt",
       "type": "features",
       "content": {
-        "title": "Votre Projet en 4 Pas",
-        "subtitle": "La clarté d'un processus maîtrisé pour vos travaux.",
+        "title": "Votre Chantier en 4 Étapes",
+        "subtitle": "Une organisation rigoureuse pour une satisfaction garantie.",
         "columns": 4,
         "features": [
           {
-            "title": "Diagnostic",
-            "description": "Inspection complète de l'état de votre couverture.",
-            "icon": "Search"
+            "title": "Estimation",
+            "description": "Visite technique et devis gratuit détaillé.",
+            "icon": "ClipboardList"
           },
           {
-            "title": "Conseil",
-            "description": "Choix des matériaux et devis précis gratuit.",
-            "icon": "Calendar"
+            "title": "Préparation",
+            "description": "Protection des sols et préparation des supports.",
+            "icon": "Shield"
           },
           {
-            "title": "Travaux",
-            "description": "Mise en œuvre sécurisée par nos artisans.",
-            "icon": "Hammer"
+            "title": "Mise en Peinture",
+            "description": "Application soignée des produits sélectionnés.",
+            "icon": "Paintbrush"
           },
           {
-            "title": "Suivi",
-            "description": "Réception de chantier et remise des garanties.",
-            "icon": "CheckCircle"
+            "title": "Finitions",
+            "description": "Contrôle qualité et nettoyage de fin de chantier.",
+            "icon": "Award"
           }
         ]
       },
@@ -356,9 +356,9 @@
       "id": "map",
       "type": "map",
       "content": {
-        "title": "Zone d'Intervention Arlésienne",
+        "title": "Nous intervenons dans tout le Pays d'Arles",
         "address": "29, rue des Arènes, 13200 Arles, France",
-        "zoom": 15,
+        "zoom": 13,
         "height": "400px"
       },
       "settings": {
@@ -372,9 +372,9 @@
       "id": "contact",
       "type": "contact",
       "content": {
-        "title": "Parlons de votre Toiture",
-        "subtitle": "Besoin d'un conseil ou d'une urgence ? Nous vous répondons avec réactivité.",
-        "email": "contact@artuiles-toits.fr",
+        "title": "Lancez votre Projet Peinture",
+        "subtitle": "Une question ? Un projet de rénovation ? Contactez-nous pour une étude personnalisée.",
+        "email": "contact@art-couleurs.fr",
         "phone": "04 65 08 04 41",
         "address": "29, rue des Arènes, 13200 Arles",
         "hours": "Lun - Ven : 8h00 - 18h30 | Sam : 9h00 - 12h00"
@@ -391,7 +391,7 @@
       "id": "footer",
       "type": "footer",
       "content": {
-        "copyright": "© 2024 Artuiles & toits. Artisan couvreur zingueur à Arles.",
+        "copyright": "© 2024 Art & Couleurs. Artisan peintre décorateur à Arles.",
         "socials": [
           {
             "platform": "facebook",
@@ -405,7 +405,7 @@
           }
         ],
         "ctaButton": {
-          "text": "Demander un Devis",
+          "text": "Obtenir un Devis",
           "url": "tel:+33465080441",
           "variant": "primary"
         }
