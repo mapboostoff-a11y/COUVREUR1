@@ -1,10 +1,10 @@
 {
   "meta": {
-    "title": "Artuiles & toits - Couvreur Arles (13200) | Excellence en Toiture Provençale",
-    "description": "Artuiles & toits : Artisan couvreur spécialisé en toitures anciennes et modernes à Arles. Rénovation, zinguerie, étanchéité et dépannage urgent 7j/7. Devis gratuit sous 48h.",
+    "title": "Artuiles & toits - Couvreur Arles (13200) | Spécialiste Toitures Provençales",
+    "description": "Artuiles & toits : Votre artisan de confiance pour la rénovation de tuiles canal et la zinguerie à Arles. Intervention rapide Mistral, étanchéité garantie et devis gratuit.",
     "favicon": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&w=32&h=32",
     "ogImage": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
-    "canonicalUrl": "https://www.artuiles-toits.fr/",
+    "canonicalUrl": "https://couvreur-arles-01.vercel.app/",
     "robots": "index, follow",
     "businessType": "RoofingContractor",
     "businessName": "Artuiles & toits"
@@ -24,7 +24,7 @@
   "whatsapp": {
     "enabled": true,
     "number": "33465080441",
-    "message": "Bonjour Artuiles & toits, j'aimerais obtenir un devis pour ma toiture à Arles.",
+    "message": "Bonjour, je souhaite un devis pour ma toiture à Arles.",
     "position": "bottom-right"
   },
   "sections": [
@@ -37,28 +37,28 @@
         "sticky": true,
         "links": [
           {
-            "text": "Nos Projets",
-            "url": "#realisations",
-            "variant": "link"
-          },
-          {
-            "text": "Expertise",
+            "text": "Nos Services",
             "url": "#services",
             "variant": "link"
           },
           {
-            "text": "Témoignages",
-            "url": "#avis",
+            "text": "Vidéos Chantiers",
+            "url": "#videos",
             "variant": "link"
           },
           {
-            "text": "Contact",
-            "url": "#contact",
+            "text": "Conseils (Blog)",
+            "url": "#blog-video",
+            "variant": "link"
+          },
+          {
+            "text": "Réalisations",
+            "url": "#realisations",
             "variant": "link"
           }
         ],
         "cta": {
-          "text": "04 65 08 04 41",
+          "text": "Appel d'Urgence",
           "url": "tel:+33465080441",
           "variant": "primary"
         }
@@ -74,24 +74,24 @@
       "id": "hero-unique",
       "type": "hero",
       "content": {
-        "headline": "L'Art de la Toiture au Cœur d'Arles",
-        "subheadline": "Spécialiste de la restauration de toitures anciennes et de l'étanchéité moderne. Artuiles & toits protège votre patrimoine avec passion et rigueur.",
+        "headline": "Une Toiture Saine face au Mistral",
+        "subheadline": "Experts en rénovation de tuiles anciennes et étanchéité moderne à Arles. Nous protégeons votre habitat avec la rigueur d'un artisan passionné.",
         "alignment": "left",
         "cta": [
           {
-            "text": "Demander une expertise gratuite",
+            "text": "Expertise Gratuite",
             "url": "#contact",
             "variant": "primary"
           },
           {
-            "text": "Voir nos chantiers",
+            "text": "Voir nos Projets",
             "url": "#realisations",
             "variant": "outline"
           }
         ],
         "image": {
           "src": "https://images.unsplash.com/photo-1635339001026-6114ad430721?auto=format&fit=crop&q=80",
-          "alt": "Restauration de toiture ancienne à Arles par Artuiles & toits"
+          "alt": "Artisan couvreur travaillant sur une toiture à Arles"
         }
       },
       "settings": {
@@ -112,22 +112,22 @@
         "features": [
           {
             "title": "Garantie Décennale",
-            "description": "Protection 10 ans certifiée",
+            "description": "Sérénité totale pendant 10 ans",
             "icon": "ShieldCheck"
           },
           {
-            "title": "Artisan Local",
-            "description": "Basé à Arles (13200)",
+            "title": "Local & Réactif",
+            "description": "Basé au cœur d'Arles (13200)",
             "icon": "MapPin"
           },
           {
-            "title": "Intervention 7j/7",
-            "description": "Urgences fuites 24h/24",
+            "title": "Astreinte 7j/7",
+            "description": "Intervention fuite immédiate",
             "icon": "Clock"
           },
           {
-            "title": "Devis 48h",
-            "description": "Réponse rapide et gratuite",
+            "title": "Zéro Surprise",
+            "description": "Devis fixe et détaillé sous 48h",
             "icon": "Zap"
           }
         ]
@@ -141,71 +141,72 @@
       }
     },
     {
-      "id": "realisations",
-      "type": "gallery",
+      "id": "videos",
+      "type": "video-gallery",
       "content": {
-        "title": "Dernières Réalisations en Pays d'Arles",
-        "columns": 3,
-        "aspectRatio": "video",
-        "images": [
+        "title": "Nos Chantiers en Action",
+        "videos": [
           {
-            "src": "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80",
-            "alt": "Toiture en tuiles canal rénovée à Arles"
+            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "title": "Remplacement de tuiles canal"
           },
           {
-            "src": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
-            "alt": "Isolation de toiture moderne"
+            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "title": "Nettoyage et Hydrofuge"
           },
           {
-            "src": "https://images.unsplash.com/photo-1516594709413-e9395a4b73e3?auto=format&fit=crop&q=80",
-            "alt": "Zinguerie sur mesure sur maison de ville"
+            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "title": "Pose de Zinguerie"
           }
-        ]
+        ],
+        "columns": 3,
+        "aspectRatio": "video"
       },
       "settings": {
         "visible": true,
         "backgroundColor": "white",
         "paddingTop": "lg",
         "paddingBottom": "lg",
-        "container": true
+        "container": true,
+        "animation": "slide-up"
       }
     },
     {
       "id": "services",
       "type": "features",
       "content": {
-        "title": "Notre Expertise de Couvreur-Zingueur",
-        "subtitle": "Un savoir-faire traditionnel allié aux techniques d'étanchéité les plus performantes.",
+        "title": "Notre Savoir-Faire Artisanal",
+        "subtitle": "De la toiture historique aux solutions d'isolation modernes.",
         "columns": 3,
         "features": [
           {
-            "title": "Toiture & Charpente",
-            "description": "Rénovation complète de toitures en tuiles romanes, canal ou ardoises. Renforcement de charpente.",
+            "title": "Toitures Anciennes",
+            "description": "Restauration de tuiles canal et romanes dans le respect du patrimoine arlésien.",
             "icon": "Home"
           },
           {
-            "title": "Zinguerie Provençale",
-            "description": "Façonnage de chéneaux, gouttières et abergements de cheminée en zinc ou cuivre.",
+            "title": "Zinguerie de Précision",
+            "description": "Chéneaux, gouttières et abergements de cheminée pour une évacuation parfaite.",
             "icon": "Wrench"
           },
           {
-            "title": "Étanchéité & Recherche de Fuite",
-            "description": "Détection par fumigène et réparation immédiate pour protéger votre intérieur.",
+            "title": "Étanchéité & Urgence",
+            "description": "Bâchage d'urgence et recherche de fuites pour stopper tout sinistre.",
             "icon": "Droplets"
           },
           {
             "title": "Isolation Thermique",
-            "description": "Isolation par l'extérieur (Sarking) ou sous rampants pour un confort été comme hiver.",
+            "description": "Réduisez vos factures en isolant vos combles par soufflage ou panneaux.",
             "icon": "Thermometer"
           },
           {
-            "title": "Nettoyage & Hydrofuge",
-            "description": "Nettoyage basse pression et application de traitement minéralisant pour tuiles.",
+            "title": "Traitement de Toit",
+            "description": "Démoussage curatif et protection hydrofuge pour prolonger la vie de vos tuiles.",
             "icon": "Sparkles"
           },
           {
-            "title": "Pose de Velux",
-            "description": "Installation de fenêtres de toit pour transformer vos combles en espaces de vie.",
+            "title": "Fenêtres de Toit",
+            "description": "Pose certifiée de Velux pour transformer vos combles en pièces de vie.",
             "icon": "Sun"
           }
         ]
@@ -219,28 +220,24 @@
       }
     },
     {
-      "id": "avis",
-      "type": "testimonials",
+      "id": "realisations",
+      "type": "gallery",
       "content": {
-        "title": "Ils nous font confiance à Arles",
-        "testimonials": [
+        "title": "Quelques Réalisations Récentes",
+        "columns": 3,
+        "aspectRatio": "square",
+        "images": [
           {
-            "name": "Jean-Marc T.",
-            "role": "Quartier de la Roquette",
-            "content": "Un artisan qui connaît son métier. La rénovation de ma toiture ancienne a été faite dans les règles de l'art. Chantier propre et délais respectés.",
-            "rating": 5
+            "src": "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80",
+            "alt": "Rénovation de toiture à Arles"
           },
           {
-            "name": "Sophie B.",
-            "role": "Proche des Arènes",
-            "content": "Intervention d'urgence un dimanche pour une fuite. Très réactif, professionnel et honnête sur les tarifs. Je recommande sans hésiter.",
-            "rating": 5
+            "src": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
+            "alt": "Chantier d'isolation"
           },
           {
-            "name": "Luc P.",
-            "role": "Propriétaire à Arles",
-            "content": "Artuiles & toits a réalisé l'isolation de mes combles. La différence de température est flagrante cet été. Travail sérieux.",
-            "rating": 5
+            "src": "https://images.unsplash.com/photo-1516594709413-e9395a4b73e3?auto=format&fit=crop&q=80",
+            "alt": "Détail zinguerie zinc"
           }
         ]
       },
@@ -253,31 +250,96 @@
       }
     },
     {
+      "id": "blog-video",
+      "type": "video-gallery",
+      "content": {
+        "title": "Blog Vidéo : Nos Conseils Experts",
+        "videos": [
+          {
+            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "title": "Comment détecter une fuite de toit ?"
+          },
+          {
+            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "title": "Choisir ses tuiles pour le Mistral"
+          },
+          {
+            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "title": "L'importance du démoussage régulier"
+          }
+        ],
+        "columns": 3,
+        "aspectRatio": "video"
+      },
+      "settings": {
+        "visible": true,
+        "backgroundColor": "gray",
+        "paddingTop": "lg",
+        "paddingBottom": "lg",
+        "container": true,
+        "animation": "fade-in"
+      }
+    },
+    {
+      "id": "avis",
+      "type": "testimonials",
+      "content": {
+        "title": "Ce que disent nos Clients",
+        "testimonials": [
+          {
+            "name": "Jean-Marc T.",
+            "role": "Propriétaire à Trinquetaille",
+            "content": "Artisan sérieux qui connaît les contraintes de nos toitures anciennes. Chantier propre et rapide.",
+            "rating": 5
+          },
+          {
+            "name": "Sophie B.",
+            "role": "Habitante Centre-Ville",
+            "content": "Intervention d'urgence après un gros Mistral. Très efficace et rassurant.",
+            "rating": 5
+          },
+          {
+            "name": "Luc P.",
+            "role": "Maison de campagne",
+            "content": "Isolation parfaite des combles. On sent déjà la différence de température. Merci !",
+            "rating": 5
+          }
+        ]
+      },
+      "settings": {
+        "visible": true,
+        "backgroundColor": "gray",
+        "paddingTop": "lg",
+        "paddingBottom": "lg",
+        "container": true
+      }
+    },
+    {
       "id": "process-alt",
       "type": "features",
       "content": {
-        "title": "Votre projet en 4 étapes",
-        "subtitle": "Un accompagnement serein pour vos travaux de toiture",
+        "title": "Votre Projet en 4 Pas",
+        "subtitle": "La clarté d'un processus maîtrisé pour vos travaux.",
         "columns": 4,
         "features": [
           {
             "title": "Diagnostic",
-            "description": "Analyse gratuite de l'état de votre toit.",
+            "description": "Inspection complète de l'état de votre couverture.",
             "icon": "Search"
           },
           {
-            "title": "Planification",
-            "description": "Devis précis et calendrier de chantier.",
+            "title": "Conseil",
+            "description": "Choix des matériaux et devis précis gratuit.",
             "icon": "Calendar"
           },
           {
-            "title": "Exécution",
-            "description": "Mise en œuvre par nos experts couvreurs.",
+            "title": "Travaux",
+            "description": "Mise en œuvre sécurisée par nos artisans.",
             "icon": "Hammer"
           },
           {
-            "title": "Validation",
-            "description": "Contrôle final et remise des garanties.",
+            "title": "Suivi",
+            "description": "Réception de chantier et remise des garanties.",
             "icon": "CheckCircle"
           }
         ]
@@ -294,10 +356,10 @@
       "id": "map",
       "type": "map",
       "content": {
-        "title": "Retrouvez-nous au centre d'Arles",
+        "title": "Zone d'Intervention Arlésienne",
         "address": "29, rue des Arènes, 13200 Arles, France",
         "zoom": 15,
-        "height": "450px"
+        "height": "400px"
       },
       "settings": {
         "visible": true,
@@ -310,12 +372,12 @@
       "id": "contact",
       "type": "contact",
       "content": {
-        "title": "Parlez-nous de votre projet",
-        "subtitle": "Besoin d'un dépannage ou d'un devis ? Notre équipe Arlésienne vous répond rapidement.",
+        "title": "Parlons de votre Toiture",
+        "subtitle": "Besoin d'un conseil ou d'une urgence ? Nous vous répondons avec réactivité.",
         "email": "contact@artuiles-toits.fr",
         "phone": "04 65 08 04 41",
         "address": "29, rue des Arènes, 13200 Arles",
-        "hours": "Lundi - Vendredi : 8h00 - 18h30\nSamedi : 9h00 - 12h00 (Urgences 7j/7)"
+        "hours": "Lun - Ven : 8h00 - 18h30 | Sam : 9h00 - 12h00"
       },
       "settings": {
         "visible": true,
@@ -329,21 +391,21 @@
       "id": "footer",
       "type": "footer",
       "content": {
-        "copyright": "© 2024 Artuiles & toits - Couvreur Arles. Siret en cours.",
+        "copyright": "© 2024 Artuiles & toits. Artisan couvreur zingueur à Arles.",
         "socials": [
           {
             "platform": "facebook",
-            "url": "#",
+            "url": "https://facebook.com",
             "enabled": true
           },
           {
             "platform": "instagram",
-            "url": "#",
+            "url": "https://instagram.com",
             "enabled": true
           }
         ],
         "ctaButton": {
-          "text": "Appeler maintenant",
+          "text": "Demander un Devis",
           "url": "tel:+33465080441",
           "variant": "primary"
         }
