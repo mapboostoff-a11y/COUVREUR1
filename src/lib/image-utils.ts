@@ -80,6 +80,6 @@ export async function getCroppedImg(
   // paste generated rotate image at the top left corner
   ctx.putImageData(data, 0, 0)
 
-  // As Base64 string
-  return canvas.toDataURL('image/jpeg')
+  // As Base64 string with compression
+  return canvas.toDataURL('image/jpeg', 0.8)
 }

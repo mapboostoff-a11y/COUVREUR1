@@ -120,11 +120,22 @@ const PublishDialog = ({ config }: { config: any }) => {
         body: JSON.stringify(config),
       });
 
+      const contentType = response.headers.get("content-type");
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || 'Erreur lors de la publication');
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          throw new Error(data.error || `Erreur serveur (${response.status})`);
+        } else {
+          const text = await response.text();
+          console.error('Server returned non-JSON error:', text);
+          throw new Error(`Erreur serveur (${response.status}): Réponse inattendue (non-JSON).`);
+        }
       }
 
+      if (contentType && contentType.includes("application/json")) {
+        await response.json();
+      }
+      
       setStatus('success');
     } catch (error) {
       console.error('Publish error:', error);

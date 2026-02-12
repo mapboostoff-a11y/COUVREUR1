@@ -55,19 +55,26 @@ router.get('/config', async (req, res) => {
 
 // Endpoint unique pour sauvegarder et publier
 router.post(['/config', '/publish', '/storage'], async (req, res) => {
+    console.log('--- Publish Request Start ---');
     const config = req.body.config || req.body;
     const configKey = getConfigKey(req);
     const domain = configKey.split(':')[1];
     
+    console.log(`Domain: ${domain}, ConfigKey: ${configKey}`);
+    
     if (!config || Object.keys(config).length === 0) {
+        console.warn('Publish failed: Empty configuration');
         return res.status(400).json({ error: 'Configuration vide' });
     }
 
     try {
+        console.log('Connecting to DB...');
         const db = await getDb();
         const configJson = JSON.stringify(config);
+        console.log(`Config size: ${configJson.length} characters`);
 
         // 1. Sauvegarde SQLite (Source de vérité)
+        console.log('Updating site_config table...');
         await db.run(
             'INSERT INTO site_config (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value',
             configKey, 
@@ -78,17 +85,21 @@ router.post(['/config', '/publish', '/storage'], async (req, res) => {
         const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_ENV !== undefined;
         if (!isVercel && domain === 'localhost') {
             try {
+                console.log('Localhost detected, saving to exempleenproduction.json...');
                 const configPath = path.resolve(process.cwd(), 'exempleenproduction.json');
                 fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+                console.log('File save successful');
             } catch (fsErr) {
                 console.warn('Erreur écriture fichier (non critique):', fsErr);
             }
         }
 
         console.log(`Config sauvegardée avec succès pour le domaine: ${domain}`);
+        console.log('--- Publish Request End (Success) ---');
         res.json({ success: true, domain });
     } catch (err) {
-        console.error(`Erreur API POST /publish (${domain}):`, err);
+        console.error(`!!! Erreur API POST /publish (${domain}):`, err);
+        console.log('--- Publish Request End (Failure) ---');
         res.status(500).json({ 
             error: 'Erreur lors de la sauvegarde',
             details: err.message,
