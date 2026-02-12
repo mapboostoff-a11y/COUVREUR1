@@ -267,7 +267,10 @@ export const AiBuilder: React.FC = () => {
       meta: {
         title: `${formData.name} - ${formData.industry}`,
         description: formData.description || `Professional ${formData.industry} services.`,
-        favicon: formData.logo || ''
+        favicon: formData.logo || '',
+        robots: 'index, follow',
+        businessType: 'LocalBusiness',
+        businessName: formData.name
       },
       theme: {
         colors: colors,
