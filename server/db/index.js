@@ -1,11 +1,29 @@
 import { createClient } from '@libsql/client';
 import path from 'path';
 import fs from 'fs';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_ENV !== undefined;
+
+// Remote DB configuration
+const remoteUrl = process.env.LIBSQL_DB_URL || process.env.TURSO_DATABASE_URL;
+const authToken = process.env.LIBSQL_DB_AUTH_TOKEN || process.env.TURSO_AUTH_TOKEN;
+
+// Local DB path
 const dbPath = isVercel ? path.join('/tmp', 'site-data.db') : path.resolve(process.cwd(), 'site-data.db');
 
-console.log(`Database path: ${dbPath} (isVercel: ${isVercel})`);
+console.log(`Database configuration:`);
+if (remoteUrl) {
+    console.log(`- Type: Remote (Turso/LibSQL)`);
+    console.log(`- URL: ${remoteUrl}`);
+} else {
+    console.log(`- Type: Local SQLite`);
+    console.log(`- Path: ${dbPath}`);
+    console.log(`- isVercel: ${isVercel}`);
+}
 
 let dbInstance = null;
 
@@ -14,16 +32,18 @@ export async function getDb() {
 
     try {
         // Ensure directory exists for local dev
-        if (!isVercel) {
+        if (!isVercel && !remoteUrl) {
             const dir = path.dirname(dbPath);
             if (!fs.existsSync(dir)) {
                 fs.mkdirSync(dir, { recursive: true });
             }
         }
 
-        const client = createClient({
-            url: `file:${dbPath}`,
-        });
+        const clientConfig = remoteUrl 
+            ? { url: remoteUrl, authToken: authToken }
+            : { url: `file:${dbPath}` };
+
+        const client = createClient(clientConfig);
 
         // Compatibility layer to match sqlite-like API used in the project
         dbInstance = {
@@ -74,7 +94,7 @@ export async function getDb() {
             )
         `);
 
-        console.log('LibSQL (SQLite) database opened and initialized successfully.');
+        console.log(`LibSQL (${remoteUrl ? 'Remote' : 'Local'}) database opened and initialized successfully.`);
         return dbInstance;
     } catch (err) {
         console.error('Failed to open LibSQL database:', err.message);
