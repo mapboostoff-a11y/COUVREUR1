@@ -124,6 +124,50 @@ export const GlobalSettingsPanel = () => {
                     className="h-8"
                 />
             </div>
+            <div className="space-y-1.5">
+                <label className="text-xs font-medium text-muted-foreground">Keywords (comma separated)</label>
+                <Input 
+                    type="text" 
+                    value={meta.keywords || ''}
+                    onChange={(e) => updateMeta({ keywords: e.target.value })}
+                    placeholder="roofing, expert, city..."
+                    className="h-8"
+                />
+            </div>
+            <div className="space-y-1.5">
+                <label className="text-xs font-medium text-muted-foreground">Author / Company Name</label>
+                <Input 
+                    type="text" 
+                    value={meta.author || ''}
+                    onChange={(e) => updateMeta({ author: e.target.value })}
+                    className="h-8"
+                />
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-muted-foreground">Robots</label>
+                    <select 
+                        value={meta.robots}
+                        onChange={(e) => updateMeta({ robots: e.target.value })}
+                        className="w-full h-8 rounded-md border border-input bg-background px-3 text-sm"
+                    >
+                        <option value="index, follow">Index, Follow</option>
+                        <option value="noindex, nofollow">No Index, No Follow</option>
+                        <option value="index, nofollow">Index, No Follow</option>
+                    </select>
+                </div>
+                <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-muted-foreground">Canonical URL (optional)</label>
+                    <Input 
+                        type="text" 
+                        value={meta.canonicalUrl || ''}
+                        onChange={(e) => updateMeta({ canonicalUrl: e.target.value })}
+                        placeholder="https://example.com"
+                        className="h-8"
+                    />
+                </div>
+            </div>
             
             <div className="grid grid-cols-2 gap-4 pt-2">
                 <div className="space-y-1.5">
@@ -160,6 +204,75 @@ export const GlobalSettingsPanel = () => {
 
       <div className="space-y-4 pt-6 border-t border-border">
         <h4 className="text-sm font-semibold text-foreground flex items-center gap-2">
+            <Globe size={16} />
+            Structured Data (Local Business)
+        </h4>
+        <p className="text-[11px] text-muted-foreground">Helps Google understand your business type and location.</p>
+        
+        <div className="space-y-3">
+            <div className="space-y-1.5">
+                <label className="text-xs font-medium text-muted-foreground">Business Name</label>
+                <Input 
+                    type="text" 
+                    value={meta.businessName || ''}
+                    onChange={(e) => updateMeta({ businessName: e.target.value })}
+                    placeholder="E.g. TopToit Couvreur"
+                    className="h-8"
+                />
+            </div>
+            <div className="space-y-1.5">
+                <label className="text-xs font-medium text-muted-foreground">Business Type</label>
+                <select 
+                    value={meta.businessType || 'LocalBusiness'}
+                    onChange={(e) => updateMeta({ businessType: e.target.value })}
+                    className="w-full h-8 rounded-md border border-input bg-background px-3 text-sm"
+                >
+                    <option value="LocalBusiness">General Local Business</option>
+                    <option value="RoofingContractor">Roofing Contractor</option>
+                    <option value="HomeAndConstructionBusiness">Home & Construction</option>
+                    <option value="ProfessionalService">Professional Service</option>
+                    <option value="Organization">Organization</option>
+                </select>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-muted-foreground">Price Range</label>
+                    <Input 
+                        type="text" 
+                        value={meta.priceRange || ''}
+                        onChange={(e) => updateMeta({ priceRange: e.target.value })}
+                        placeholder="E.g. $$ or 50€-200€"
+                        className="h-8"
+                    />
+                </div>
+                <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-muted-foreground">Rating (Value / Count)</label>
+                    <div className="flex gap-2">
+                        <Input 
+                            type="number" 
+                            step="0.1"
+                            min="1"
+                            max="5"
+                            value={meta.ratingValue || ''}
+                            onChange={(e) => updateMeta({ ratingValue: parseFloat(e.target.value) })}
+                            placeholder="4.8"
+                            className="h-8"
+                        />
+                        <Input 
+                            type="number" 
+                            value={meta.reviewCount || ''}
+                            onChange={(e) => updateMeta({ reviewCount: parseInt(e.target.value) })}
+                            placeholder="24"
+                            className="h-8"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div className="space-y-4 pt-6 border-t border-border">
+        <h4 className="text-sm font-semibold text-foreground flex items-center gap-2">
             <BarChart size={16} />
             Tracking & Analytics
         </h4>
@@ -182,6 +295,16 @@ export const GlobalSettingsPanel = () => {
                     value={meta.googleAnalyticsId || ''}
                     onChange={(e) => updateMeta({ googleAnalyticsId: e.target.value })}
                     placeholder="G-XXXXXXXXXX"
+                    className="h-8"
+                />
+            </div>
+            <div className="space-y-1.5">
+                <label className="text-xs font-medium text-muted-foreground">Google Tag Manager ID (GTM-)</label>
+                <Input 
+                    type="text" 
+                    value={meta.googleTagManagerId || ''}
+                    onChange={(e) => updateMeta({ googleTagManagerId: e.target.value })}
+                    placeholder="GTM-XXXXXXX"
                     className="h-8"
                 />
             </div>

@@ -208,10 +208,21 @@ export const WhatsAppConfigSchema = z.object({
 export const MetaSchema = z.object({
   title: z.string(),
   description: z.string(),
+  keywords: z.string().optional(), // Comma separated keywords
   ogImage: z.string().url().optional(),
   favicon: z.string().url().optional(),
+  canonicalUrl: z.string().url().optional(),
+  robots: z.string().default('index, follow'),
+  author: z.string().optional(),
   facebookPixelId: z.string().optional(),
   googleAnalyticsId: z.string().optional(),
+  googleTagManagerId: z.string().optional(),
+  // Local Business Structured Data (Schema.org)
+  businessName: z.string().optional(),
+  businessType: z.string().default('LocalBusiness'), // e.g., RoofingContractor
+  priceRange: z.string().optional(),
+  ratingValue: z.number().optional(),
+  reviewCount: z.number().optional(),
 });
 
 // Root Configuration Schema
