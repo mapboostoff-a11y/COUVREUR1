@@ -37,28 +37,28 @@
         "sticky": true,
         "links": [
           {
-            "text": "Nos Services",
+            "text": "Réalisations",
+            "url": "#realisations",
+            "variant": "link"
+          },
+          {
+            "text": "Prestations",
             "url": "#services",
             "variant": "link"
           },
           {
-            "text": "Vidéos Projets",
+            "text": "Avis Clients",
+            "url": "#avis",
+            "variant": "link"
+          },
+          {
+            "text": "Vidéos",
             "url": "#videos",
-            "variant": "link"
-          },
-          {
-            "text": "Conseils Déco",
-            "url": "#blog-video",
-            "variant": "link"
-          },
-          {
-            "text": "Galerie",
-            "url": "#realisations",
             "variant": "link"
           }
         ],
         "cta": {
-          "text": "Devis Gratuit",
+          "text": "Estimation Gratuite",
           "url": "tel:+33465080441",
           "variant": "primary"
         }
@@ -74,24 +74,24 @@
       "id": "hero-unique",
       "type": "hero",
       "content": {
-        "headline": "Sublimez votre Intérieur avec Art & Couleurs",
-        "subheadline": "Artisan peintre expert en rénovation et décoration à Arles. Nous transformons vos espaces avec des finitions impeccables et des couleurs qui vous ressemblent.",
-        "alignment": "left",
+        "headline": "L'Excellence de la Peinture & Décoration à Arles",
+        "subheadline": "Art & Couleurs transforme vos espaces de vie avec passion. Finitions haute précision et produits éco-responsables pour un intérieur qui vous ressemble.",
+        "alignment": "center",
         "cta": [
           {
-            "text": "Demander un Devis",
+            "text": "Demander mon Devis",
             "url": "#contact",
             "variant": "primary"
           },
           {
-            "text": "Voir nos Réalisations",
+            "text": "Découvrir nos Projets",
             "url": "#realisations",
             "variant": "outline"
           }
         ],
         "image": {
           "src": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80",
-          "alt": "Artisan peintre appliquant de la peinture sur un mur intérieur"
+          "alt": "Artisan peintre Art & Couleurs à Arles"
         }
       },
       "settings": {
@@ -104,67 +104,30 @@
       }
     },
     {
-      "id": "trust-bar",
-      "type": "features",
+      "id": "realisations",
+      "type": "gallery",
       "content": {
-        "title": "",
-        "columns": 4,
-        "features": [
+        "title": "Nos Transformations Récentes",
+        "columns": 3,
+        "aspectRatio": "square",
+        "images": [
           {
-            "title": "Peinture Éco-label",
-            "description": "Produits sains sans odeur (A+)",
-            "icon": "Leaf"
+            "src": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&q=80",
+            "alt": "Rénovation séjour Arles"
           },
           {
-            "title": "Chantier Propre",
-            "description": "Protection totale et nettoyage",
-            "icon": "Sparkles"
+            "src": "https://images.unsplash.com/photo-1595844730298-b960ff98fee0?auto=format&fit=crop&q=80",
+            "alt": "Chambre enfant décoration"
           },
           {
-            "title": "Finitions de Luxe",
-            "description": "Rigueur et précision absolue",
-            "icon": "CheckCircle"
-          },
-          {
-            "title": "Conseils Couleurs",
-            "description": "Accompagnement déco personnalisé",
-            "icon": "Palette"
+            "src": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80",
+            "alt": "Finitions boiseries"
           }
         ]
       },
       "settings": {
         "visible": true,
         "backgroundColor": "gray",
-        "paddingTop": "sm",
-        "paddingBottom": "sm",
-        "container": true
-      }
-    },
-    {
-      "id": "videos",
-      "type": "video-gallery",
-      "content": {
-        "title": "Nos Chantiers en Vidéo",
-        "videos": [
-          {
-            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "title": "Rénovation d'un salon complet"
-          },
-          {
-            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "title": "Application peinture Airless (Grandes surfaces)"
-          },
-          {
-            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "title": "Pose de papier peint panoramique"
-          }
-        ],
-        "columns": 3,
-        "aspectRatio": "video"
-      },
-      "settings": {
-        "visible": true,
-        "backgroundColor": "white",
         "paddingTop": "lg",
         "paddingBottom": "lg",
         "container": true,
@@ -172,119 +135,10 @@
       }
     },
     {
-      "id": "services",
-      "type": "features",
-      "content": {
-        "title": "Nos Prestations de Peinture",
-        "subtitle": "Un savoir-faire complet pour l'embellissement de votre habitat.",
-        "columns": 3,
-        "features": [
-          {
-            "title": "Peinture Intérieure",
-            "description": "Murs, plafonds et boiseries avec des finitions mat, velours ou satin.",
-            "icon": "Paintbrush"
-          },
-          {
-            "title": "Ravalement de Façade",
-            "description": "Nettoyage, réparation et mise en peinture pour protéger vos murs extérieurs.",
-            "icon": "Home"
-          },
-          {
-            "title": "Enduits Décoratifs",
-            "description": "Béton ciré, stuc et enduits à la chaux pour un style unique.",
-            "icon": "Layers"
-          },
-          {
-            "title": "Revêtements de Murs",
-            "description": "Pose de papier peint, toile de verre et revêtements acoustiques.",
-            "icon": "Image"
-          },
-          {
-            "title": "Peinture Boiseries",
-            "description": "Rénovation de volets, portes, fenêtres et escaliers en bois.",
-            "icon": "Wind"
-          },
-          {
-            "title": "Relooking Cuisine",
-            "description": "Peinture spécifique sur meubles et crédences pour une cuisine neuve.",
-            "icon": "Coffee"
-          }
-        ]
-      },
-      "settings": {
-        "visible": true,
-        "backgroundColor": "gray",
-        "paddingTop": "lg",
-        "paddingBottom": "lg",
-        "container": true
-      }
-    },
-    {
-      "id": "realisations",
-      "type": "gallery",
-      "content": {
-        "title": "Nos Dernières Réalisations",
-        "columns": 3,
-        "aspectRatio": "square",
-        "images": [
-          {
-            "src": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&q=80",
-            "alt": "Salon moderne fraîchement peint en gris perle"
-          },
-          {
-            "src": "https://images.unsplash.com/photo-1595844730298-b960ff98fee0?auto=format&fit=crop&q=80",
-            "alt": "Chambre d'enfant avec mur de couleur pastel"
-          },
-          {
-            "src": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80",
-            "alt": "Détail d'une finition peinture sur boiserie"
-          }
-        ]
-      },
-      "settings": {
-        "visible": true,
-        "backgroundColor": "white",
-        "paddingTop": "lg",
-        "paddingBottom": "lg",
-        "container": true
-      }
-    },
-    {
-      "id": "blog-video",
-      "type": "video-gallery",
-      "content": {
-        "title": "Blog Vidéo : Conseils de Pro",
-        "videos": [
-          {
-            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "title": "Comment choisir sa finition (Mat vs Satin) ?"
-          },
-          {
-            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "title": "3 astuces pour agrandir une pièce avec la couleur"
-          },
-          {
-            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "title": "Pourquoi préparer ses murs est crucial ?"
-          }
-        ],
-        "columns": 3,
-        "aspectRatio": "video"
-      },
-      "settings": {
-        "visible": true,
-        "backgroundColor": "gray",
-        "paddingTop": "lg",
-        "paddingBottom": "lg",
-        "container": true,
-        "animation": "fade-in"
-      }
-    },
-    {
       "id": "avis",
       "type": "testimonials",
       "content": {
-        "title": "Avis de nos Clients",
+        "title": "Ils nous font Confiance",
         "testimonials": [
           {
             "name": "Marc L.",
@@ -315,32 +169,148 @@
       }
     },
     {
-      "id": "process-alt",
+      "id": "services",
       "type": "features",
       "content": {
-        "title": "Votre Chantier en 4 Étapes",
-        "subtitle": "Une organisation rigoureuse pour une satisfaction garantie.",
-        "columns": 4,
+        "title": "Nos Services de Peinture",
+        "subtitle": "Une expertise complète pour tous vos projets de rénovation.",
+        "columns": 3,
         "features": [
           {
-            "title": "Estimation",
-            "description": "Visite technique et devis gratuit détaillé.",
-            "icon": "ClipboardList"
-          },
-          {
-            "title": "Préparation",
-            "description": "Protection des sols et préparation des supports.",
-            "icon": "Shield"
-          },
-          {
-            "title": "Mise en Peinture",
-            "description": "Application soignée des produits sélectionnés.",
+            "title": "Intérieur Design",
+            "description": "Peinture soignée sur murs et plafonds avec préparation minutieuse.",
             "icon": "Paintbrush"
           },
           {
-            "title": "Finitions",
-            "description": "Contrôle qualité et nettoyage de fin de chantier.",
-            "icon": "Award"
+            "title": "Ravalement & Façade",
+            "description": "Protection et esthétique pour vos extérieurs face au climat provençal.",
+            "icon": "Home"
+          },
+          {
+            "title": "Effets & Matières",
+            "description": "Béton ciré, stuc et enduits à la chaux pour un rendu unique.",
+            "icon": "Layers"
+          },
+          {
+            "title": "Papiers Peints",
+            "description": "Pose experte de revêtements muraux et décors panoramiques.",
+            "icon": "Image"
+          },
+          {
+            "title": "Rénovation Bois",
+            "description": "Lasures et peintures pour volets, portes et escaliers.",
+            "icon": "Wind"
+          },
+          {
+            "title": "Peinture Cuisine",
+            "description": "Redonnez vie à votre cuisine sans tout changer.",
+            "icon": "Coffee"
+          }
+        ]
+      },
+      "settings": {
+        "visible": true,
+        "backgroundColor": "gray",
+        "paddingTop": "lg",
+        "paddingBottom": "lg",
+        "container": true
+      }
+    },
+    {
+      "id": "engagements",
+      "type": "features",
+      "content": {
+        "title": "Nos Engagements Qualité",
+        "columns": 4,
+        "features": [
+          {
+            "title": "Zéro Odeur",
+            "description": "Peintures A+ respectueuses de l'air",
+            "icon": "Leaf"
+          },
+          {
+            "title": "Protection Sol",
+            "description": "Bâchage complet de votre intérieur",
+            "icon": "ShieldCheck"
+          },
+          {
+            "title": "Détails Soignés",
+            "description": "Découpes au millimètre près",
+            "icon": "CheckCircle"
+          },
+          {
+            "title": "Colorimétrie",
+            "description": "Aide au choix des teintes",
+            "icon": "Palette"
+          }
+        ]
+      },
+      "settings": {
+        "visible": true,
+        "backgroundColor": "white",
+        "paddingTop": "md",
+        "paddingBottom": "md",
+        "container": true
+      }
+    },
+    {
+      "id": "videos",
+      "type": "video-gallery",
+      "content": {
+        "title": "L'Art de Peindre en Vidéo",
+        "videos": [
+          {
+            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "title": "Chantier : Salon & Salle à manger"
+          },
+          {
+            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "title": "Technique : Peinture Airless"
+          },
+          {
+            "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "title": "Focus : Pose Papier Panoramique"
+          }
+        ],
+        "columns": 3,
+        "aspectRatio": "video"
+      },
+      "settings": {
+        "visible": true,
+        "backgroundColor": "gray",
+        "paddingTop": "lg",
+        "paddingBottom": "lg",
+        "container": true,
+        "animation": "slide-up"
+      }
+    },
+    {
+      "id": "process-alt",
+      "type": "features",
+      "content": {
+        "title": "Votre Projet pas à pas",
+        "subtitle": "Un accompagnement serein du devis à la réception.",
+        "columns": 4,
+        "features": [
+          {
+            "title": "1. Étude",
+            "description": "Devis gratuit et conseils couleurs.",
+            "icon": "ClipboardList"
+          },
+          {
+            "title": "2. Préparation",
+            "description": "Protection et enduisage des murs.",
+            "icon": "Shield"
+          },
+          {
+            "title": "3. Peinture",
+            "description": "Application de 2 couches de finition.",
+            "icon": "Paintbrush"
+          },
+          {
+            "title": "4. Nettoyage",
+            "description": "Remise en place et fin de chantier.",
+            "icon": "Sparkles"
           }
         ]
       },
@@ -353,27 +323,11 @@
       }
     },
     {
-      "id": "map",
-      "type": "map",
-      "content": {
-        "title": "Nous intervenons dans tout le Pays d'Arles",
-        "address": "29, rue des Arènes, 13200 Arles, France",
-        "zoom": 13,
-        "height": "400px"
-      },
-      "settings": {
-        "visible": true,
-        "container": true,
-        "paddingTop": "none",
-        "paddingBottom": "none"
-      }
-    },
-    {
       "id": "contact",
       "type": "contact",
       "content": {
-        "title": "Lancez votre Projet Peinture",
-        "subtitle": "Une question ? Un projet de rénovation ? Contactez-nous pour une étude personnalisée.",
+        "title": "Votre Devis sous 48h",
+        "subtitle": "Parlons de vos envies de couleurs et de décoration.",
         "email": "contact@art-couleurs.fr",
         "phone": "04 65 08 04 41",
         "address": "29, rue des Arènes, 13200 Arles",
@@ -388,10 +342,26 @@
       }
     },
     {
+      "id": "map",
+      "type": "map",
+      "content": {
+        "title": "Notre Zone d'Intervention",
+        "address": "29, rue des Arènes, 13200 Arles, France",
+        "zoom": 13,
+        "height": "400px"
+      },
+      "settings": {
+        "visible": true,
+        "container": true,
+        "paddingTop": "none",
+        "paddingBottom": "none"
+      }
+    },
+    {
       "id": "footer",
       "type": "footer",
       "content": {
-        "copyright": "© 2024 Art & Couleurs. Artisan peintre décorateur à Arles.",
+        "copyright": "© 2024 Art & Couleurs. Peintre décorateur Arles.",
         "socials": [
           {
             "platform": "facebook",
@@ -405,7 +375,7 @@
           }
         ],
         "ctaButton": {
-          "text": "Obtenir un Devis",
+          "text": "Appeler maintenant",
           "url": "tel:+33465080441",
           "variant": "primary"
         }
