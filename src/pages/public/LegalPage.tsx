@@ -39,9 +39,6 @@ export const LegalPage = () => {
   const host = legalInfo?.host || "Vercel Inc.";
   const hostAddress = legalInfo?.hostAddress || "340 S Lemon Ave #4133, Walnut, CA 91789, USA";
   
-  // Clean up contact info for display inline if needed (remove newlines)
-  const contactInline = contact.replace(/\n/g, ' - ');
-
   return (
     <>
       <Helmet>
