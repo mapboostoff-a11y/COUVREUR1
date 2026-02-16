@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useConfigStore } from '../../store/use-config-store';
 import { SectionRenderer } from '../../components/renderer/SectionRenderer';
 import { Helmet } from 'react-helmet-async';
