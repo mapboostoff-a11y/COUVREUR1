@@ -49,7 +49,9 @@ app.get('/health', (req, res) => {
 });
 
 // Serve static files from the React app
-if (fs.existsSync(distPath)) {
+// Skip in development to allow Vite to handle HMR and new routes
+const isDev = process.env.NODE_ENV === 'development';
+if (!isDev && fs.existsSync(distPath)) {
     app.use(express.static(distPath));
     
     // The "catchall" handler: for any request that doesn't

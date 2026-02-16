@@ -1,13 +1,13 @@
 {
   "meta": {
-    "title": "Couvreur Champigny-sur-Marne (94) | Urgence & Rénovation Toiture",
-    "description": "Artisan couvreur local à Champigny (94). Dépannage fuite 7j/7, r\u00e9novation compl\u00e8te, zinguerie. Devis gratuit sous 48h. Garantie d\u00e9cennale + Qualibat RGE.",
+    "title": "Artuiles & Toits SAS | Couvreur à Frontignan",
+    "description": "Artisan couvreur local à Frontignan (34). Dépannage fuite 7j/7, rénovation complète, zinguerie. Devis gratuit sous 48h.",
     "favicon": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&w=32&h=32",
     "ogImage": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
-    "canonicalUrl": "https://www.couvreur-champigny-sur-marne.org/",
+    "canonicalUrl": "https://www.artuiles-et-toits.fr/",
     "robots": "index, follow",
     "businessType": "RoofingContractor",
-    "businessName": "Couvreur Champigny"
+    "businessName": "Artuiles & Toits SAS"
   },
   "theme": {
     "colors": {
@@ -23,8 +23,8 @@
   },
   "whatsapp": {
     "enabled": true,
-    "number": "33612345678",
-    "message": "Bonjour, je souhaite un devis pour ma toiture à Champigny.",
+    "number": "33651636499",
+    "message": "Bonjour, je souhaite un devis pour ma toiture à Frontignan.",
     "position": "bottom-right"
   },
   "sections": [
@@ -32,7 +32,7 @@
       "id": "header-1",
       "type": "header",
       "content": {
-        "title": "Couvreur Champigny",
+        "title": "Artuiles & Toits",
         "logoMode": "text",
         "sticky": true,
         "links": [
@@ -41,7 +41,7 @@
           { "text": "Avis", "url": "#avis", "variant": "link", "external": false },
           { "text": "Contact", "url": "#contact", "variant": "link", "external": false }
         ],
-        "cta": { "text": "01 23 45 67 89", "url": "tel:+33123456789", "variant": "primary", "external": false }
+        "cta": { "text": "06 51 63 64 99", "url": "tel:0651636499", "variant": "primary", "external": false }
       },
       "settings": { 
         "visible": true, 
@@ -58,8 +58,8 @@
       "id": "hero-video",
       "type": "hero",
       "content": {
-        "headline": "Expert Couvreur à Champigny-sur-Marne",
-        "subheadline": "Artisan de confiance pour votre toiture dans le 94. Travail soigné et durable.",
+        "headline": "Expert Couvreur à Frontignan",
+        "subheadline": "Artisan de confiance pour votre toiture. Travail soigné et durable.",
         "alignment": "center",
         "videoUrl": "https://www.youtube.com/embed/JvHJJaMtGI0",
         "cta": [
@@ -82,11 +82,11 @@
       "id": "hero-image",
       "type": "hero",
       "content": {
-        "headline": "Intervention Toiture en 24h sur le Val-de-Marne",
+        "headline": "Intervention Toiture en 24h",
         "subheadline": "Tuiles cassées ? Infiltrations ? Notre équipe d'experts intervient immédiatement pour sécuriser votre habitat. Travail soigné et garanti.",
         "alignment": "center",
         "cta": [
-          { "text": "Appeler un expert", "url": "tel:0123456789", "variant": "primary", "external": false },
+          { "text": "Appeler un expert", "url": "tel:0651636499", "variant": "primary", "external": false },
           { "text": "Demander un diagnostic", "url": "#contact", "variant": "outline", "external": false }
         ],
         "image": {
@@ -151,7 +151,7 @@
       "type": "features",
       "content": {
         "title": "Nos Services de Couverture",
-        "subtitle": "Une expertise complète pour tous vos besoins en toiture dans le Val-de-Marne.",
+        "subtitle": "Une expertise complète pour tous vos besoins en toiture.",
         "columns": 3,
         "features": [
           {
@@ -181,7 +181,7 @@
           },
           {
             "title": "Urgences 7j/7",
-            "description": "Bâchage d'urgence après tempête. Intervention rapide sur tout le 94.",
+            "description": "Bâchage d'urgence après tempête. Intervention rapide sur tout le secteur.",
             "icon": "Clock"
           }
         ]
@@ -201,21 +201,21 @@
       "id": "realisations",
       "type": "gallery",
       "content": {
-        "title": "Nos Derniers Chantiers",
+        "title": "Nos Réalisations",
         "columns": 3,
         "aspectRatio": "square",
         "images": [
           {
-            "src": "https://images.unsplash.com/photo-1635339001026-6114ad430721?auto=format&fit=crop&q=80",
+            "src": "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
             "alt": "Rénovation toiture tuiles"
           },
           {
-            "src": "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80",
-            "alt": "Maison moderne toiture"
+            "src": "https://images.unsplash.com/photo-1595846519845-68e298c2edd8?auto=format&fit=crop&q=80",
+            "alt": "Pose de Velux"
           },
           {
-            "src": "https://images.unsplash.com/photo-1516594709413-e9395a4b73e3?auto=format&fit=crop&q=80",
-            "alt": "Détail zinguerie"
+            "src": "https://images.unsplash.com/photo-1628135879857-417105151523?auto=format&fit=crop&q=80",
+            "alt": "Zinguerie"
           }
         ]
       },
@@ -231,68 +231,21 @@
       }
     },
     {
-      "id": "guarantees",
-      "type": "features",
-      "content": {
-        "title": "Vos Garanties & Certifications",
-        "subtitle": "Faites confiance à un artisan qualifié et assuré.",
-        "columns": 4,
-        "features": [
-          {
-            "title": "Garantie Décennale",
-            "description": "Tous nos travaux sont couverts pendant 10 ans.",
-            "icon": "Award"
-          },
-          {
-            "title": "Devis Gratuit",
-            "description": "Estimation précise et sans engagement sous 48h.",
-            "icon": "FileText"
-          },
-          {
-            "title": "Respect des Délais",
-            "description": "Nous nous engageons sur les dates d'intervention.",
-            "icon": "Calendar"
-          },
-          {
-            "title": "Qualité Artisanale",
-            "description": "Savoir-faire traditionnel et matériaux de qualité.",
-            "icon": "Hammer"
-          }
-        ]
-      },
-      "settings": {
-        "visible": true,
-        "backgroundColor": "primary",
-        "paddingTop": "md",
-        "paddingBottom": "md",
-        "container": true,
-        "animation": "slide-up",
-        "border": false,
-        "shadow": "none"
-      }
-    },
-    {
       "id": "avis",
       "type": "testimonials",
       "content": {
-        "title": "Avis Clients à Champigny (94)",
+        "title": "Avis Clients",
         "testimonials": [
           {
             "name": "Jean Dupont",
-            "role": "Propriétaire à Champigny (Quartier du Plant)",
-            "content": "Excellent travail pour la rénovation de ma toiture. Équipe ponctuelle, chantier laissé propre et délais respectés. Je recommande vivement !",
+            "role": "Propriétaire à Frontignan",
+            "content": "Excellent travail pour la rénovation de ma toiture. Équipe ponctuelle et chantier propre.",
             "rating": 5
           },
           {
-            "name": "Sophie Martin",
-            "role": "Habitante à Coeuilly",
-            "content": "J'ai fait appel à eux pour une fuite urgente après l'orage. Intervention dans la journée, problème réglé rapidement. Très pro.",
-            "rating": 5
-          },
-          {
-            "name": "Marc Durand",
-            "role": "Chennevières-sur-Marne",
-            "content": "Devis clair et compétitif. Le démoussage a redonné un coup de jeune à ma maison. Merci pour les conseils d'entretien.",
+            "name": "Marie Martin",
+            "role": "Cliente satisfaite",
+            "content": "Intervention rapide pour une fuite. Je recommande vivement Artuiles & Toits.",
             "rating": 5
           }
         ]
@@ -313,17 +266,17 @@
       "type": "map",
       "content": {
         "title": "Zone d'Intervention",
-        "address": "Champigny-sur-Marne, France",
+        "address": "11 avenue de la bordelaise, Frontignan",
         "zoom": 13,
         "height": "400px"
       },
       "settings": {
         "visible": true,
-        "container": true,
-        "paddingTop": "md",
-        "paddingBottom": "md",
         "backgroundColor": "white",
-        "animation": "slide-up",
+        "paddingTop": "none",
+        "paddingBottom": "none",
+        "container": true,
+        "animation": "none",
         "border": false,
         "shadow": "none"
       }
@@ -333,15 +286,15 @@
       "type": "contact",
       "content": {
         "title": "Contactez-nous",
-        "subtitle": "Notre équipe est à votre disposition pour toute demande.",
-        "email": "contact@couvreur-champigny.fr",
-        "phone": "01 23 45 67 89",
-        "address": "12 Avenue de la République, 94500 Champigny-sur-Marne",
-        "hours": "Lundi - Samedi : 8h00 - 19h00"
+        "subtitle": "Devis gratuit et réponse rapide",
+        "email": "artuiles.toits@gmail.com",
+        "phone": "06 51 63 64 99",
+        "address": "11 avenue de la bordelaise, Frontignan",
+        "hours": "Lun - Dim : 8h - 20h"
       },
       "settings": {
         "visible": true,
-        "backgroundColor": "white",
+        "backgroundColor": "primary",
         "paddingTop": "lg",
         "paddingBottom": "lg",
         "container": true,
@@ -354,12 +307,40 @@
       "id": "footer",
       "type": "footer",
       "content": {
-        "copyright": "© 2024 Couvreur Champigny-sur-Marne. Tous droits réservés.",
+        "copyright": "Artuiles & Toits SAS",
         "socials": [
           { "platform": "facebook", "url": "#", "enabled": true },
           { "platform": "instagram", "url": "#", "enabled": true }
         ],
-        "ctaButton": { "text": "Nous Contacter", "url": "#contact", "variant": "outline", "external": false }
+        "ctaButton": { "text": "Nous Contacter", "url": "#contact", "variant": "outline", "external": false },
+        "legalLinks": [
+          {
+            "text": "Mentions Légales",
+            "url": "/mentions-legales#mentions-legales",
+            "variant": "link"
+          },
+          {
+            "text": "Politique de Confidentialité",
+            "url": "/mentions-legales#confidentialite",
+            "variant": "link"
+          },
+          {
+            "text": "CGU",
+            "url": "/mentions-legales#cgu",
+            "variant": "link"
+          }
+        ],
+        "legal": {
+          "publisher": "Artuiles & Toits SAS",
+          "publisherContact": "11 avenue de la bordelaise, Frontignan\n06 51 63 64 99\nartuiles.toits@gmail.com",
+          "siret": "En cours d'immatriculation",
+          "rcs": "Montpellier",
+          "capital": "1 000 €",
+          "tva": "En cours d'attribution",
+          "host": "Vercel Inc.",
+          "hostAddress": "340 S Lemon Ave #4133, Walnut, CA 91789, USA",
+          "intellectualProperty": "Tous droits réservés."
+        }
       },
       "settings": {
         "visible": true,

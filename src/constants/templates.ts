@@ -221,6 +221,11 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
             { text: "Contact", url: "#", variant: "link", external: false }
           ]
         }
+      ],
+      legalLinks: [
+        { text: "Mentions Légales", url: "/mentions-legales#mentions-legales", variant: "link", external: false },
+        { text: "Politique de Confidentialité", url: "/mentions-legales#confidentialite", variant: "link", external: false },
+        { text: "CGU", url: "/mentions-legales#cgu", variant: "link", external: false }
       ]
     }
   },
@@ -319,7 +324,12 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
         { platform: 'facebook', url: '#', enabled: true },
         { platform: 'instagram', url: '#', enabled: true }
       ],
-      ctaButton: { text: "Book a Demo", url: "#demo", variant: "primary", external: true }
+      ctaButton: { text: "Book a Demo", url: "#demo", variant: "primary", external: true },
+      legalLinks: [
+        { text: "Mentions Légales", url: "/mentions-legales#mentions-legales", variant: "link", external: false },
+        { text: "Politique de Confidentialité", url: "/mentions-legales#confidentialite", variant: "link", external: false },
+        { text: "CGU", url: "/mentions-legales#cgu", variant: "link", external: false }
+      ]
     }
   },
   {

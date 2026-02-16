@@ -4,6 +4,9 @@ import App from './App'
 import './index.css'
 import { ThemeProvider } from './components/theme-provider'
 
+// Force refresh v2
+console.log('Application initialized', Date.now());
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">

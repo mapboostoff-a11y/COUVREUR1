@@ -99,6 +99,18 @@ export const FooterContentSchema = z.object({
   })).optional(),
   ctaButton: LinkSchema.optional(),
   columns: z.array(FooterLinkGroupSchema).optional(),
+  legalLinks: z.array(LinkSchema).optional(),
+  legal: z.object({
+    publisher: z.string().optional(),
+    publisherContact: z.string().optional(),
+    siret: z.string().optional(),
+    rcs: z.string().optional(),
+    capital: z.string().optional(),
+    tva: z.string().optional(),
+    host: z.string().optional(),
+    hostAddress: z.string().optional(),
+    intellectualProperty: z.string().optional(),
+  }).optional(),
 });
 
 export const MapContentSchema = z.object({

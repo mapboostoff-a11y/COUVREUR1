@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import { PublicLayout } from './layouts/PublicLayout';
 import { AdminLayout } from './layouts/AdminLayout';
 import { LandingPage } from './pages/public/LandingPage';
+import { LegalPage } from './pages/public/LegalPage';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { Login } from './pages/auth/Login';
 import { useAuthStore } from './store/use-auth-store';
@@ -47,7 +48,12 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route element={<PublicLayout />}>
+          <Route path="/legal" element={<LegalPage />} />
+          <Route path="/mentions-legales" element={<LegalPage />} />
+          <Route path="/confidentialite" element={<LegalPage />} />
+          <Route path="/cgu" element={<LegalPage />} />
           <Route path="/" element={<LandingPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
 
         {/* Auth Routes */}
