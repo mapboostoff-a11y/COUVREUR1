@@ -21,6 +21,13 @@ const Testimonials: React.FC<TestimonialsProps> = ({ content, isEditing, onUpdat
     onUpdate({ testimonials: newTestimonials });
   };
 
+  const getGridClass = () => {
+    const count = content.testimonials.length;
+    if (count === 1) return "max-w-xl mx-auto";
+    if (count === 2) return "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto";
+    return "grid-cols-1 md:grid-cols-3";
+  };
+
   return (
     <div className="space-y-12">
       <div className="text-center">
@@ -33,7 +40,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ content, isEditing, onUpdat
         />
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className={`grid gap-8 ${getGridClass()}`}>
         {content.testimonials.map((item, idx) => (
           <div key={idx} className="bg-card p-8 rounded-2xl shadow-sm border border-border">
             <div className="flex gap-1 mb-4 text-yellow-500">

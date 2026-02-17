@@ -247,6 +247,12 @@
             "role": "Cliente satisfaite",
             "content": "Intervention rapide pour une fuite. Je recommande vivement Artuiles & Toits.",
             "rating": 5
+          },
+          {
+            "name": "Pierre Durand",
+            "role": "Habitant de Sète",
+            "content": "Devis clair et respecté. Je suis très content du résultat pour l'isolation de mes combles.",
+            "rating": 5
           }
         ]
       },
