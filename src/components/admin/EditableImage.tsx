@@ -7,12 +7,14 @@ import { Image as ImageIcon, Upload, X, Check, Crop as CropIcon, RotateCcw } fro
 interface EditableImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   onUpdate?: (src: string) => void;
   isEditing?: boolean;
+  imageClassName?: string;
 }
 
 export const EditableImage: React.FC<EditableImageProps> = ({
   src,
   alt,
   className,
+  imageClassName,
   onUpdate,
   isEditing,
   ...props
@@ -80,7 +82,7 @@ export const EditableImage: React.FC<EditableImageProps> = ({
   };
 
   if (!isEditing) {
-    return <img src={src} alt={alt} className={className} {...props} />;
+    return <img src={src} alt={alt} className={cn(className, imageClassName)} {...props} />;
   }
 
   return (
@@ -92,10 +94,10 @@ export const EditableImage: React.FC<EditableImageProps> = ({
           setShowModal(true);
         }}
       >
-        <img src={src} alt={alt} className="w-full h-full object-cover" {...props} />
-        <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center border-2 border-primary border-dashed">
-          <div className="bg-background p-2 rounded-full shadow-lg">
-            <ImageIcon size={20} className="text-primary" />
+        <img src={src} alt={alt} className={cn("w-full h-full object-cover", imageClassName)} {...props} />
+        <div className="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center border-2 border-primary border-dashed z-10">
+          <div className="bg-background p-3 rounded-full shadow-xl transform scale-90 group-hover:scale-100 transition-transform">
+            <ImageIcon size={24} className="text-primary" />
           </div>
         </div>
       </div>

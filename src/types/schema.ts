@@ -177,6 +177,14 @@ export const IframeContentSchema = z.object({
   allowFullScreen: z.boolean().default(true),
 });
 
+export const BrandsContentSchema = z.object({
+  title: z.string().optional(),
+  images: z.array(ImageSchema),
+  direction: z.enum(['left', 'right']).default('left'),
+  speed: z.number().min(5).max(100).default(20), // seconds for animation duration
+  grayscale: z.boolean().default(true),
+});
+
 // Discriminated Union for Sections
 export const SectionSchema = z.discriminatedUnion('type', [
   z.object({ id: z.string(), name: z.string().optional(), type: z.literal('header'), content: HeaderContentSchema, settings: SectionSettingsSchema }),
@@ -192,6 +200,7 @@ export const SectionSchema = z.discriminatedUnion('type', [
   z.object({ id: z.string(), name: z.string().optional(), type: z.literal('video-gallery'), content: VideoGalleryContentSchema, settings: SectionSettingsSchema }),
   z.object({ id: z.string(), name: z.string().optional(), type: z.literal('map'), content: MapContentSchema, settings: SectionSettingsSchema }),
   z.object({ id: z.string(), name: z.string().optional(), type: z.literal('iframe'), content: IframeContentSchema, settings: SectionSettingsSchema }),
+  z.object({ id: z.string(), name: z.string().optional(), type: z.literal('brands'), content: BrandsContentSchema, settings: SectionSettingsSchema }),
 ]);
 
 // Global Theme Schema

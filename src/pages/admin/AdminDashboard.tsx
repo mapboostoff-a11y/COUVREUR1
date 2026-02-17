@@ -294,10 +294,10 @@ export const AdminDashboard = () => {
           <h2 className="font-semibold text-foreground">Sections</h2>
           <button 
             onClick={() => setShowSectionPicker(!showSectionPicker)}
-            className="p-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
-            title="Add Section"
+            className="flex items-center gap-2 px-3 py-1.5 bg-primary text-primary-foreground text-sm font-medium rounded-md hover:bg-primary/90 transition-colors shadow-sm"
+            title="Add New Section"
           >
-            <Plus size={18} />
+            <Plus size={16} /> Add
           </button>
           {showSectionPicker && (
             <SectionPicker onSelect={handleAddSection} onClose={() => setShowSectionPicker(false)} />

@@ -178,7 +178,8 @@ export const GlobalSettingsPanel = () => {
                          <EditableImage 
                             src={meta.favicon || "https://via.placeholder.com/32?text=ICO"}
                             alt="Favicon"
-                            className="w-full h-full object-contain p-2"
+                            className="w-full h-full p-2"
+                            imageClassName="object-contain"
                             isEditing={true}
                             onUpdate={(val) => updateMeta({ favicon: val })}
                         />
@@ -192,7 +193,8 @@ export const GlobalSettingsPanel = () => {
                          <EditableImage 
                             src={meta.ogImage || "https://via.placeholder.com/1200x630?text=OG"}
                             alt="OG Image"
-                            className="w-full h-full object-cover"
+                            className="w-full h-full"
+                            imageClassName="object-cover"
                             isEditing={true}
                             onUpdate={(val) => updateMeta({ ogImage: val })}
                         />

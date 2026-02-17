@@ -63,7 +63,8 @@ const Hero: React.FC<HeroProps> = ({ content, isEditing, onUpdate }) => {
                 <EditableImage
                   src={content.logo}
                   alt="Hero Logo"
-                  className="h-full w-auto object-contain"
+                  className="h-full w-auto"
+                  imageClassName="object-contain"
                   isEditing={isEditing}
                   onUpdate={(val) => onUpdate && onUpdate({ logo: val })}
                 />
@@ -152,7 +153,8 @@ const Hero: React.FC<HeroProps> = ({ content, isEditing, onUpdate }) => {
             alt={content.image.alt} 
             width={content.image.width} 
             height={content.image.height}
-            className="max-w-full h-auto"
+            className="max-w-full"
+            imageClassName="w-full h-auto"
             isEditing={isEditing}
             onUpdate={(newSrc) => onUpdate?.({ image: { ...content.image!, src: newSrc } })}
           />

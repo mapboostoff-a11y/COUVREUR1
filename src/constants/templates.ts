@@ -35,6 +35,25 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
     }
   },
   {
+    name: "Partner Brands (Marquee)",
+    type: 'brands',
+    settings: { visible: true, paddingTop: 'md', paddingBottom: 'md', backgroundColor: 'gray', container: false, animation: 'fade-in', border: false, shadow: 'none' },
+    content: {
+      title: "Ils nous font confiance",
+      speed: 20,
+      direction: "left",
+      grayscale: true,
+      images: [
+        { src: "https://placehold.co/150x80/e2e8f0/1e293b?text=Partner+1", alt: "Partner 1", width: 150, height: 80 },
+        { src: "https://placehold.co/150x80/e2e8f0/1e293b?text=Partner+2", alt: "Partner 2", width: 150, height: 80 },
+        { src: "https://placehold.co/150x80/e2e8f0/1e293b?text=Partner+3", alt: "Partner 3", width: 150, height: 80 },
+        { src: "https://placehold.co/150x80/e2e8f0/1e293b?text=Partner+4", alt: "Partner 4", width: 150, height: 80 },
+        { src: "https://placehold.co/150x80/e2e8f0/1e293b?text=Partner+5", alt: "Partner 5", width: 150, height: 80 },
+        { src: "https://placehold.co/150x80/e2e8f0/1e293b?text=Partner+6", alt: "Partner 6", width: 150, height: 80 },
+      ]
+    }
+  },
+  {
     name: "Contact Form",
     type: 'contact',
     settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' },

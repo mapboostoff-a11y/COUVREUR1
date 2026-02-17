@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { SECTION_TEMPLATES } from '../../constants/templates';
 import { 
   Plus, LayoutTemplate, Type, MessageSquare, CreditCard, MousePointerClick, 
-  X, Search, Layout, List, Phone, Menu, Play, Image, MapPin, Film, ExternalLink
+  X, Search, Layout, List, Phone, Menu, Play, Image, MapPin, Film, ExternalLink, Briefcase
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Input } from '../ui/input';
@@ -20,6 +20,7 @@ const CATEGORIES = [
   { id: 'testimonials', label: 'Testimonials', icon: MessageSquare },
   { id: 'pricing', label: 'Pricing', icon: CreditCard },
   { id: 'cta', label: 'Call to Action', icon: MousePointerClick },
+  { id: 'brands', label: 'Brands', icon: Briefcase },
   { id: 'contact', label: 'Contact', icon: Phone },
   { id: 'footer', label: 'Footer', icon: Type },
   { id: 'video', label: 'Video', icon: Play },
@@ -38,6 +39,7 @@ const getIconForType = (type: string) => {
     case 'cta': return <MousePointerClick size={24} />;
     case 'footer': return <Type size={24} />;
     case 'header': return <Menu size={24} />;
+    case 'brands': return <Briefcase size={24} />;
     case 'contact': return <Phone size={24} />;
     case 'video': return <Play size={24} />;
     case 'gallery': return <Image size={24} />;

@@ -146,10 +146,8 @@ const Gallery: React.FC<GalleryProps> = ({ content, isEditing, onUpdate }) => {
                 alt={image.alt}
                 isEditing={isEditing}
                 onUpdate={(src) => handleImageUpdate(idx, src)}
-                className={cn(
-                  "w-full h-full transition-transform duration-300 hover:scale-105 cursor-pointer",
-                  content.aspectRatio === 'none' ? "object-contain" : "object-cover"
-                )}
+                className="w-full h-full transition-transform duration-300 hover:scale-105 cursor-pointer"
+                imageClassName={content.aspectRatio === 'none' ? "object-contain" : "object-cover"}
              />
              
              {isEditing && (

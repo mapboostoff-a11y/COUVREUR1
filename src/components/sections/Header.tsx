@@ -106,7 +106,8 @@ const Header: React.FC<HeaderProps> = ({ content, isEditing, onUpdate }) => {
                <EditableImage
                   src={content.logo || "https://via.placeholder.com/150x50?text=LOGO"}
                   alt="Logo"
-                  className="h-full w-auto object-contain"
+                  className="h-full w-auto"
+                  imageClassName="object-contain"
                   isEditing={isEditing}
                   onUpdate={(val) => onUpdate && onUpdate({ logo: val })}
                />
