@@ -127,7 +127,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
       subheadline: "Watch the video to learn more about our amazing features.",
       alignment: "center",
       cta: [{ text: "Get Started", url: "#", variant: "primary", external: false }],
-      videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      videoUrl: ""
     }
   },
   {
@@ -253,7 +253,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
     type: 'video',
     settings: { visible: true, paddingTop: 'lg', paddingBottom: 'lg', backgroundColor: 'dark', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
-      videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      videoUrl: "",
       title: "Watch Our Story",
       autoplay: false,
       controls: true,
@@ -313,7 +313,7 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
     type: 'video',
     settings: { visible: true, paddingTop: 'xl', paddingBottom: 'xl', backgroundColor: 'white', container: true, animation: 'slide-up', border: false, shadow: 'none' },
     content: {
-      videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      videoUrl: "",
       title: "How We Started",
       autoplay: false,
       controls: true,
@@ -360,9 +360,9 @@ export const SECTION_TEMPLATES: SectionTemplate[] = [
       columns: 3,
       aspectRatio: "video",
       videos: [
-        { videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", title: "Introduction" },
-        { videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", title: "Feature Overview" },
-        { videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", title: "Advanced Tips" }
+        { videoUrl: "", title: "Introduction" },
+        { videoUrl: "", title: "Feature Overview" },
+        { videoUrl: "", title: "Advanced Tips" }
       ]
     }
   }

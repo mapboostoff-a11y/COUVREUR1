@@ -35,7 +35,7 @@ export const HeroContentSchema = z.object({
   image: ImageSchema.optional(),
   alignment: z.enum(['left', 'center', 'right']).default('center'),
   logo: z.string().optional(),
-  videoUrl: z.string().url().optional(),
+  videoUrl: z.string().optional(),
 });
 
 export const FeatureItemSchema = z.object({
@@ -139,7 +139,7 @@ export const ContactContentSchema = z.object({
 });
 
 export const VideoContentSchema = z.object({
-  videoUrl: z.string().url(),
+  videoUrl: z.string().optional(),
   title: z.string().optional(),
   autoplay: z.boolean().default(false),
   controls: z.boolean().default(true),
@@ -155,7 +155,7 @@ export const GalleryContentSchema = z.object({
 });
 
 export const VideoItemSchema = z.object({
-  videoUrl: z.string().url(),
+  videoUrl: z.string().optional(),
   thumbnail: z.string().url().optional(),
   title: z.string().optional(),
 });

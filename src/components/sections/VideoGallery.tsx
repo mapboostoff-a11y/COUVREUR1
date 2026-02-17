@@ -39,7 +39,7 @@ const VideoGallery: React.FC<VideoGalleryProps> = ({ content, isEditing, onUpdat
   const handleAddVideo = () => {
     if (!onUpdate) return;
     const newVideo = {
-      videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      videoUrl: "",
       title: "New Video",
     };
     onUpdate({ videos: [...content.videos, newVideo] });
@@ -82,7 +82,7 @@ const VideoGallery: React.FC<VideoGalleryProps> = ({ content, isEditing, onUpdat
 
       <div className={cn("grid gap-6", getGridClass(columns))}>
         {content.videos.map((video, index) => {
-            const videoId = getYouTubeId(video.videoUrl);
+            const videoId = getYouTubeId(video.videoUrl || '');
             const thumbnailUrl = video.thumbnail || (videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null);
             const isPlaying = playingIndex === index;
 

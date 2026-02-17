@@ -10,15 +10,30 @@ export const MetaTags: React.FC = () => {
   const { meta, sections } = config;
   const heroSection = sections.find(s => s.type === 'hero');
   const headerSection = sections.find(s => s.type === 'header');
+  const mapSection = sections.find(s => s.type === 'map');
 
-  const title = meta.title || heroSection?.content?.headline || headerSection?.content?.title || 'Landing Page';
-  const description = meta.description || heroSection?.content?.subheadline || 'Expertise et services professionnels.';
-  const keywords = meta.keywords || '';
+  const location = mapSection?.content?.address;
+  const businessName = meta.businessName || headerSection?.content?.title || 'Entreprise locale';
+
+  let title = meta.title || heroSection?.content?.headline || headerSection?.content?.title || 'Landing Page';
+  let description = meta.description || heroSection?.content?.subheadline || 'Expertise et services professionnels.';
+
+  // Enrich title/description with location if available and not already present
+  if (location) {
+    if (!title.toLowerCase().includes(location.toLowerCase()) && !meta.title) {
+      title = `${title} - ${location}`;
+    }
+    if (!description.toLowerCase().includes(location.toLowerCase()) && !meta.description) {
+      description = `${description} Interventions à ${location} et alentours.`;
+    }
+  }
+
+  const keywords = meta.keywords || (location ? `services, ${location}, expert` : '');
   const ogImage = meta.ogImage || heroSection?.content?.image?.src || '';
   const favicon = meta.favicon || '/favicon.ico';
   const canonical = meta.canonicalUrl || window.location.href;
   const robots = meta.robots || 'index, follow';
-  const author = meta.author || meta.businessName || title;
+  const author = meta.author || businessName;
 
   return (
     <Helmet>
@@ -31,6 +46,10 @@ export const MetaTags: React.FC = () => {
       <meta name="robots" content={robots} />
       <link rel="canonical" href={canonical} />
       <link rel="icon" href={favicon} />
+      
+      {/* Local SEO / Map Tags */}
+      {location && <meta name="geo.placename" content={location} />}
+      {location && <meta name="location" content={location} />}
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content="website" />

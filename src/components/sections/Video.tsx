@@ -22,7 +22,7 @@ const Video: React.FC<VideoProps> = ({ content, isEditing, onUpdate }) => {
     return (match && match[2].length === 11) ? match[2] : null;
   };
 
-  const videoId = getYouTubeId(content.videoUrl);
+  const videoId = getYouTubeId(content.videoUrl || '');
 
   return (
     <div className="flex flex-col items-center gap-8 w-full">
