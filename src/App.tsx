@@ -8,6 +8,7 @@ import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { Login } from './pages/auth/Login';
 import { useAuthStore } from './store/use-auth-store';
 import { useConfigStore } from './store/use-config-store';
+import Loader from './components/ui/Loader';
 
 const ConfigLoader = () => {
   const { fetchRemoteConfig } = useConfigStore();
@@ -41,9 +42,20 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-function App() {
+const AppContent = () => {
+  const isLoaded = useConfigStore((state) => state.isLoaded);
+
+  if (!isLoaded) {
+    return (
+      <>
+        <ConfigLoader />
+        <Loader />
+      </>
+    );
+  }
+
   return (
-    <BrowserRouter>
+    <div className="animate-fade-in">
       <ConfigLoader />
       <Routes>
         {/* Public Routes */}
@@ -69,6 +81,14 @@ function App() {
           {/* Add more admin routes here like /admin/preview, /admin/settings */}
         </Route>
       </Routes>
+    </div>
+  );
+};
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }

@@ -7,6 +7,7 @@ import { generateUUID } from '../lib/utils';
 
 interface ConfigState {
   config: LandingPageConfig;
+  isLoaded: boolean;
   setConfig: (config: LandingPageConfig) => void;
   updateSection: (id: string, updates: Partial<Section>) => void;
   updateSectionContent: (id: string, content: any) => void;
@@ -25,6 +26,7 @@ interface ConfigState {
 export const useConfigStore = create<ConfigState>()(
   (set) => ({
     config: defaultConfig,
+    isLoaded: false,
     
     fetchRemoteConfig: async () => {
       try {
@@ -38,12 +40,21 @@ export const useConfigStore = create<ConfigState>()(
         if (response.ok) {
           const remoteConfig = await response.json();
           if (remoteConfig && typeof remoteConfig === 'object' && remoteConfig.sections) {
-            set({ config: remoteConfig });
+            set({ config: remoteConfig, isLoaded: true });
             console.log('Configuration loaded from SQLite');
+          } else {
+            // Si la config est vide ou invalide, on marque quand même comme chargé 
+            // pour permettre l'affichage par défaut
+            set({ isLoaded: true });
           }
+        } else {
+          // Si le serveur ne répond pas bien, on marque comme chargé 
+          // pour afficher la config par défaut
+          set({ isLoaded: true });
         }
       } catch (error) {
         console.warn('Failed to fetch remote config', error);
+        set({ isLoaded: true });
       }
     },
 
